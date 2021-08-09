@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 export default function SearchTrip() {
   const [localization, setLocalization] = useState({
@@ -7,25 +7,36 @@ export default function SearchTrip() {
     Longitude: "",
   });
 
-  const success = (pos) => {
-    let crd = pos.coords;
-
-    setLocalization({ Latitude: crd.latitude, Longitude: crd.longitude });
-    console.log("Your current position is:");
-    console.log(`Latitude : ${crd.latitude}`);
-    console.log(`Longitude: ${crd.longitude}`);
-    console.log(`More or less ${crd.accuracy} meters.`);
-  };
-
   const errors = (err) => {
     console.warn(`ERROR(${err.code}): ${err.message}`);
   };
 
-  const getLocalization = () => {
+  async function findLocalization(position) {
+    let latitude = position.coords.latitude;
+    let longitude = position.coords.longitude;
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        "x-rapidapi-key": "c6939485b1msh554bb1848fd05e3p17c4eajsnff0e7a27fd8b",
+        "x-rapidapi-host": "forward-reverse-geocoding.p.rapidapi.com",
+      },
+    };
+    const response = await fetch(
+      `https://forward-reverse-geocoding.p.rapidapi.com/v1/reverse?lat=${latitude}&lon=${longitude}&accept-language=en&polygon_threshold=0.0`,
+      requestOptions
+    );
+    const data = await response.json();
+    setLocalization({
+      cityName: data.address.town,
+      Latitude: latitude,
+      Longitude: longitude,
+    });
+  }
+
+  const getPositionHandler = () => {
     let options = {
       enableHighAccuracy: true,
-      //   timeout: 5000,
-      maximumAge: 0,
+      timeout: 5000,
     };
 
     if (navigator.geolocation) {
@@ -33,9 +44,17 @@ export default function SearchTrip() {
         .query({ name: "geolocation" })
         .then(function (result) {
           if (result.state === "granted") {
-            navigator.geolocation.getCurrentPosition(success);
+            navigator.geolocation.getCurrentPosition(
+              findLocalization,
+              errors,
+              options
+            );
           } else if (result.state === "prompt") {
-            navigator.geolocation.getCurrentPosition(success, errors, options);
+            navigator.geolocation.getCurrentPosition(
+              findLocalization,
+              errors,
+              options
+            );
           } else if (result.state === "denied") {
             alert("Denied");
           }
@@ -46,25 +65,23 @@ export default function SearchTrip() {
     } else {
       alert("Sorry Not available!");
     }
+    const watchId = navigator.geolocation.watchPosition(
+      findLocalization,
+      errors
+    );
+    navigator.geolocation.clearWatch(watchId);
   };
 
-  useEffect(() => {
-    getLocalization();
-  });
+  // useEffect(() => {});
 
   const searchTripHandler = (event) => {
     event.preventDefault();
   };
 
-  const getPositionHandler = () => {
-    getLocalization();
-    console.log(localization);
-  };
-
   return (
     <form onSubmit={searchTripHandler}>
       <label htmlFor="origin">
-        <input id="origin"></input>
+        <input id="origin" placeholder={localization.cityName}></input>
       </label>
       <button onClick={getPositionHandler}>Get Current Location</button>
       <label htmlFor="destination">
