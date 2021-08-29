@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import axios from "axios";
 
 export default function SearchTrip() {
+  const originName = useRef(null);
   const [localization, setLocalization] = useState({
     cityName: "",
     Latitude: "",
@@ -15,22 +17,22 @@ export default function SearchTrip() {
     let latitude = position.coords.latitude;
     let longitude = position.coords.longitude;
     const requestOptions = {
-      method: "GET",
       headers: {
         "x-rapidapi-key": "c6939485b1msh554bb1848fd05e3p17c4eajsnff0e7a27fd8b",
         "x-rapidapi-host": "forward-reverse-geocoding.p.rapidapi.com",
       },
     };
-    const response = await fetch(
+    const response = await axios.get(
       `https://forward-reverse-geocoding.p.rapidapi.com/v1/reverse?lat=${latitude}&lon=${longitude}&accept-language=en&polygon_threshold=0.0`,
       requestOptions
     );
-    const data = await response.json();
+    console.log(response);
     setLocalization({
-      cityName: data.address.town,
+      cityName: response.data.address.hamlet,
       Latitude: latitude,
       Longitude: longitude,
     });
+    originName.current = response.data.address.hamlet;
   }
 
   const getPositionHandler = () => {
@@ -72,8 +74,6 @@ export default function SearchTrip() {
     navigator.geolocation.clearWatch(watchId);
   };
 
-  // useEffect(() => {});
-
   const searchTripHandler = (event) => {
     event.preventDefault();
   };
@@ -81,11 +81,16 @@ export default function SearchTrip() {
   return (
     <form onSubmit={searchTripHandler}>
       <label htmlFor="origin">
-        <input id="origin" placeholder={localization.cityName}></input>
+        <input
+          id="origin"
+          defaultValue={localization.cityName}
+          ref={originName}
+          placeholder="Origin"
+        ></input>
       </label>
       <button onClick={getPositionHandler}>Get Current Location</button>
       <label htmlFor="destination">
-        <input id=" destination"></input>
+        <input id=" destination" placeholder="Destination"></input>
       </label>
       <button type="submit">Search</button>
     </form>
