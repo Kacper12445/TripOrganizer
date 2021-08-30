@@ -29,18 +29,15 @@ export default function Map() {
     libraries: libraries,
   });
 
-  const [coords, setCoords] = useState([]);
+  const [coords, setCoords] = useState();
   const [selected, setSelected] = useState(null);
 
   const mapClickHandler = useCallback((event) => {
-    setCoords((current) => [
-      ...current,
-      {
-        lat: event.latLng.lat(),
-        lng: event.latLng.lng(),
-        time: new Date(),
-      },
-    ]);
+    setCoords({
+      lat: event.latLng.lat(),
+      lng: event.latLng.lng(),
+      time: new Date(),
+    });
   }, []);
 
   const mapRef = useRef();
@@ -60,10 +57,11 @@ export default function Map() {
         onClick={mapClickHandler}
         onLoad={onLoad}
       >
-        {coords.map((coord) => (
+        {/* {coords.map((coord) => ( */}
+        {coords && (
           <Marker
-            key={coord.time.toISOString()}
-            position={{ lat: coord.lat, lng: coord.lng }}
+            key={coords.time.toISOString()}
+            position={{ lat: coords.lat, lng: coords.lng }}
             // icon={
             //     url:"",
             // scaledSize: new window.google.maps.Size(30,30),
@@ -71,10 +69,11 @@ export default function Map() {
             // anchor: new window.google.maps.Point(15,15)
             // }
             onClick={() => {
-              setSelected(coord);
+              setSelected(coords);
             }}
           />
-        ))}
+        )}
+
         {selected ? (
           <InfoWindow
             position={{ lat: selected.lat, lng: selected.lng }}

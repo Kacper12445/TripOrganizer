@@ -1,9 +1,5 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
-// import PlacesAutocomplete, {
-//   geocodeByAdres,
-//   getLatLang,
-// } from "react-places-autocomplete";
 
 export default function SearchTrip() {
   const originName = useRef(null);
@@ -82,18 +78,6 @@ export default function SearchTrip() {
     event.preventDefault();
   };
 
-  // const [adress, setAdress] = useState("");
-  // const [coordinates, setCoordinates] = useState({
-  //   lat: null,
-  //   lang: null,
-  // });
-  // const selectHandler = async (value) => {
-  //   const result = await geocodeByAdres(value);
-  //   const latLng = await getLatLang(result[0]);
-  //   setAdress(value);
-  //   setCoordinates(latLng);
-  // };
-
   return (
     <>
       <form onSubmit={searchTripHandler}>
@@ -111,30 +95,6 @@ export default function SearchTrip() {
         </label>
         <button type="submit">Search</button>
       </form>
-      {/* <PlacesAutocomplete
-        value={adress}
-        onChange={setAdress}
-        onSelect={selectHandler}
-      >
-        {({ getInputProps, suggestions, getSuggestionsItemProps, loading }) => (
-          <div>
-            <input {...getInputProps({ placeholder: "Type adress" })} />
-            <div>
-              {loading ? <div>...loading</div> : null}
-              {suggestions.map((suggestion) => {
-                const style = {
-                  backgroundColor: suggestion.active ? "#41b6e6" : "#fff",
-                };
-                return (
-                  <div {...getSuggestionsItemProps(suggestion, { style })}>
-                    {suggestion.description}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        )}
-      </PlacesAutocomplete> */}
     </>
   );
 }
