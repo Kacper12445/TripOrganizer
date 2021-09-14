@@ -7,6 +7,11 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 
+import usePlacesAutocomplete, {
+  getGeocode,
+  getLatLng,
+} from "use-places-autocomplete";
+
 import MapStyles from "./MapStyles";
 
 export default function Map() {
@@ -14,10 +19,6 @@ export default function Map() {
   const mapContainerStyle = {
     width: "100vw",
     height: "100vh",
-  };
-  const center = {
-    lat: 51.107883,
-    lng: 17.038538,
   };
   const options = {
     styles: MapStyles,
@@ -45,14 +46,21 @@ export default function Map() {
     mapRef.current = map;
   }, []);
 
+  const panTo = useCallback(({ lat, lng }) => {
+    mapRef.current.panTo({ lat, lng });
+    mapRef.current.setZoom(14);
+  }, []);
+
   if (loadError) return "Error loading maps";
   if (!isLoaded) return "Loading map";
   return (
     <>
+      <Search panTo={panTo} />
+      <Locate panTo={panTo} />
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={8}
-        center={center}
+        center={{ lat: 51.107883, lng: 17.038538 }}
         options={options}
         onClick={mapClickHandler}
         onLoad={onLoad}
@@ -90,6 +98,117 @@ export default function Map() {
           </InfoWindow>
         ) : null}
       </GoogleMap>
+    </>
+  );
+}
+
+function Locate({ panTo }) {
+  return (
+    <button
+      onClick={() => {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            panTo({
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            });
+          },
+          () => null
+        );
+      }}
+    ></button>
+  );
+}
+
+function Search({ panTo }) {
+  const {
+    ready,
+    value,
+    suggestions: { status, data },
+    setValue,
+    clearSuggestions,
+  } = usePlacesAutocomplete({
+    requestOptions: {
+      location: { lat: () => 51.107883, lng: () => 17.038538 },
+      radius: 100 * 1000,
+    },
+  });
+
+  const handleInput = (e) => {
+    setValue(e.target.value);
+  };
+
+  const handleSelect =
+    ({ description }) =>
+    () => {
+      setValue(description, false);
+      clearSuggestions();
+
+      getGeocode({ address: description })
+        .then((results) => getLatLng(results[0]))
+        .then(({ lat, lng }) => {
+          console.log("Coordinates:", { lat, lng });
+        })
+        .catch((error) => {
+          console.log("Error: ", error);
+        });
+    };
+
+  const renderSuggestion = () =>
+    data.map((suggestion) => {
+      const {
+        place_id,
+        structured_formatting: { main_text, secondary_text },
+      } = suggestion;
+      return (
+        <li key={place_id} onClick={handleSelect(suggestion)}>
+          <strong>{main_text}</strong>
+          <small>{secondary_text}</small>
+        </li>
+      );
+    });
+  return (
+    <>
+      <div>
+        <input
+          value={value}
+          onChange={handleInput}
+          disabled={!ready}
+          placeholder="Enter an address"
+        />
+        {<ul>{status === "OK" && renderSuggestion()}</ul>}
+      </div>
+      {/* <div
+        onSelect={async (address) => {
+          setValue(address, false);
+          clearSuggestions();
+          console.log(address);
+          try {
+            const results = await getGeocode({ address });
+            const { lat, lng } = await getLatLng(results[0]);
+            panTo({ lat, lng });
+          } catch (error) {
+            console.log("error");
+          }
+        }}
+      >
+        <input
+          value={value}
+          onChange={handleInput}
+          disabled={!ready}
+          placeholder="Enter an adress"
+        />
+        <div>
+          <div>
+            {status === "Ok" &&
+              data.map(({ id, description }) => (
+                <div key={id} value={description}>
+                  {description}
+                </div>
+              ))}
+          </div>
+        </div>
+      </div> */}
     </>
   );
 }

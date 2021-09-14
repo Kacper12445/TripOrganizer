@@ -28,11 +28,11 @@ export default function SearchTrip() {
     );
     console.log(response);
     setLocalization({
-      cityName: response.data.address.hamlet,
+      cityName: response.data.address.town,
       Latitude: latitude,
       Longitude: longitude,
     });
-    originName.current = response.data.address.hamlet;
+    originName.current = response.data.address.town;
   }
 
   const getPositionHandler = () => {
