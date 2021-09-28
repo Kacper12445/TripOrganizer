@@ -31,7 +31,7 @@ export default function AutocompleteInput({ panTo }) {
       getGeocode({ address: description })
         .then((results) => getLatLng(results[0]))
         .then(({ lat, lng }) => {
-          panTo({ lat: lat, lng: lng });
+          panTo({ lat: lat, lng: lng }, "destination");
           console.log("Coordinates:", { lat, lng });
         })
         .catch((error) => {
@@ -47,8 +47,8 @@ export default function AutocompleteInput({ panTo }) {
       } = suggestion;
       return (
         <li key={place_id} onClick={handleSelect(suggestion)}>
-          <strong>{main_text}</strong>
-          <small>{secondary_text}</small>
+          <strong>{main_text} </strong>
+          <small> {secondary_text}</small>
         </li>
       );
     });
@@ -56,6 +56,7 @@ export default function AutocompleteInput({ panTo }) {
     <>
       <div>
         <input
+          id="origin"
           value={value}
           onChange={handleInput}
           disabled={!ready}

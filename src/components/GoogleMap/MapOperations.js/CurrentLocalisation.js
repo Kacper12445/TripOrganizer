@@ -6,10 +6,13 @@ export default function CurrentLocalisation({ panTo }) {
       onClick={() => {
         navigator.geolocation.getCurrentPosition(
           (position) => {
-            panTo({
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
-            });
+            panTo(
+              {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude,
+              },
+              "origin"
+            );
           },
           () => null
         );
