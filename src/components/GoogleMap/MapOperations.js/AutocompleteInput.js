@@ -26,6 +26,10 @@ export default function AutocompleteInput(props) {
 
     setValue(e.target.value);
   };
+  const clearInput = () => {
+    props.travelPoint === "origin" ? props.setOriginValue("") : setValue("");
+    props.clearMarker();
+  };
 
   const handleSelect =
     ({ description }) =>
@@ -67,6 +71,7 @@ export default function AutocompleteInput(props) {
         disabled={!ready}
         placeholder={`Enter ${props.travelPoint}`}
       />
+      <button onClick={clearInput}>Clear</button>
       {<ul>{status === "OK" && renderSuggestion()}</ul>}
     </>
   );

@@ -37,15 +37,17 @@ export default function Map() {
   const [coords, setCoords] = useState([
     {
       id: "origin",
-      lat: 0,
-      lng: 0,
+      lat: 51,
+      lng: 17,
       time: 0,
+      visible: true,
     },
     {
       id: "destination",
       lat: 0,
       lng: 0,
       time: 0,
+      visible: true,
     },
   ]);
 
@@ -56,7 +58,8 @@ export default function Map() {
       )
       .then((resp) => {
         setOriginValue(`${resp.data.results[0].formatted_address}`);
-      });
+      })
+      .catch((error) => console.log(error));
   };
 
   const changeCoords = (lat, lng, key_value) => {
@@ -65,11 +68,16 @@ export default function Map() {
     coordToUpdate.lat = lat;
     coordToUpdate.lng = lng;
     coordToUpdate.time = new Date();
+    coordToUpdate.visible = true;
     if ((key_value = "origin")) {
       geoCode(lat, lng);
     }
 
     setCoords(updatedCoords);
+  };
+
+  const clearMarkers = () => {
+    coords.forEach((coord) => (coord.visible = false));
   };
 
   const getCoords = (key_value) => {
@@ -92,7 +100,6 @@ export default function Map() {
     mapRef.current.setZoom(14);
   }, []);
 
-  console.log(coords);
   if (loadError) return "Error loading maps";
   if (!isLoaded) return "Loading map";
   return (
@@ -102,9 +109,13 @@ export default function Map() {
         travelPoint="origin"
         originValue={originValue}
         setOriginValue={setOriginValue}
-        geoCode={geoCode}
+        clearMarker={clearMarkers}
       />
-      <AutocompleteInput panTo={panTo} travelPoint="destination" />
+      <AutocompleteInput
+        panTo={panTo}
+        travelPoint="destination"
+        clearMarker={clearMarkers}
+      />
       <FindRoad
         travelMode={travelMode}
         originCoords={getCoords("origin")}
@@ -119,7 +130,7 @@ export default function Map() {
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={8}
-        center={{ lat: 51.107883, lng: 17.038538 }}
+        center={{ lat: getCoords("origin").lat, lng: getCoords("origin").lng }}
         options={options}
         onClick={mapClickHandler}
         onLoad={onLoad}
@@ -128,6 +139,7 @@ export default function Map() {
           <Marker
             key={coord.id}
             position={{ lat: coord.lat, lng: coord.lng }}
+            visible={coord.visible}
             // icon={
             //     url:"",
             // scaledSize: new window.google.maps.Size(30,30),
