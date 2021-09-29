@@ -1,18 +1,19 @@
 import React from "react";
 
-export default function CurrentLocalisation({ panTo }) {
+export default function CurrentLocalisation(props) {
   return (
     <button
       onClick={() => {
         navigator.geolocation.getCurrentPosition(
           (position) => {
-            panTo(
+            props.panTo(
               {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude,
               },
-              "origin"
+              props.travelPoint
             );
+            props.geoCode(position.coords.latitude, position.coords.longitude);
           },
           () => null
         );

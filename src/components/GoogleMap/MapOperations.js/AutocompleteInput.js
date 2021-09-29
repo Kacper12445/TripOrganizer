@@ -5,7 +5,7 @@ import usePlacesAutocomplete, {
   getLatLng,
 } from "use-places-autocomplete";
 
-export default function AutocompleteInput({ panTo }) {
+export default function AutocompleteInput(props) {
   const {
     ready,
     value,
@@ -20,18 +20,25 @@ export default function AutocompleteInput({ panTo }) {
   });
 
   const handleInput = (e) => {
+    if (props.travelPoint === "origin") {
+      props.setOriginValue(e.target.value);
+    }
+
     setValue(e.target.value);
   };
 
   const handleSelect =
     ({ description }) =>
     () => {
-      setValue(description, false);
+      props.travelPoint === "origin"
+        ? props.setOriginValue(description)
+        : setValue(description, false);
+
       clearSuggestions();
       getGeocode({ address: description })
         .then((results) => getLatLng(results[0]))
         .then(({ lat, lng }) => {
-          panTo({ lat: lat, lng: lng }, "destination");
+          props.panTo({ lat: lat, lng: lng }, props.travelPoint);
           console.log("Coordinates:", { lat, lng });
         })
         .catch((error) => {
@@ -54,16 +61,13 @@ export default function AutocompleteInput({ panTo }) {
     });
   return (
     <>
-      <div>
-        <input
-          id="origin"
-          value={value}
-          onChange={handleInput}
-          disabled={!ready}
-          placeholder="Enter an address"
-        />
-        {<ul>{status === "OK" && renderSuggestion()}</ul>}
-      </div>
+      <input
+        value={props.travelPoint === "origin" ? props.originValue : value}
+        onChange={handleInput}
+        disabled={!ready}
+        placeholder={`Enter ${props.travelPoint}`}
+      />
+      {<ul>{status === "OK" && renderSuggestion()}</ul>}
     </>
   );
 }
