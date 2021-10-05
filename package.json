@@ -2,13 +2,19 @@
   "name": "trip-organizer",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://maps.googleapis.com/maps/api/directions/",
+  "homepage": "http://localhost:3000/",
   "dependencies": {
+    "@react-google-maps/api": "^2.2.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "axios": "^0.21.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-places-autocomplete": "^7.3.0",
     "react-scripts": "4.0.3",
+    "use-places-autocomplete": "^1.9.4",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
