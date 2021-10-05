@@ -4,6 +4,7 @@ import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
+import CurrentLocalisation from "./CurrentLocalisation";
 
 export default function AutocompleteInput(props) {
   const {
@@ -20,23 +21,18 @@ export default function AutocompleteInput(props) {
   });
 
   const handleInput = (e) => {
-    if (props.travelPoint === "origin") {
-      props.setOriginValue(e.target.value);
-    }
-
     setValue(e.target.value);
   };
+
   const clearInput = () => {
-    props.travelPoint === "origin" ? props.setOriginValue("") : setValue("");
+    setValue("");
     props.clearMarker();
   };
 
   const handleSelect =
     ({ description }) =>
     () => {
-      props.travelPoint === "origin"
-        ? props.setOriginValue(description)
-        : setValue(description, false);
+      setValue(description, false);
 
       clearSuggestions();
       getGeocode({ address: description })
@@ -66,12 +62,19 @@ export default function AutocompleteInput(props) {
   return (
     <>
       <input
-        value={props.travelPoint === "origin" ? props.originValue : value}
+        value={value}
         onChange={handleInput}
         disabled={!ready}
         placeholder={`Enter ${props.travelPoint}`}
       />
       <button onClick={clearInput}>Clear</button>
+      {props.travelPoint === "origin" ? (
+        <CurrentLocalisation
+          panTo={props.panTo}
+          travelPoint={props.travelPoint}
+          passValue={setValue}
+        />
+      ) : null}
       {<ul>{status === "OK" && renderSuggestion()}</ul>}
     </>
   );

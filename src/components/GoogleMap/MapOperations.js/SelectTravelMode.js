@@ -4,8 +4,9 @@ export default function SelectTravelMode(props) {
   const [transitSelected, setTransitSelected] = useState(null);
 
   const selectOptionHandler = (event) => {
+    console.log("wchodzi");
     props.passTravelMode(event.target.value);
-    if (event.target.value === "Transit") {
+    if (event.target.value === "transit") {
       setTransitSelected(true);
     } else {
       setTransitSelected(false);
@@ -16,10 +17,10 @@ export default function SelectTravelMode(props) {
     <>
       <label>Choose travel mode</label>
       <select onChange={selectOptionHandler}>
-        <option>Driving</option>
-        <option>Bicycling</option>
-        <option>Walking</option>
-        <option>Transit</option>
+        <option value="driving">Driving</option>
+        <option value="bicycling">Bicycling</option>
+        <option value="walking">Walking</option>
+        <option value="transit">Transit</option>
       </select>
       {transitSelected && (
         <>

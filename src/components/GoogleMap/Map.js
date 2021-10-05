@@ -1,18 +1,15 @@
 import React, { useState, useCallback, useRef } from "react";
 import AutocompleteInput from "./MapOperations.js/AutocompleteInput";
-import CurrentLocalisation from "./MapOperations.js/CurrentLocalisation";
 import FindRoad from "./MapOperations.js/FindRoad";
 import SelectTravelMode from "./MapOperations.js/SelectTravelMode";
-
+import MapStyles from "./MapStyles";
 import {
   GoogleMap,
   useLoadScript,
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
-
-import MapStyles from "./MapStyles";
-import axios from "axios";
+import FindAttractions from "../Trip/FindAttractions";
 
 export default function Map() {
   const [libraries] = useState(["places"]);
@@ -32,35 +29,23 @@ export default function Map() {
 
   const [selected, setSelected] = useState(null);
   const [travelMode, setTravelMode] = useState("Driving");
-  const [originValue, setOriginValue] = useState();
-
+  const [focusCoord, setFocusCoord] = useState({ lat: 51, lng: 17 });
   const [coords, setCoords] = useState([
     {
       id: "origin",
-      lat: 51,
-      lng: 17,
+      lat: 0,
+      lng: 0,
       time: 0,
-      visible: true,
+      visible: false,
     },
     {
       id: "destination",
       lat: 0,
       lng: 0,
       time: 0,
-      visible: true,
+      visible: false,
     },
   ]);
-
-  const geoCode = (lat, lng) => {
-    axios
-      .get(
-        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`
-      )
-      .then((resp) => {
-        setOriginValue(`${resp.data.results[0].formatted_address}`);
-      })
-      .catch((error) => console.log(error));
-  };
 
   const changeCoords = (lat, lng, key_value) => {
     const updatedCoords = [...coords];
@@ -69,11 +54,9 @@ export default function Map() {
     coordToUpdate.lng = lng;
     coordToUpdate.time = new Date();
     coordToUpdate.visible = true;
-    if ((key_value = "origin")) {
-      geoCode(lat, lng);
-    }
 
     setCoords(updatedCoords);
+    setFocusCoord({ lat: coordToUpdate.lat, lng: coordToUpdate.lng });
   };
 
   const clearMarkers = () => {
@@ -95,10 +78,13 @@ export default function Map() {
   }, []);
 
   const panTo = useCallback(({ lat, lng }, key_value) => {
+    console.log("Wchodzi do funkcji");
     changeCoords(lat, lng, key_value);
     mapRef.current.panTo({ lat, lng });
     mapRef.current.setZoom(14);
   }, []);
+
+  console.log(coords);
 
   if (loadError) return "Error loading maps";
   if (!isLoaded) return "Loading map";
@@ -107,8 +93,6 @@ export default function Map() {
       <AutocompleteInput
         panTo={panTo}
         travelPoint="origin"
-        originValue={originValue}
-        setOriginValue={setOriginValue}
         clearMarker={clearMarkers}
       />
       <AutocompleteInput
@@ -121,16 +105,12 @@ export default function Map() {
         originCoords={getCoords("origin")}
         destinationCoords={getCoords("destination")}
       />
-      <CurrentLocalisation
-        panTo={panTo}
-        travelPoint="origin"
-        geoCode={geoCode}
-      />
       <SelectTravelMode passTravelMode={setTravelMode} />
+      <FindAttractions />
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={8}
-        center={{ lat: getCoords("origin").lat, lng: getCoords("origin").lng }}
+        center={{ lat: focusCoord.lat, lng: focusCoord.lng }}
         options={options}
         onClick={mapClickHandler}
         onLoad={onLoad}
