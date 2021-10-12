@@ -10,6 +10,7 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 import FindAttractions from "../Trip/FindAttractions";
+import RouteAlgorithm from "../Trip/RouteAlgorithm";
 
 export default function Map() {
   const [libraries] = useState(["places"]);
@@ -107,6 +108,10 @@ export default function Map() {
       />
       <SelectTravelMode passTravelMode={setTravelMode} />
       <FindAttractions />
+      <RouteAlgorithm
+        originCoords={getCoords("origin")}
+        destinationCoords={getCoords("destination")}
+      />
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={8}
