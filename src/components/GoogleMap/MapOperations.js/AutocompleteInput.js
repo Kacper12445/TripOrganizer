@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "../../common/Button";
 import Input from "../../common/Input";
+import Card from "../../common/Card";
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
@@ -62,21 +63,23 @@ export default function AutocompleteInput(props) {
     });
   return (
     <>
-      <Input
-        value={value}
-        onChange={handleInput}
-        disabled={!ready}
-        placeholder={`Enter ${props.travelPoint}`}
-      />
-      <Button onClick={clearInput}>Clear</Button>
-      {props.travelPoint === "origin" ? (
-        <CurrentLocalisation
-          panTo={props.panTo}
-          travelPoint={props.travelPoint}
-          passValue={setValue}
+      <Card>
+        <Input
+          value={value}
+          onChange={handleInput}
+          disabled={!ready}
+          placeholder={`Enter ${props.travelPoint}`}
         />
-      ) : null}
-      {<ul>{status === "OK" && renderSuggestion()}</ul>}
+        <Button onClick={clearInput}>Clear</Button>
+        {props.travelPoint === "origin" ? (
+          <CurrentLocalisation
+            panTo={props.panTo}
+            travelPoint={props.travelPoint}
+            passValue={setValue}
+          />
+        ) : null}
+        {<ul>{status === "OK" && renderSuggestion()}</ul>}
+      </Card>
     </>
   );
 }

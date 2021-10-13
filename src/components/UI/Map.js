@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useRef } from "react";
-import AutocompleteInput from "./MapOperations.js/AutocompleteInput";
-import FindRoad from "./MapOperations.js/FindRoad";
-import SelectTravelMode from "./MapOperations.js/SelectTravelMode";
+import AutocompleteInput from "../GoogleMap/MapOperations.js/AutocompleteInput";
+import FindRoad from "../GoogleMap/MapOperations.js/FindRoad";
+import SelectTravelMode from "../GoogleMap/MapOperations.js/SelectTravelMode";
 import MapStyles from "./MapStyles";
 import {
   GoogleMap,
@@ -99,35 +99,39 @@ export default function Map() {
   if (!isLoaded) return "Loading map";
   return (
     <>
-      <Card>
-        <AutocompleteInput
-          panTo={panTo}
-          travelPoint="origin"
-          clearMarker={clearMarkers}
-        />
-        <AutocompleteInput
-          panTo={panTo}
-          travelPoint="destination"
-          clearMarker={clearMarkers}
-        />
-      </Card>
-      <FindRoad
-        travelMode={travelMode}
-        originCoords={getCoords("origin")}
-        destinationCoords={getCoords("destination")}
-      />
-      <Card>
-        <SelectTravelMode passTravelMode={setTravelMode} />
-      </Card>
-      <Card>
-        <FindAttractions destinationCoords={getCoords("destination")} />
-      </Card>
-      {/* <Card>
+      <Card flexDirection="column">
+        <Card>
+          <AutocompleteInput
+            panTo={panTo}
+            travelPoint="origin"
+            clearMarker={clearMarkers}
+          />
+          <AutocompleteInput
+            panTo={panTo}
+            travelPoint="destination"
+            clearMarker={clearMarkers}
+          />
+        </Card>
+        <Card>
+          <FindRoad
+            travelMode={travelMode}
+            originCoords={getCoords("origin")}
+            destinationCoords={getCoords("destination")}
+          />
+        </Card>
+        <Card>
+          <SelectTravelMode passTravelMode={setTravelMode} />
+        </Card>
+        <Card>
+          <FindAttractions destinationCoords={getCoords("destination")} />
+        </Card>
+        {/* <Card>
         <RouteAlgorithm
           originCoords={getCoords("origin")}
           destinationCoords={getCoords("destination")}
         />
       </Card> */}
+      </Card>
       <Card>
         <GoogleMap
           mapContainerStyle={mapContainerStyle}
