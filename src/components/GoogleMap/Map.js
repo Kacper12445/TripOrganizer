@@ -61,8 +61,17 @@ export default function Map() {
   };
 
   const clearMarkers = () => {
-    coords.forEach((coord) => (coord.visible = false));
+    // coords.forEach((coord) => (coord.visible = false));
+    let tempCoords = coords;
+    // tempCoords.forEach((coord) => (coord.visible = false));
+    for (let i = 0; i < tempCoords.length; i++) {
+      tempCoords[i].lat = null;
+      tempCoords[i].lng = null;
+      tempCoords[i].visible = false;
+    }
+    setCoords(tempCoords);
   };
+  console.log(coords);
 
   const getCoords = (key_value) => {
     let coord = coords.find(({ id }) => id === key_value);
@@ -84,8 +93,6 @@ export default function Map() {
     mapRef.current.panTo({ lat, lng });
     mapRef.current.setZoom(14);
   }, []);
-
-  console.log(coords);
 
   if (loadError) return "Error loading maps";
   if (!isLoaded) return "Loading map";

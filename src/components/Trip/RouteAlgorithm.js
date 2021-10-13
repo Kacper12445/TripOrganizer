@@ -6,9 +6,6 @@ export default function RouteAlgorithm(props) {
     { duration: null, mode: null },
   ]);
   const getBestResult = (resultArray) => {
-    // let bestResult = Math.min(
-    //   ...resultArray.map((element) => element.duration)
-    // );
     let bestResult = resultArray.reduce((prev, curr) => {
       return prev.duration < curr.duration ? prev : curr;
     });
