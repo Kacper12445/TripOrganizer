@@ -1,5 +1,6 @@
 import React from "react";
-
+import Button from "../../common/Button";
+import Input from "../../common/Input";
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
@@ -61,13 +62,13 @@ export default function AutocompleteInput(props) {
     });
   return (
     <>
-      <input
+      <Input
         value={value}
         onChange={handleInput}
         disabled={!ready}
         placeholder={`Enter ${props.travelPoint}`}
       />
-      <button onClick={clearInput}>Clear</button>
+      <Button onClick={clearInput}>Clear</Button>
       {props.travelPoint === "origin" ? (
         <CurrentLocalisation
           panTo={props.panTo}

@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Button from "../common/Button";
 
-export default function FindAttractions() {
+export default function FindAttractions(props) {
   const [areaData, setAreaData] = useState({
     location: {
-      latitude: 51.110612128826006,
-      longitude: 17.03289461135866,
+      latitude: 0,
+      longitude: 0,
     },
     radius: 50000,
     attractionType: "",
@@ -16,15 +17,32 @@ export default function FindAttractions() {
     setAreaData({ ...areaData, attractionType: e.target.value });
   };
 
+  useEffect(() => {
+    let tempAreaData = areaData;
+    if (
+      props.destinationCoords.lat !== 0 &&
+      props.destinationCoords.lng !== 0
+    ) {
+      tempAreaData.location.longitude = props.destinationCoords.lng;
+      tempAreaData.location.latitude = props.destinationCoords.lat;
+      setAreaData(tempAreaData);
+    }
+  }, [props.destinationCoords.lng, props.destinationCoords.lat, areaData]);
+  console.log(
+    `area: ${areaData.location.latitude} ${areaData.location.longitude}`
+  );
+
   const find_attraction = () => {
-    axios
-      .get(
-        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${areaData.location.latitude}%2C${areaData.location.longitude}&radius=${areaData.radius}&type=${areaData.attractionType}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`
-      )
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => console.log(err));
+    if (areaData.location.latitude !== 0 && areaData.location.longitude !== 0) {
+      axios
+        .get(
+          `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${areaData.location.latitude}%2C${areaData.location.longitude}&radius=${areaData.radius}&type=${areaData.attractionType}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`
+        )
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   return (
@@ -38,8 +56,9 @@ export default function FindAttractions() {
         <option value="bar">Bar</option>
         <option value="cafe">Cafe</option>
         <option value="tourist_attraction">Tourist attraction</option>
+        <option value="airport">Airport</option>
       </select>
-      <button onClick={find_attraction}>Znajdz cos fajnego</button>
+      <Button onClick={find_attraction}>Znajdz cos fajnego</Button>
     </>
   );
 }
