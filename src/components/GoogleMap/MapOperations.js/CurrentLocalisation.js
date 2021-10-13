@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import Button from "../../common/Button";
 
 export default function CurrentLocalisation(props) {
   const geoCode = (lat, lng) => {
@@ -15,7 +16,7 @@ export default function CurrentLocalisation(props) {
   };
 
   return (
-    <button
+    <Button
       onClick={() => {
         navigator.geolocation.getCurrentPosition(
           (position) => {
@@ -37,6 +38,6 @@ export default function CurrentLocalisation(props) {
       }}
     >
       Locate
-    </button>
+    </Button>
   );
 }

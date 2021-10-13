@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Button from "../common/Button";
 
 export default function RouteAlgorithm(props) {
   const [resultList, setResultList] = useState([
@@ -41,10 +42,9 @@ export default function RouteAlgorithm(props) {
     return tempArray;
   };
 
-  console.log(resultList);
   return (
     <>
-      <button onClick={getRoutesTime}>Find faster type of travel</button>
+      <Button onClick={getRoutesTime}>Find fastest type of travel</Button>
     </>
   );
 }

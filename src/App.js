@@ -1,11 +1,10 @@
 import "./App.css";
-
-import Map from "./components/GoogleMap/Map";
+import MainPage from "./pages/MainPage";
 
 function App() {
   return (
     <>
-      <Map></Map>
+      <MainPage></MainPage>
     </>
   );
 }

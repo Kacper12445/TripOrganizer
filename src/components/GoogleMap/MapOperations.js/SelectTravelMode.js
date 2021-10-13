@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Input from "../../common/Input";
 
 export default function SelectTravelMode(props) {
   const [transitSelected, setTransitSelected] = useState(null);
@@ -25,7 +26,7 @@ export default function SelectTravelMode(props) {
       {transitSelected && (
         <>
           <label>Select departue time</label>
-          <input />
+          <Input />
         </>
       )}
     </>
