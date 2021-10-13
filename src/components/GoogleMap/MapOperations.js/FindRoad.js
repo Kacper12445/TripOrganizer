@@ -52,8 +52,8 @@ export default function FindRoad(props) {
     // }
     let options = {
       headers: {
-        "x-rapidapi-host": "travel-advisor.p.rapidapi.com",
-        "x-rapidapi-key": "c52cfc7653mshfa80f2685f2bc96p14a6bcjsn98ea93c50a74",
+        "x-rapidapi-host": process.env.REACT_APP_TRAVEL_ADVISOR_HOST,
+        "x-rapidapi-key": process.env.REACT_APP_RAPID_API_KEY,
       },
       params: {
         latitude: props.destinationCoords.lat,
