@@ -111,7 +111,7 @@ export default function FindRoad(props) {
   return (
     <>
       <Button onClick={buttonHandler}>Search</Button>
-      <Button onClick={findHotel}>FindHotel</Button>
+      {/* <Button onClick={findHotel}>FindHotel</Button> */}
     </>
   );
 }

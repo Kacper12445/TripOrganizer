@@ -36,6 +36,8 @@ export default function CurrentLocalisation(props) {
           () => null
         );
       }}
+      height="100%"
+      width="25%"
     >
       Locate
     </Button>

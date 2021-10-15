@@ -63,14 +63,16 @@ export default function AutocompleteInput(props) {
     });
   return (
     <>
-      <Card>
+      <Card height="75%" width="100%" justifyContent="center">
         <Input
           value={value}
           onChange={handleInput}
           disabled={!ready}
           placeholder={`Enter ${props.travelPoint}`}
+          height="100%"
+          width="50%"
+          padding="22px 18px"
         />
-        <Button onClick={clearInput}>Clear</Button>
         {props.travelPoint === "origin" ? (
           <CurrentLocalisation
             panTo={props.panTo}
@@ -78,6 +80,9 @@ export default function AutocompleteInput(props) {
             passValue={setValue}
           />
         ) : null}
+        <Button onClick={clearInput} height="100%" width="25%">
+          Clear
+        </Button>
         {<ul>{status === "OK" && renderSuggestion()}</ul>}
       </Card>
     </>

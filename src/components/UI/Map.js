@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useRef } from "react";
-import AutocompleteInput from "../GoogleMap/MapOperations.js/AutocompleteInput";
-import FindRoad from "../GoogleMap/MapOperations.js/FindRoad";
-import SelectTravelMode from "../GoogleMap/MapOperations.js/SelectTravelMode";
+// import AutocompleteInput from "../GoogleMap/MapOperations.js/AutocompleteInput";
+// import FindRoad from "../GoogleMap/MapOperations.js/FindRoad";
+// import SelectTravelMode from "../GoogleMap/MapOperations.js/SelectTravelMode";
 import MapStyles from "./MapStyles";
 import {
   GoogleMap,
@@ -9,15 +9,17 @@ import {
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
-import FindAttractions from "../Trip/FindAttractions";
-import RouteAlgorithm from "../Trip/RouteAlgorithm";
+// import FindAttractions from "../Trip/FindAttractions";
+// import RouteAlgorithm from "../Trip/RouteAlgorithm";
 import Card from "../common/Card";
+// import TripForm from "./SearchSide/TripForm";
+import Searching from "./SearchSide/Searching";
 
 export default function Map() {
   const [libraries] = useState(["places"]);
   const mapContainerStyle = {
-    width: "100vw",
-    height: "100vh",
+    height: "70%",
+    width: "100%",
   };
   const options = {
     styles: MapStyles,
@@ -95,86 +97,78 @@ export default function Map() {
     mapRef.current.setZoom(14);
   }, []);
 
-  if (loadError) return "Error loading maps";
-  if (!isLoaded) return "Loading map";
+  // if (loadError) return "Error loading maps";
+  // if (!isLoaded) return "Loading map";
   return (
-    <>
-      <Card flexDirection="column">
-        <Card>
-          <AutocompleteInput
-            panTo={panTo}
-            travelPoint="origin"
-            clearMarker={clearMarkers}
-          />
-          <AutocompleteInput
-            panTo={panTo}
-            travelPoint="destination"
-            clearMarker={clearMarkers}
-          />
-        </Card>
-        <Card>
-          <FindRoad
-            travelMode={travelMode}
-            originCoords={getCoords("origin")}
-            destinationCoords={getCoords("destination")}
-          />
-        </Card>
-        <Card>
-          <SelectTravelMode passTravelMode={setTravelMode} />
-        </Card>
-        <Card>
-          <FindAttractions destinationCoords={getCoords("destination")} />
-        </Card>
-        {/* <Card>
-        <RouteAlgorithm
-          originCoords={getCoords("origin")}
-          destinationCoords={getCoords("destination")}
-        />
-      </Card> */}
-      </Card>
-      <Card>
-        <GoogleMap
-          mapContainerStyle={mapContainerStyle}
-          zoom={8}
-          center={{ lat: focusCoord.lat, lng: focusCoord.lng }}
-          options={options}
-          onClick={mapClickHandler}
-          onLoad={onLoad}
-        >
-          {coords.map((coord) => (
-            <Marker
-              key={coord.id}
-              position={{ lat: coord.lat, lng: coord.lng }}
-              visible={coord.visible}
-              // icon={
-              //     url:"",
-              // scaledSize: new window.google.maps.Size(30,30),
-              // origin: new window.google.maps.Point(0,0),
-              // anchor: new window.google.maps.Point(15,15)
-              // }
-              onClick={() => {
-                setSelected(coord);
-              }}
-            />
-          ))}
-          {selected ? (
-            <InfoWindow
-              position={{ lat: selected.lat, lng: selected.lng }}
-              onCloseClick={() => {
-                setSelected(null);
-              }}
-            >
-              <div>
-                <h2>Coords</h2>
-                <h3>{selected.id}</h3>
-                <p>
-                  {selected.lat} - {selected.lng}
-                </p>
-              </div>
-            </InfoWindow>
-          ) : null}
-        </GoogleMap>
-      </Card>
-    </>
+    // <Card height="90vh" justifyContent="space-between">
+    // {/* <Card flexDirection="column" height="100%" flexBasis="65%"> */}
+    // {/* <Card flexDirection="column" flexBasis="30%" backGroundColor="blue"> */}
+    // {/* <TripForm panTo={panTo} /> */}
+    // {/* <Card>
+    //     <FindRoad
+    //       travelMode={travelMode}
+    //       originCoords={getCoords("origin")}
+    //       destinationCoords={getCoords("destination")}
+    //     />
+    //   </Card> */}
+    // {/* <Card>
+    //     <SelectTravelMode passTravelMode={setTravelMode} />
+    //   </Card> */}
+    // {/* <Card>
+    //     <FindAttractions destinationCoords={getCoords("destination")} />
+    //   </Card> */}
+    // {/* <Card>
+    //   <RouteAlgorithm
+    //     originCoords={getCoords("origin")}
+    //     destinationCoords={getCoords("destination")}
+    //   />
+    //     </Card> */}
+    // {/* </Card> */}
+    // {/* <Card flexBasis="70%" backGroundColor="yellow"></Card>
+    // </Card> */}
+    <Card flexBasis="35%" height="100%" backGroundColor="green">
+      {/* <GoogleMap
+            mapContainerStyle={mapContainerStyle}
+            zoom={4}
+            center={{ lat: focusCoord.lat, lng: focusCoord.lng }}
+            options={options}
+            onClick={mapClickHandler}
+            onLoad={onLoad}
+          >
+            {coords.map((coord) => (
+              <Marker
+                key={coord.id}
+                position={{ lat: coord.lat, lng: coord.lng }}
+                visible={coord.visible}
+                // icon={
+                //     url:"",
+                // scaledSize: new window.google.maps.Size(30,30),
+                // origin: new window.google.maps.Point(0,0),
+                // anchor: new window.google.maps.Point(15,15)
+                // }
+                onClick={() => {
+                  setSelected(coord);
+                }}
+              />
+            ))}
+            {selected ? (
+              <InfoWindow
+                position={{ lat: selected.lat, lng: selected.lng }}
+                onCloseClick={() => {
+                  setSelected(null);
+                }}
+              >
+                <div>
+                  <h2>Coords</h2>
+                  <h3>{selected.id}</h3>
+                  <p>
+                    {selected.lat} - {selected.lng}
+                  </p>
+                </div>
+              </InfoWindow>
+            ) : null}
+          </GoogleMap> */}
+    </Card>
+    // {/* </Card> */}
   );
 }
