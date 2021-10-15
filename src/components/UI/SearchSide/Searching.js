@@ -1,5 +1,5 @@
 import React from "react";
-import TripForm from "./TripForm";
+import TripForm from "./Form/TripForm";
 import SearchResults from "./SearchResults";
 import Card from "../../common/Card";
 

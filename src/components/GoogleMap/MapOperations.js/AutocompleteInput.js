@@ -2,6 +2,7 @@ import React from "react";
 import Button from "../../common/Button";
 import Input from "../../common/Input";
 import Card from "../../common/Card";
+import SuggestionItem from "../../UI/SearchSide/Form/SuggestionItem";
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
@@ -55,11 +56,14 @@ export default function AutocompleteInput(props) {
         structured_formatting: { main_text, secondary_text },
       } = suggestion;
       return (
-        <li key={place_id} onClick={handleSelect(suggestion)}>
-          <strong>{main_text} </strong>
-          <small> {secondary_text}</small>
-        </li>
+        <SuggestionItem
+          key={place_id}
+          text={suggestion.structured_formatting}
+          onClick={handleSelect(suggestion)}
+        />
       );
+      // <strong>{main_text} </strong>
+      // <small> {secondary_text}</small>
     });
   return (
     <>

@@ -1,7 +1,7 @@
 import React from "react";
-import Card from "../../common/Card";
-import AutocompleteInput from "../../GoogleMap/MapOperations.js/AutocompleteInput";
-import FindRoad from "../../GoogleMap/MapOperations.js/FindRoad";
+import Card from "../../../common/Card";
+import AutocompleteInput from "../../../GoogleMap/MapOperations.js/AutocompleteInput";
+import FindRoad from "../../../GoogleMap/MapOperations.js/FindRoad";
 
 export default function TripForm(props) {
   return (

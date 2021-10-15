@@ -7,7 +7,7 @@ import Card from "../components/common/Card";
 export default function SearchPage() {
   return (
     <>
-      <Header />
+      <Header height="10vh" width="100vw" backGroundColor="red" />
       <Card height="90vh" justifyContent="space-between">
         <Searching />
         <Map />

@@ -10,6 +10,12 @@ export default function NavBar() {
     {
       name: "Find Trip",
     },
+    {
+      name: "About us",
+    },
+    {
+      name: "Contact",
+    },
   ];
   return (
     <>
