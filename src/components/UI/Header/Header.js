@@ -9,8 +9,8 @@ export default function Header(props) {
       flexDirection={props.flexDirection}
       height={props.height}
       width={props.width}
-      backGroundColor={props.backGroundColor}
       justifyContent={props.justifyContent}
+      margin="5% 0 0 0"
     >
       <Logo />
       <NavBar navItemSize={props.navItemSize} />

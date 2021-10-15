@@ -29,14 +29,13 @@ export default function MainPage() {
     <Card
       flexDirection="column"
       height="100vh"
-      backGroundColor="grey"
+      backGroundColor="orange"
       justifyContent="space-around"
     >
       <Header
         height="30%"
         flexDirection="column"
         justifyContent="space-between"
-        backGroundColor="navy"
         navItemSize="30%"
       />
       {/* <AirportSearching></AirportSearching> */}
@@ -45,7 +44,6 @@ export default function MainPage() {
         justifyContent="space-around"
         alignItems="flex-start"
         height="60%"
-        backGroundColor="orange"
       >
         <Card width="100%">
           <Text
