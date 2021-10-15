@@ -2,7 +2,7 @@ import React from "react";
 import Card from "../../common/Card";
 import NavBarItem from "./NavBarItem";
 
-export default function NavBar() {
+export default function NavBar(props) {
   const itemList = [
     {
       name: "Home",
@@ -19,7 +19,7 @@ export default function NavBar() {
   ];
   return (
     <>
-      <Card flexBasis="70%">
+      <Card flexBasis={props.navItemSize} alignItems="center">
         {itemList.map((element, index) => {
           return <NavBarItem key={index} title={element.name}></NavBarItem>;
         })}

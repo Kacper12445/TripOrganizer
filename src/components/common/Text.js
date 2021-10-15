@@ -5,5 +5,10 @@ const Text = styled.p`
   font-weight: ${(props) => props.fontWeight};
   color: ${(props) => props.color};
   margin: ${(props) => props.margin};
+  text-align: ${(props) => props.textAlign};
+  cursor: ${(props) => props.cursor};
+  // &:hover {
+  //   color: white;
+  // }
 `;
 export default Text;

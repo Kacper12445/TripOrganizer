@@ -13,7 +13,7 @@ export default function Header(props) {
       justifyContent={props.justifyContent}
     >
       <Logo />
-      <NavBar />
+      <NavBar navItemSize={props.navItemSize} />
     </Card>
   );
 }

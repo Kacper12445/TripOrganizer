@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Text from "./Text";
 
 const Card = styled.div`
   box-sizing: border-box;
@@ -19,7 +20,14 @@ const Card = styled.div`
   background-repeat: no-repeat;
   // background-position: center
   background-color: ${(props) => props.backGroundColor};
+  border-bottom: ${(props) => props.border_bot};
   overflow: ${(props) => (props.overflow ? props.overflow : "hidden")};
   cursor: ${(props) => props.cursor};
+  &.navItem:hover .navItemText {
+    color: white;
+  }
+  &.navItem:hover {
+    border-bottom: solid white 1px;
+  }
 `;
 export default Card;

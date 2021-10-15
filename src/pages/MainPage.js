@@ -8,19 +8,19 @@ import OfferItem from "../components/UI/OfferItem";
 const OFFER_DATA = [
   {
     name: "Tickets",
-    icon: "route",
+    icon: "ticket-alt",
   },
   {
     name: "Hotels",
-    icon: "",
+    icon: "hotel",
   },
   {
     name: "Turist Attractions",
-    icon: "",
+    icon: "map-marked",
   },
   {
     name: "Best Routes",
-    icon: "",
+    icon: "route",
   },
 ];
 
@@ -36,7 +36,8 @@ export default function MainPage() {
         height="30%"
         flexDirection="column"
         justifyContent="space-between"
-        backGroundColor="pink"
+        backGroundColor="navy"
+        navItemSize="30%"
       />
       {/* <AirportSearching></AirportSearching> */}
       <Card
@@ -47,14 +48,25 @@ export default function MainPage() {
         backGroundColor="orange"
       >
         <Card width="100%">
-          <Text fontSize="80px" fontWeight="bold">
+          <Text
+            fontSize="80px"
+            fontWeight="bold"
+            color="white"
+            textAlign="right"
+          >
             Plan your trip
             <br /> with us
           </Text>
         </Card>
         <Card width="100%" height="30%">
           {OFFER_DATA.map((element, index) => {
-            return <OfferItem key={index} offerName={element.name} />;
+            return (
+              <OfferItem
+                key={index}
+                offerName={element.name}
+                icon={element.icon}
+              />
+            );
           })}
         </Card>
       </Card>
