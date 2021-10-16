@@ -10,15 +10,26 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 import { useSelector, useDispatch } from "react-redux";
+// import {counterActions} from "../../store/Slices/counter"
 // import FindAttractions from "../Trip/FindAttractions";
 // import RouteAlgorithm from "../Trip/RouteAlgorithm";
-import Card from "../common/Card";
 // import TripForm from "./SearchSide/TripForm";
-import Searching from "./SearchSide/Searching";
 
 export default function Map() {
-  const dispatch = useDispatch();
-  const coordsStore = useSelector((state) => state.coords);
+  // const dispatch = useDispatch();
+  // const coordsStore = useSelector((state) => state.coords);
+
+  // Przyklad
+  // dispatch({type: "cos tam"});
+  // Z payloadem
+  // dispatch({type: 'cos tam', 'nazwa wlasna': "wartosc payloadu"})
+
+  // Sktorem ze slicami mozna zrobic cos takiego
+  //  dispatch(counterActions.increment());
+  // z payloadem
+  // dispatch(counterActions.increase(10) ){ type : Some unique id, payload: 10}
+  // Ze slicami - pierwsza kropka to wejscie do reducera podanego w configure store
+  // const coord = useSelector((state) => state.coord.coord)
 
   const [libraries] = useState(["places"]);
   const mapContainerStyle = {
@@ -104,33 +115,18 @@ export default function Map() {
   if (loadError) return "Error loading maps";
   if (!isLoaded) return "Loading map";
   return (
-    // <Card height="90vh" justifyContent="space-between">
-    // {/* <Card flexDirection="column" height="100%" flexBasis="65%"> */}
-    // {/* <Card flexDirection="column" flexBasis="30%" backGroundColor="blue"> */}
     // {/* <TripForm panTo={panTo} /> */}
-    // {/* <Card>
     //     <FindRoad
     //       travelMode={travelMode}
     //       originCoords={getCoords("origin")}
     //       destinationCoords={getCoords("destination")}
     //     />
-    //   </Card> */}
-    // {/* <Card>
     //     <SelectTravelMode passTravelMode={setTravelMode} />
-    //   </Card> */}
-    // {/* <Card>
     //     <FindAttractions destinationCoords={getCoords("destination")} />
-    //   </Card> */}
-    // {/* <Card>
     //   <RouteAlgorithm
     //     originCoords={getCoords("origin")}
     //     destinationCoords={getCoords("destination")}
     //   />
-    //     </Card> */}
-    // {/* </Card> */}
-    // {/* <Card flexBasis="70%" backGroundColor="yellow"></Card>
-    // </Card> */}
-    // <Card flexBasis="35%" height="100%" backGroundColor="green">
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
       zoom={4}
@@ -172,7 +168,5 @@ export default function Map() {
         </InfoWindow>
       ) : null}
     </GoogleMap>
-    // </Card>
-    // {/* </Card> */}
   );
 }

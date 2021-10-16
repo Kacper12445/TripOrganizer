@@ -1,31 +1,9 @@
-import { createStore } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
+import coordReducer from "./Slices/counter";
+import authReducer from "./Slices/auth";
 
-const coordsReducer = (
-  {
-    state = {
-      coords: {
-        originCoords: {
-          id: "origin",
-          lat: 0,
-          lng: 0,
-          time: 0,
-          visible: false,
-        },
-        destinationCoords: {
-          id: "destination",
-          lat: 0,
-          lng: 0,
-          time: 0,
-          visible: false,
-        },
-      },
-    },
-  },
-  action
-) => {
-  return state;
-};
-
-const store = createStore(coordsReducer);
+const store = configureStore({
+  reducer: { coord: coordReducer, auth: authReducer },
+});
 
 export default store;
