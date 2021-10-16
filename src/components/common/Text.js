@@ -8,5 +8,7 @@ const Text = styled.p`
   text-align: ${(props) => props.textAlign};
   cursor: ${(props) => props.cursor};
   letter-spacing: ${(props) => props.letterSpace};
+  line-height: ${(props) => props.lineHeight};
+  height: ${(props) => props.height};
 `;
 export default Text;

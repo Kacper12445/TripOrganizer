@@ -9,6 +9,7 @@ import {
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
+import { useSelector, useDispatch } from "react-redux";
 // import FindAttractions from "../Trip/FindAttractions";
 // import RouteAlgorithm from "../Trip/RouteAlgorithm";
 import Card from "../common/Card";
@@ -16,6 +17,9 @@ import Card from "../common/Card";
 import Searching from "./SearchSide/Searching";
 
 export default function Map() {
+  const dispatch = useDispatch();
+  const coordsStore = useSelector((state) => state.coords);
+
   const [libraries] = useState(["places"]);
   const mapContainerStyle = {
     height: "100%",
@@ -97,8 +101,8 @@ export default function Map() {
     mapRef.current.setZoom(14);
   }, []);
 
-  // if (loadError) return "Error loading maps";
-  // if (!isLoaded) return "Loading map";
+  if (loadError) return "Error loading maps";
+  if (!isLoaded) return "Loading map";
   return (
     // <Card height="90vh" justifyContent="space-between">
     // {/* <Card flexDirection="column" height="100%" flexBasis="65%"> */}

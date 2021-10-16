@@ -13,7 +13,11 @@ export default function Header(props) {
       margin={props.margin}
       backGroundColor={props.backGroundColor}
     >
-      <Logo logoLetterSpacing={props.logoLetterSpacing} logoFZ={props.logoFZ} />
+      <Logo
+        logoLetterSpacing={props.logoLetterSpacing}
+        logoFZ={props.logoFZ}
+        logoSize={props.logoSize}
+      />
       <NavBar
         navItemSize={props.navItemSize}
         navItemHeight={props.navItemHeight}

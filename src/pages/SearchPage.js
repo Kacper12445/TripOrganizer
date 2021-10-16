@@ -14,6 +14,7 @@ export default function SearchPage() {
         navItemSize="70%"
         navItemHeight="60%"
         logoFZ="30px"
+        logoSize="35px"
       />
       <Card height="90vh" width="100vw" justifyContent="space-between">
         <Searching />

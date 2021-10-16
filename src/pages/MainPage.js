@@ -44,6 +44,7 @@ export default function MainPage() {
           margin="6% 0 0 0"
           logoLetterSpacing="10px"
           logoFZ="50px"
+          logoSize="55px"
         />
         {/* <AirportSearching></AirportSearching> */}
         <Card
