@@ -23,8 +23,10 @@ const Card = styled.div`
   background-position: center;
   background-color: ${(props) => props.backGroundColor};
   // ----------BORDER----------
+  border: ${(props) => props.border};
   border-radius: ${(props) => props.borderRad};
   border-bottom: ${(props) => props.border_bot};
+  border-left: ${(props) => props.borderLeft};
   overflow: ${(props) => (props.overflow ? props.overflow : "hidden")};
   cursor: ${(props) => props.cursor};
   &.navItem:hover .navItemText {

@@ -70,21 +70,28 @@ export default function AutocompleteInput(props) {
     <>
       <Card
         height="75%"
-        width="49%"
-        justifyContent="space-around"
+        width="49.5%"
+        justifyContent="space-between"
         alignItems="center"
       >
+        <FontAwesomeIcon
+          icon={props.icon}
+          style={{
+            fontSize: "35px",
+            margin: "0 0 0 5%",
+            borderLeft: "3px solid lightgreen",
+            padding: "0 0 0 5px",
+          }}
+        />
         <Input
           value={value}
           onChange={handleInput}
           disabled={!ready}
           placeholder={`Enter ${props.travelPoint}`}
           height="100%"
-          width="70%"
+          width="60%"
           padding="22px 18px"
-          margin="0 0 0 5%"
           fontSize="15px"
-          borderLeft="2px solid lightgreen"
         />
         {props.travelPoint === "origin" ? (
           <CurrentLocalisation
@@ -95,7 +102,10 @@ export default function AutocompleteInput(props) {
         ) : null}
         <FontAwesomeIcon
           icon="eraser"
-          style={{ fontSize: "25px", cursor: "pointer" }}
+          style={{
+            fontSize: "25px",
+            cursor: "pointer",
+          }}
           onClick={clearInput}
           height="100%"
           width="25%"

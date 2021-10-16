@@ -8,9 +8,11 @@ const Button = styled.button`
   height: ${(props) => props.height};
   cursor: pointer;
   display: flex;
-  align-items: center;
-  background: #7f8ff4;
+  align-items: ${(props) => props.alignItems};
+  justify-content: ${(props) => props.justifyContent};
+  background-color: ${(props) => props.backGroundColor};
   border: 0;
+  border-radius: ${(props) => props.borderRad};
 `;
 
 export default Button;

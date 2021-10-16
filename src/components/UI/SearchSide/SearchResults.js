@@ -23,12 +23,14 @@ const DummyData = [
 export default function SearchResults() {
   return (
     <Card
-      flexBasis="75%"
+      flexBasis="80%"
+      width="95%"
       flexDirection="column"
-      backGroundColor="yellow"
+      backGroundColor="rgba(100, 100, 100, .3)"
       overflow="scroll"
+      borderRad="20px"
       // justifyContent="space-around"
-      // alignItems="center"
+      alignItems="center"
       // alignContent="space-around"
     >
       {DummyData.map((element, index) => {

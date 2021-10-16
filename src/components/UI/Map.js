@@ -18,8 +18,8 @@ import Searching from "./SearchSide/Searching";
 export default function Map() {
   const [libraries] = useState(["places"]);
   const mapContainerStyle = {
-    height: "70%",
-    width: "100%",
+    height: "100%",
+    width: "35%",
   };
   const options = {
     styles: MapStyles,
@@ -126,49 +126,49 @@ export default function Map() {
     // {/* </Card> */}
     // {/* <Card flexBasis="70%" backGroundColor="yellow"></Card>
     // </Card> */}
-    <Card flexBasis="35%" height="100%" backGroundColor="green">
-      {/* <GoogleMap
-            mapContainerStyle={mapContainerStyle}
-            zoom={4}
-            center={{ lat: focusCoord.lat, lng: focusCoord.lng }}
-            options={options}
-            onClick={mapClickHandler}
-            onLoad={onLoad}
-          >
-            {coords.map((coord) => (
-              <Marker
-                key={coord.id}
-                position={{ lat: coord.lat, lng: coord.lng }}
-                visible={coord.visible}
-                // icon={
-                //     url:"",
-                // scaledSize: new window.google.maps.Size(30,30),
-                // origin: new window.google.maps.Point(0,0),
-                // anchor: new window.google.maps.Point(15,15)
-                // }
-                onClick={() => {
-                  setSelected(coord);
-                }}
-              />
-            ))}
-            {selected ? (
-              <InfoWindow
-                position={{ lat: selected.lat, lng: selected.lng }}
-                onCloseClick={() => {
-                  setSelected(null);
-                }}
-              >
-                <div>
-                  <h2>Coords</h2>
-                  <h3>{selected.id}</h3>
-                  <p>
-                    {selected.lat} - {selected.lng}
-                  </p>
-                </div>
-              </InfoWindow>
-            ) : null}
-          </GoogleMap> */}
-    </Card>
+    // <Card flexBasis="35%" height="100%" backGroundColor="green">
+    <GoogleMap
+      mapContainerStyle={mapContainerStyle}
+      zoom={4}
+      center={{ lat: focusCoord.lat, lng: focusCoord.lng }}
+      options={options}
+      onClick={mapClickHandler}
+      onLoad={onLoad}
+    >
+      {coords.map((coord) => (
+        <Marker
+          key={coord.id}
+          position={{ lat: coord.lat, lng: coord.lng }}
+          visible={coord.visible}
+          // icon={
+          //     url:"",
+          // scaledSize: new window.google.maps.Size(30,30),
+          // origin: new window.google.maps.Point(0,0),
+          // anchor: new window.google.maps.Point(15,15)
+          // }
+          onClick={() => {
+            setSelected(coord);
+          }}
+        />
+      ))}
+      {selected ? (
+        <InfoWindow
+          position={{ lat: selected.lat, lng: selected.lng }}
+          onCloseClick={() => {
+            setSelected(null);
+          }}
+        >
+          <div>
+            <h2>Coords</h2>
+            <h3>{selected.id}</h3>
+            <p>
+              {selected.lat} - {selected.lng}
+            </p>
+          </div>
+        </InfoWindow>
+      ) : null}
+    </GoogleMap>
+    // </Card>
     // {/* </Card> */}
   );
 }
