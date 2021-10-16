@@ -10,9 +10,9 @@ export default function Header(props) {
       height={props.height}
       width={props.width}
       justifyContent={props.justifyContent}
-      margin="5% 0 0 0"
+      margin={props.margin}
     >
-      <Logo />
+      <Logo logoLetterSpacing={props.logoLetterSpacing} logoFZ={props.logoFZ} />
       <NavBar navItemSize={props.navItemSize} />
     </Card>
   );

@@ -7,8 +7,6 @@ const Text = styled.p`
   margin: ${(props) => props.margin};
   text-align: ${(props) => props.textAlign};
   cursor: ${(props) => props.cursor};
-  // &:hover {
-  //   color: white;
-  // }
+  letter-spacing: ${(props) => props.letterSpace};
 `;
 export default Text;

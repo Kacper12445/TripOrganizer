@@ -16,8 +16,8 @@ library.add(fab, faPlane, faRoute, faHotel, faMapMarked, faTicketAlt);
 function App() {
   return (
     <>
-      <MainPage />
-      {/* <SearchPage /> */}
+      {/* <MainPage /> */}
+      <SearchPage />
     </>
   );
 }

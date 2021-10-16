@@ -37,6 +37,9 @@ export default function MainPage() {
         flexDirection="column"
         justifyContent="space-between"
         navItemSize="30%"
+        margin="8% 0 0 0"
+        logoLetterSpacing="10px"
+        logoFZ="50px"
       />
       {/* <AirportSearching></AirportSearching> */}
       <Card

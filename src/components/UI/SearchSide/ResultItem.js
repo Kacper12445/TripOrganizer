@@ -5,13 +5,20 @@ import Text from "../../common/Text";
 export default function ResultItem(props) {
   return (
     <Card
-      flexDirection="column"
-      flexBasis="45%"
       height="30%"
+      width="100%"
       backGroundColor="purple"
+      justifyContent="spacer-between"
     >
-      <Card backGroundColor="black" height="80%" flexBasis="100%"></Card>
-      <Text>{props.name}</Text>
+      <Card backGroundColor="black" height="100%" width="35%"></Card>
+      <Card flexDirection="column" width="65%">
+        <Card>
+          <Text>{props.name}</Text>
+        </Card>
+        <Card>
+          <Text>{props.description}</Text>
+        </Card>
+      </Card>
     </Card>
   );
 }

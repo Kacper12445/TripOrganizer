@@ -12,6 +12,7 @@ export default function SearchPage() {
         width="100vw"
         backGroundColor="red"
         navItemSize="70%"
+        logoFZ="30px"
       />
       <Card height="90vh" justifyContent="space-between">
         <Searching />
