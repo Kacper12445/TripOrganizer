@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import Button from "../../common/Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function CurrentLocalisation(props) {
   const geoCode = (lat, lng) => {
@@ -16,7 +16,9 @@ export default function CurrentLocalisation(props) {
   };
 
   return (
-    <Button
+    <FontAwesomeIcon
+      icon="map-marker-alt"
+      style={{ fontSize: "25px", cursor: "pointer" }}
       onClick={() => {
         navigator.geolocation.getCurrentPosition(
           (position) => {
@@ -40,6 +42,6 @@ export default function CurrentLocalisation(props) {
       width="25%"
     >
       Locate
-    </Button>
+    </FontAwesomeIcon>
   );
 }

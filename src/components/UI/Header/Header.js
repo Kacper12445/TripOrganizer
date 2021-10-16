@@ -11,9 +11,13 @@ export default function Header(props) {
       width={props.width}
       justifyContent={props.justifyContent}
       margin={props.margin}
+      backGroundColor={props.backGroundColor}
     >
       <Logo logoLetterSpacing={props.logoLetterSpacing} logoFZ={props.logoFZ} />
-      <NavBar navItemSize={props.navItemSize} />
+      <NavBar
+        navItemSize={props.navItemSize}
+        navItemHeight={props.navItemHeight}
+      />
     </Card>
   );
 }

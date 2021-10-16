@@ -10,8 +10,9 @@ export default function SearchPage() {
       <Header
         height="10vh"
         width="100vw"
-        backGroundColor="red"
+        backGroundColor="#002564"
         navItemSize="70%"
+        navItemHeight="60%"
         logoFZ="30px"
       />
       <Card height="90vh" justifyContent="space-between">

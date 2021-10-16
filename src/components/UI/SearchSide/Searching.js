@@ -5,7 +5,7 @@ import Card from "../../common/Card";
 
 export default function Searching() {
   return (
-    <Card flexDirection="column" height="100%" flexBasis="65%">
+    <Card flexDirection="column" height="100%" flexBasis="65%" borderRad="20px">
       <TripForm />
       <SearchResults />
     </Card>

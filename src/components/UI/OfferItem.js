@@ -8,9 +8,9 @@ export default function OfferItem(props) {
     <Card flexDirection="column" alignItems="center" flexBasis="30%">
       <FontAwesomeIcon
         icon={props.icon}
-        style={{ color: "grey", fontSize: "55px" }}
+        style={{ color: "white", fontSize: "55px" }}
       />
-      <Text fontWeight="bold" fontSize="25px" color="grey">
+      <Text fontWeight="bold" fontSize="25px" color="white">
         {props.offerName}
       </Text>
     </Card>

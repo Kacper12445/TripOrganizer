@@ -10,6 +10,7 @@ export default function Logo(props) {
         fontSize={props.logoFZ}
         letterSpace={props.logoLetterSpacing}
         cursor="pointer"
+        color="white"
       >
         <FontAwesomeIcon icon="plane" /> Trip Planner
       </Text>

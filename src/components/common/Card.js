@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Text from "./Text";
+// import Text from "./Text";
 
 const Card = styled.div`
   box-sizing: border-box;
@@ -7,6 +7,7 @@ const Card = styled.div`
   padding: ${(props) => (props.padding ? props.padding : "0")};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
+  // ----------Flex displaying----------
   display: ${(props) => (props.display ? props.display : "flex")};
   flex-direction: ${(props) => props.flexDirection};
   align-items: ${(props) => props.alignItems};
@@ -15,19 +16,22 @@ const Card = styled.div`
     props.justifyContent ? props.justifyContent : "space-around"};
   flex-basis: ${(props) => props.flexBasis};
   flex-wrap: ${(props) => props.flexWrap};
-  background-image: url("${(props) => props.backGroundImg}");
+  // ----------BACKGROUND----------
+  background-image: url(${(props) => props.backGroundImg});
   background-size: cover;
   background-repeat: no-repeat;
-  // background-position: center
+  background-position: center;
   background-color: ${(props) => props.backGroundColor};
+  // ----------BORDER----------
+  border-radius: ${(props) => props.borderRad};
   border-bottom: ${(props) => props.border_bot};
   overflow: ${(props) => (props.overflow ? props.overflow : "hidden")};
   cursor: ${(props) => props.cursor};
   &.navItem:hover .navItemText {
-    color: white;
+    color: lightgreen;
   }
   &.navItem:hover {
-    border-bottom: solid white 1px;
+    border-bottom: solid lightgreen 1px;
   }
 `;
 export default Card;

@@ -6,9 +6,11 @@ export default function NavBar(props) {
   const itemList = [
     {
       name: "Home",
+      path: "/",
     },
     {
       name: "Find Trip",
+      path: "searchingPage",
     },
     {
       name: "About us",
@@ -21,7 +23,13 @@ export default function NavBar(props) {
     <>
       <Card flexBasis={props.navItemSize} alignItems="center">
         {itemList.map((element, index) => {
-          return <NavBarItem key={index} title={element.name}></NavBarItem>;
+          return (
+            <NavBarItem
+              key={index}
+              navItem={element}
+              navItemHeight={props.navItemHeight}
+            ></NavBarItem>
+          );
         })}
       </Card>
       ;

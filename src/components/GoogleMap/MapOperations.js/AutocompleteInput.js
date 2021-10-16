@@ -8,6 +8,7 @@ import usePlacesAutocomplete, {
   getLatLng,
 } from "use-places-autocomplete";
 import CurrentLocalisation from "./CurrentLocalisation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function AutocompleteInput(props) {
   const {
@@ -67,15 +68,23 @@ export default function AutocompleteInput(props) {
     });
   return (
     <>
-      <Card height="75%" width="100%" justifyContent="center">
+      <Card
+        height="75%"
+        width="49%"
+        justifyContent="space-around"
+        alignItems="center"
+      >
         <Input
           value={value}
           onChange={handleInput}
           disabled={!ready}
           placeholder={`Enter ${props.travelPoint}`}
           height="100%"
-          width="50%"
+          width="70%"
           padding="22px 18px"
+          margin="0 0 0 5%"
+          fontSize="15px"
+          borderLeft="2px solid lightgreen"
         />
         {props.travelPoint === "origin" ? (
           <CurrentLocalisation
@@ -84,9 +93,15 @@ export default function AutocompleteInput(props) {
             passValue={setValue}
           />
         ) : null}
-        <Button onClick={clearInput} height="100%" width="25%">
+        <FontAwesomeIcon
+          icon="eraser"
+          style={{ fontSize: "25px", cursor: "pointer" }}
+          onClick={clearInput}
+          height="100%"
+          width="25%"
+        >
           Clear
-        </Button>
+        </FontAwesomeIcon>
         {<ul>{status === "OK" && renderSuggestion()}</ul>}
       </Card>
     </>
