@@ -1,4 +1,4 @@
-export default [
+const MapStyles = [
   {
     featureType: "administrative.country",
     elementType: "geometry",
@@ -12,3 +12,5 @@ export default [
     ],
   },
 ];
+
+export default MapStyles;

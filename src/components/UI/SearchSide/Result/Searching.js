@@ -1,7 +1,7 @@
 import React from "react";
-import TripForm from "./Form/TripForm";
+import TripForm from "../Form/TripForm";
 import SearchResults from "./SearchResults";
-import Card from "../../common/Card";
+import Card from "../../../common/Card";
 
 export default function Searching() {
   return (

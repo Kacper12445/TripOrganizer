@@ -1,12 +1,14 @@
 import styled from "styled-components";
 const SuggestionDiv = styled.ul`
+  position: absolute;
+  background-color: white;
   width: 100%;
-  height: 300px;
   border-top-width: 0;
   list-style: none;
-  margin-top: 0;
+  margin-top: 100px;
   overflow: scroll;
   padding-left: 0;
+  z-index: 1;
   li {
     padding: 4px;
   }

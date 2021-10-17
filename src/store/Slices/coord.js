@@ -58,9 +58,9 @@ const coordSlice = createSlice({
       state.coords = updatedCoords;
     },
     getCoords(state, action) {
-      if (action.payload.key_value === "origin") {
+      if (action.payload === "origin") {
         return state.coords.originCoords;
-      } else if (action.payload.key_value === "destination") {
+      } else if (action.payload === "destination") {
         return state.coords.destinationCoords;
       }
     },

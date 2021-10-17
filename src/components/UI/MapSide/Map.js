@@ -1,7 +1,4 @@
 import React, { useState, useCallback, useRef, useEffect } from "react";
-// import AutocompleteInput from "../GoogleMap/MapOperations.js/AutocompleteInput";
-// import FindRoad from "../GoogleMap/MapOperations.js/FindRoad";
-// import SelectTravelMode from "../GoogleMap/MapOperations.js/SelectTravelMode";
 import MapStyles from "./MapStyles";
 import {
   GoogleMap,
@@ -10,25 +7,21 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 import { useSelector, useDispatch } from "react-redux";
-import { coordActions } from "../../store/Slices/coord";
-import { mapActions } from "../../store/Slices/map";
-import Card from "../common/Card";
-import Text from "../common/Text";
+import { coordActions } from "../../../store/Slices/coord";
+import { mapActions } from "../../../store/Slices/map";
+import Card from "../../common/Card";
+import Text from "../../common/Text";
+// import MapDirectionRenderer from "./MapDirectionRenderer";
 
-// import FindAttractions from "../Trip/FindAttractions";
-// import RouteAlgorithm from "../Trip/RouteAlgorithm";
-// import TripForm from "./SearchSide/TripForm";
+// const PLACES = [
+//   { latitude: 25.8103146, longitude: -80.1751609 },
+//   { latitude: 27.9947147, longitude: -82.5943645 },
+//   { latitude: 28.4813018, longitude: -81.4387899 },
+// ];
 
 export default function Map() {
   const dispatch = useDispatch();
   const coords = useSelector((state) => state.coord.coords);
-
-  // Przyklad
-  // dispatch({type: "cos tam"});
-  // Z payloadem
-  // dispatch({type: 'cos tam', 'nazwa wlasna': "wartosc payloadu"})
-  // z payloadem
-  // dispatch(counterActions.increase(10) ){ type : Some unique id, payload: 10}
 
   const [libraries] = useState(["places"]);
   const mapContainerStyle = {
@@ -57,9 +50,9 @@ export default function Map() {
     );
   }, [coords]);
 
-  const clearCoordsHandler = (key_value) => {
-    dispatch(coordActions.resetCoords({ key_value: key_value }));
-  };
+  // const clearCoordsHandler = (key_value) => {
+  //   dispatch(coordActions.resetCoords({ key_value: key_value }));
+  // };
 
   const mapClickHandler = useCallback(
     (event) => {
@@ -79,20 +72,12 @@ export default function Map() {
     mapRef.current = map;
   }, []);
 
-  const panTo = useCallback(
-    ({ lat, lng }, key_value) => {
-      dispatch(
-        coordActions.changeCoords({
-          lat: lat,
-          lng: lng,
-          key_value: key_value,
-        })
-      );
-      mapRef.current.panTo({ lat, lng });
-      mapRef.current.setZoom(14);
-    },
-    [dispatch]
-  );
+  const panTo = useCallback(({ lat, lng }) => {
+    setFocusCoord({ lat, lng });
+    mapRef.current.panTo({ lat, lng });
+    mapRef.current.setZoom(14);
+  }, []);
+
   useEffect(() => {
     dispatch(mapActions.setMapState(isLoaded));
   }, [isLoaded, dispatch]);
@@ -100,18 +85,6 @@ export default function Map() {
   if (loadError) return "Error loading maps";
   if (!isLoaded) return "Loading map";
   return (
-    // {/* <TripForm panTo={panTo} /> */}
-    //     <FindRoad
-    //       travelMode={travelMode}
-    //       originCoords={getCoords("origin")}
-    //       destinationCoords={getCoords("destination")}
-    //     />
-    //     <SelectTravelMode passTravelMode={setTravelMode} />
-    //     <FindAttractions destinationCoords={getCoords("destination")} />
-    //   <RouteAlgorithm
-    //     originCoords={getCoords("origin")}
-    //     destinationCoords={getCoords("destination")}
-    //   />
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
       zoom={4}
@@ -157,6 +130,10 @@ export default function Map() {
           </Card>
         </InfoWindow>
       ) : null}
+      {/* <MapDirectionRenderer
+          places={PLACES}
+          travelMode={window.google.maps.TravelMode.DRIVING}
+        /> */}
     </GoogleMap>
   );
 }

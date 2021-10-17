@@ -91,7 +91,12 @@ export default function AutocompleteInput(props) {
             padding: "0 0 0 5px",
           }}
         />
-        <Card width="60%" flexDirection="column">
+        <Card
+          width="60%"
+          flexDirection="column"
+          overflow="scroll"
+          position="relative"
+        >
           <Input
             value={value}
             onChange={handleInput}

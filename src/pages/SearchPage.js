@@ -1,7 +1,7 @@
 import React from "react";
-import Map from "../components/UI/Map";
+import Map from "../components/UI/MapSide/Map";
 import Header from "../components/UI/Header/Header";
-import Searching from "../components/UI/SearchSide/Searching";
+import Searching from "../components/UI/SearchSide/Result/Searching";
 import Card from "../components/common/Card";
 
 export default function SearchPage() {

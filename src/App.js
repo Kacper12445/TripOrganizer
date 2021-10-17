@@ -15,7 +15,6 @@ import {
   faTicketAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import SearchPage from "./pages/SearchPage";
-import usePlacesAutocomplete from "use-places-autocomplete";
 
 library.add(
   fab,
@@ -31,15 +30,6 @@ library.add(
 );
 
 function App() {
-  // const { init } = usePlacesAutocomplete({
-  //   initOnMount: false, // Disable initializing when the component mounts, default is true
-  // });
-
-  // const [loading] = useGoogleMapsApi({
-  //   library: "places",
-  //   onLoad: () => init(), // Lazily initializing the hook when the script is ready
-  // });
-
   return (
     <>
       <Router>

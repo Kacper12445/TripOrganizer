@@ -60,19 +60,20 @@ export default function FindRoad(props) {
     }
   };
 
-  const buttonHandler = () => {
+  const buttonClickHandler = () => {
     if (coordsState) {
       axios
         .get(
-          `https://maps.googleapis.com/maps/api/directions/json?origin=${coords.originCoords.lat},${coords.originCoords.lng}&destination=${coords.destinationCoords.lat},${coords.destinationCoords.lng}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`
+          `https://maps.googleapis.com/maps/api/directions/json?origin=${coords.originCoords.lat},${coords.originCoords.lng}&destination=${coords.destinationCoords.lat},${coords.destinationCoords.lng}&mode=transit&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`
         )
         .then((res) => {
-          console.log(res.data.routes[0].legs[0]);
+          // console.log(res.data.routes[0].legs[0]);
           console.log(res.data.routes[0].legs[0].steps);
           // console.log(res.data.routes[0].legs[0].start_address);
           // console.log(res.data.routes[0].legs[0].end_address);
           // console.log(res.data.routes[0].legs[0].distance.text);
           // console.log(res.data.routes[0].legs[0].duration.text);
+          findHotel();
         })
         .catch((err) => console.log(err));
     }
@@ -94,7 +95,7 @@ export default function FindRoad(props) {
           borderRad="25px"
           alignItems="center"
           justifyContent="center"
-          onClick={buttonHandler}
+          onClick={buttonClickHandler}
         >
           <Text textAlign="center" fontSize="20px" color="white">
             Search
