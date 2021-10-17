@@ -26,8 +26,8 @@ export default function FindRoad(props) {
         "x-rapidapi-key": process.env.REACT_APP_RAPID_API_KEY,
       },
       params: {
-        latitude: props.destinationCoords.lat,
-        longitude: props.destinationCoords.lng,
+        latitude: coords.destinationCoords.lat,
+        longitude: coords.destinationCoords.lng,
         lang: "en_US",
         hotel_class: "1,2,3,4,5",
         limit: "30",

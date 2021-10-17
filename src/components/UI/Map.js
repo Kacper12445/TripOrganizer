@@ -11,6 +11,7 @@ import {
 } from "@react-google-maps/api";
 import { useSelector, useDispatch } from "react-redux";
 import { coordActions } from "../../store/Slices/coord";
+import { mapActions } from "../../store/Slices/map";
 import Card from "../common/Card";
 import Text from "../common/Text";
 
@@ -45,7 +46,6 @@ export default function Map() {
   });
 
   const [selected, setSelected] = useState(null);
-  const [travelMode, setTravelMode] = useState("Driving");
   const [focusCoord, setFocusCoord] = useState({ lat: 51, lng: 17 });
 
   useEffect(() => {
@@ -93,6 +93,9 @@ export default function Map() {
     },
     [dispatch]
   );
+  useEffect(() => {
+    dispatch(mapActions.setMapState(isLoaded));
+  }, [isLoaded, dispatch]);
 
   if (loadError) return "Error loading maps";
   if (!isLoaded) return "Loading map";

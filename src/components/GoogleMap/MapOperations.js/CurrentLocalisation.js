@@ -1,12 +1,11 @@
 import React from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { coordActions } from "../../../store/Slices/coord";
 
 export default function CurrentLocalisation(props) {
   const dispatch = useDispatch();
-  const coords = useSelector((state) => state.coord.coords);
 
   const geoCode = (lat, lng) => {
     axios
@@ -15,7 +14,6 @@ export default function CurrentLocalisation(props) {
       )
       .then((resp) => {
         props.passValue(resp.data.results[0].formatted_address);
-        // setOriginName(`${resp.data.results[0].formatted_address}`);
       })
       .catch((error) => console.log(error));
   };

@@ -1,9 +1,8 @@
 import React from "react";
 import Card from "../../../common/Card";
-import Button from "../../../common/Button";
-import Text from "../../../common/Text";
 import AutocompleteInput from "../../../GoogleMap/MapOperations.js/AutocompleteInput";
 import FindRoad from "../../../GoogleMap/MapOperations.js/FindRoad";
+import { useSelector } from "react-redux";
 
 const autoCompleteData = [
   {
@@ -17,6 +16,8 @@ const autoCompleteData = [
 ];
 
 export default function TripForm() {
+  const isLoaded = useSelector((state) => state.map.isLoaded);
+  console.log(isLoaded);
   return (
     <Card
       flexDirection="column"
@@ -32,16 +33,17 @@ export default function TripForm() {
         borderRad="25px"
         justifyContent="space-between"
       >
-        {autoCompleteData.map((item, index) => {
-          return (
-            <AutocompleteInput
-              key={index}
-              travelPoint={item.travelPoint}
-              icon={item.icon}
-            />
-          );
-        })}
-        {/* <FindRoad/> */}
+        {isLoaded
+          ? autoCompleteData.map((item, index) => {
+              return (
+                <AutocompleteInput
+                  key={index}
+                  travelPoint={item.travelPoint}
+                  icon={item.icon}
+                />
+              );
+            })
+          : null}
       </Card>
       <FindRoad />
     </Card>

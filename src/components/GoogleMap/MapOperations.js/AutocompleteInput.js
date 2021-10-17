@@ -25,6 +25,7 @@ export default function AutocompleteInput(props) {
       location: { lat: () => 51.107883, lng: () => 17.038538 },
       radius: 100 * 1000,
     },
+    debounce: 300,
   });
   console.log(ready);
 
@@ -41,12 +42,12 @@ export default function AutocompleteInput(props) {
     ({ description }) =>
     () => {
       setValue(description, false);
-
       clearSuggestions();
+
       getGeocode({ address: description })
         .then((results) => getLatLng(results[0]))
         .then(({ lat, lng }) => {
-          props.panTo({ lat: lat, lng: lng }, props.travelPoint);
+          // props.panTo({ lat: lat, lng: lng }, props.travelPoint);
           console.log("Coordinates:", { lat, lng });
         })
         .catch((error) => {
@@ -116,7 +117,7 @@ export default function AutocompleteInput(props) {
           height="100%"
           width="25%"
         />
-        {<ul>{status === "OK" && renderSuggestion()}</ul>}
+        {status === "OK" && <ul>{renderSuggestion()}</ul>}
       </Card>
     </>
   );
