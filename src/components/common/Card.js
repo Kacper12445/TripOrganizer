@@ -7,6 +7,7 @@ const Card = styled.div`
   padding: ${(props) => (props.padding ? props.padding : "0")};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
+  position: ${(props) => props.position};
   // ----------Flex displaying----------
   display: ${(props) => (props.display ? props.display : "flex")};
   flex-direction: ${(props) => props.flexDirection};

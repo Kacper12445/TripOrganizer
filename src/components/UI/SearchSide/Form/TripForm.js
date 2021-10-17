@@ -17,7 +17,6 @@ const autoCompleteData = [
 
 export default function TripForm() {
   const isLoaded = useSelector((state) => state.map.isLoaded);
-  console.log(isLoaded);
   return (
     <Card
       flexDirection="column"
@@ -27,7 +26,7 @@ export default function TripForm() {
     >
       <Card
         flexBasis="35%"
-        width="95%"
+        width="90%"
         backGroundColor="white"
         alignItems="center"
         borderRad="25px"

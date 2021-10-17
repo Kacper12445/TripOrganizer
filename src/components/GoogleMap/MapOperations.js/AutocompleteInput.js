@@ -1,6 +1,7 @@
 import React from "react";
 import Input from "../../common/Input";
 import Card from "../../common/Card";
+import SuggestionDiv from "../../common/SuggestionDiv";
 import SuggestionItem from "../../UI/SearchSide/Form/SuggestionItem";
 import usePlacesAutocomplete, {
   getGeocode,
@@ -27,7 +28,6 @@ export default function AutocompleteInput(props) {
     },
     debounce: 300,
   });
-  console.log(ready);
 
   const handleInput = (e) => {
     setValue(e.target.value);
@@ -49,6 +49,13 @@ export default function AutocompleteInput(props) {
         .then(({ lat, lng }) => {
           // props.panTo({ lat: lat, lng: lng }, props.travelPoint);
           console.log("Coordinates:", { lat, lng });
+          dispatch(
+            coordActions.changeCoords({
+              lat: lat,
+              lng: lng,
+              key_value: props.travelPoint,
+            })
+          );
         })
         .catch((error) => {
           console.log("Error: ", error);
@@ -57,27 +64,21 @@ export default function AutocompleteInput(props) {
 
   const renderSuggestion = () =>
     data.map((suggestion) => {
-      const {
-        place_id,
-        structured_formatting: { main_text, secondary_text },
-      } = suggestion;
+      const { place_id, structured_formatting } = suggestion;
       return (
         <SuggestionItem
           key={place_id}
-          text={suggestion.structured_formatting}
-          onClick={handleSelect(suggestion)}
+          text={structured_formatting}
+          value={suggestion}
+          selectHandler={handleSelect}
         />
-        // <li key={place_id} onClick={handleSelect(suggestion)}>
-        //   <strong>{main_text} </strong>
-        //   <small> {secondary_text}</small>
-        // </li>
       );
     });
   return (
     <>
       <Card
-        height="75%"
-        width="49.5%"
+        height="100%"
+        width="100%"
         justifyContent="space-between"
         alignItems="center"
       >
@@ -90,16 +91,21 @@ export default function AutocompleteInput(props) {
             padding: "0 0 0 5px",
           }}
         />
-        <Input
-          value={value}
-          onChange={handleInput}
-          disabled={!ready}
-          placeholder={`Enter ${props.travelPoint}`}
-          height="100%"
-          width="60%"
-          padding="22px 18px"
-          fontSize="15px"
-        />
+        <Card width="60%" flexDirection="column">
+          <Input
+            value={value}
+            onChange={handleInput}
+            disabled={!ready}
+            placeholder={`Enter ${props.travelPoint}`}
+            height="100%"
+            width="100%"
+            padding="22px 18px"
+            fontSize="15px"
+          />
+          {status === "OK" && (
+            <SuggestionDiv>{renderSuggestion()}</SuggestionDiv>
+          )}
+        </Card>
         {props.travelPoint === "origin" ? (
           <CurrentLocalisation
             // panTo={props.panTo}
@@ -112,12 +118,12 @@ export default function AutocompleteInput(props) {
           style={{
             fontSize: "25px",
             cursor: "pointer",
+            marginRight: "5%",
           }}
           onClick={clearCoordsHandler}
           height="100%"
           width="25%"
         />
-        {status === "OK" && <ul>{renderSuggestion()}</ul>}
       </Card>
     </>
   );
