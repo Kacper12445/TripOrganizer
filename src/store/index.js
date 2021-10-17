@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import coordReducer from "./Slices/counter";
+import coordReducer from "./Slices/coord";
 import authReducer from "./Slices/auth";
 
 const store = configureStore({
