@@ -10,13 +10,15 @@ export default function NavBar(props) {
     },
     {
       name: "Find Trip",
-      path: "searchingPage",
+      path: "/searchingPage",
     },
     {
       name: "About us",
+      path: "/aboutUs",
     },
     {
       name: "Contact",
+      path: "/contact",
     },
   ];
   return (

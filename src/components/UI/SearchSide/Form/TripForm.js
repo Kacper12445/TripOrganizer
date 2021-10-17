@@ -5,7 +5,18 @@ import Text from "../../../common/Text";
 import AutocompleteInput from "../../../GoogleMap/MapOperations.js/AutocompleteInput";
 import FindRoad from "../../../GoogleMap/MapOperations.js/FindRoad";
 
-export default function TripForm(props) {
+const autoCompleteData = [
+  {
+    travelPoint: "origin",
+    icon: "home",
+  },
+  {
+    travelPoint: "destination",
+    icon: "map-marked-alt",
+  },
+];
+
+export default function TripForm() {
   return (
     <Card
       flexDirection="column"
@@ -21,44 +32,18 @@ export default function TripForm(props) {
         borderRad="25px"
         justifyContent="space-between"
       >
-        <AutocompleteInput
-          panTo={props.panTo}
-          travelPoint="origin"
-          icon="home"
-          // clearMarker={clearMarkers}
-        />
-        <AutocompleteInput
-          panTo={props.panTo}
-          travelPoint="destination"
-          icon="map-marked-alt"
-          // clearMarker={clearMarkers}
-        />
-
-        {/* <FindRoad
-        travelMode={travelMode}
-        originCoords={getCoords("origin")}
-        destinationCoords={getCoords("destination")}
-      /> */}
+        {autoCompleteData.map((item, index) => {
+          return (
+            <AutocompleteInput
+              key={index}
+              travelPoint={item.travelPoint}
+              icon={item.icon}
+            />
+          );
+        })}
+        {/* <FindRoad/> */}
       </Card>
-      <Card
-        flexBasis="25%"
-        width="100%"
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Button
-          backGroundColor="rgb(0,255,110)"
-          height="100%"
-          width="30%"
-          borderRad="25px"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Text textAlign="center" fontSize="20px" color="white">
-            Search
-          </Text>
-        </Button>
-      </Card>
+      <FindRoad />
     </Card>
   );
 }

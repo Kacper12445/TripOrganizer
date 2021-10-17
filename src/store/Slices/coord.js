@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+import home from "../../assets/home.webp";
+import destination from "../../assets/destination.png";
 
 const initialCoordState = {
   coords: {
@@ -7,12 +9,14 @@ const initialCoordState = {
       lat: 0,
       lng: 0,
       visible: false,
+      icon: home,
     },
     destinationCoords: {
       id: "destination",
       lat: 0,
       lng: 0,
       visible: false,
+      icon: destination,
     },
   },
 };

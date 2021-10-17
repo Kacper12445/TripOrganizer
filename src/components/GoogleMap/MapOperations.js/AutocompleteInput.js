@@ -1,5 +1,4 @@
 import React from "react";
-import Button from "../../common/Button";
 import Input from "../../common/Input";
 import Card from "../../common/Card";
 import SuggestionItem from "../../UI/SearchSide/Form/SuggestionItem";
@@ -9,8 +8,12 @@ import usePlacesAutocomplete, {
 } from "use-places-autocomplete";
 import CurrentLocalisation from "./CurrentLocalisation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { coordActions } from "../../../store/Slices/coord";
+import { useDispatch } from "react-redux";
 
 export default function AutocompleteInput(props) {
+  const dispatch = useDispatch();
+
   const {
     ready,
     value,
@@ -23,14 +26,15 @@ export default function AutocompleteInput(props) {
       radius: 100 * 1000,
     },
   });
+  console.log(ready);
 
   const handleInput = (e) => {
     setValue(e.target.value);
   };
 
-  const clearInput = () => {
+  const clearCoordsHandler = () => {
     setValue("");
-    props.clearMarker();
+    dispatch(coordActions.resetCoords({ key_value: props.travelPoint }));
   };
 
   const handleSelect =
@@ -62,9 +66,11 @@ export default function AutocompleteInput(props) {
           text={suggestion.structured_formatting}
           onClick={handleSelect(suggestion)}
         />
+        // <li key={place_id} onClick={handleSelect(suggestion)}>
+        //   <strong>{main_text} </strong>
+        //   <small> {secondary_text}</small>
+        // </li>
       );
-      // <strong>{main_text} </strong>
-      // <small> {secondary_text}</small>
     });
   return (
     <>
@@ -95,7 +101,7 @@ export default function AutocompleteInput(props) {
         />
         {props.travelPoint === "origin" ? (
           <CurrentLocalisation
-            panTo={props.panTo}
+            // panTo={props.panTo}
             travelPoint={props.travelPoint}
             passValue={setValue}
           />
@@ -106,12 +112,10 @@ export default function AutocompleteInput(props) {
             fontSize: "25px",
             cursor: "pointer",
           }}
-          onClick={clearInput}
+          onClick={clearCoordsHandler}
           height="100%"
           width="25%"
-        >
-          Clear
-        </FontAwesomeIcon>
+        />
         {<ul>{status === "OK" && renderSuggestion()}</ul>}
       </Card>
     </>

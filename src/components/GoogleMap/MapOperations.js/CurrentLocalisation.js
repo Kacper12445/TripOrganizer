@@ -1,8 +1,13 @@
 import React from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useSelector, useDispatch } from "react-redux";
+import { coordActions } from "../../../store/Slices/coord";
 
 export default function CurrentLocalisation(props) {
+  const dispatch = useDispatch();
+  const coords = useSelector((state) => state.coord.coords);
+
   const geoCode = (lat, lng) => {
     axios
       .get(
@@ -14,34 +19,37 @@ export default function CurrentLocalisation(props) {
       })
       .catch((error) => console.log(error));
   };
+  const getCurrentLocalisation = () => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        // props.panTo(
+        //   {
+        //     lat: position.coords.latitude,
+        //     lng: position.coords.longitude,
+        //   },
+        //   props.travelPoint
+        // );
+        dispatch(
+          coordActions.changeCoords({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+            key_value: "origin",
+          })
+        );
+        props.passValue(position.coords.latitude, position.coords.longitude);
+        geoCode(position.coords.latitude, position.coords.longitude);
+      },
+      () => null
+    );
+  };
 
   return (
     <FontAwesomeIcon
       icon="map-marker-alt"
       style={{ fontSize: "25px", cursor: "pointer" }}
-      onClick={() => {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            props.panTo(
-              {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude,
-              },
-              props.travelPoint
-            );
-            props.passValue(
-              position.coords.latitude,
-              position.coords.longitude
-            );
-            geoCode(position.coords.latitude, position.coords.longitude);
-          },
-          () => null
-        );
-      }}
+      onClick={getCurrentLocalisation}
       height="100%"
       width="25%"
-    >
-      Locate
-    </FontAwesomeIcon>
+    />
   );
 }

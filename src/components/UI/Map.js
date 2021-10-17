@@ -11,6 +11,8 @@ import {
 } from "@react-google-maps/api";
 import { useSelector, useDispatch } from "react-redux";
 import { coordActions } from "../../store/Slices/coord";
+import Card from "../common/Card";
+import Text from "../common/Text";
 
 // import FindAttractions from "../Trip/FindAttractions";
 // import RouteAlgorithm from "../Trip/RouteAlgorithm";
@@ -46,12 +48,6 @@ export default function Map() {
   const [travelMode, setTravelMode] = useState("Driving");
   const [focusCoord, setFocusCoord] = useState({ lat: 51, lng: 17 });
 
-  const changeCoordsHandler = (lat, lng, key_value) => {
-    dispatch(
-      coordActions.changeCoords({ lat: lat, lng: lng, key_value: key_value })
-    );
-  };
-
   useEffect(() => {
     console.log(
       `Coord z reduxa: ${coords.originCoords.lat}, ${coords.originCoords.lng}`
@@ -65,22 +61,38 @@ export default function Map() {
     dispatch(coordActions.resetCoords({ key_value: key_value }));
   };
 
-  const mapClickHandler = useCallback((event) => {
-    console.log("Mapa kliknieta");
-    changeCoordsHandler(event.latLng.lat(), event.latLng.lng(), "origin");
-  }, []);
+  const mapClickHandler = useCallback(
+    (event) => {
+      dispatch(
+        coordActions.changeCoords({
+          lat: event.latLng.lat(),
+          lng: event.latLng.lng(),
+          key_value: "origin",
+        })
+      );
+    },
+    [dispatch]
+  );
 
   const mapRef = useRef();
   const onLoad = useCallback((map) => {
     mapRef.current = map;
   }, []);
 
-  const panTo = useCallback(({ lat, lng }, key_value) => {
-    console.log("Wchodzi do funkcji");
-    changeCoordsHandler(lat, lng, key_value);
-    mapRef.current.panTo({ lat, lng });
-    mapRef.current.setZoom(14);
-  }, []);
+  const panTo = useCallback(
+    ({ lat, lng }, key_value) => {
+      dispatch(
+        coordActions.changeCoords({
+          lat: lat,
+          lng: lng,
+          key_value: key_value,
+        })
+      );
+      mapRef.current.panTo({ lat, lng });
+      mapRef.current.setZoom(14);
+    },
+    [dispatch]
+  );
 
   if (loadError) return "Error loading maps";
   if (!isLoaded) return "Loading map";
@@ -110,14 +122,14 @@ export default function Map() {
           key={coord[1].id}
           position={{ lat: coord[1].lat, lng: coord[1].lng }}
           visible={coord[1].visible}
-          // icon={
-          //     url:"",
-          // scaledSize: new window.google.maps.Size(30,30),
-          // origin: new window.google.maps.Point(0,0),
-          // anchor: new window.google.maps.Point(15,15)
-          // }
+          icon={{
+            url: coord[1].icon,
+            scaledSize: new window.google.maps.Size(30, 30),
+            origin: new window.google.maps.Point(0, 0),
+            anchor: new window.google.maps.Point(15, 15),
+          }}
           onClick={() => {
-            setSelected(coord);
+            setSelected(coord[1]);
           }}
         />
       ))}
@@ -128,13 +140,18 @@ export default function Map() {
             setSelected(null);
           }}
         >
-          <div>
-            <h2>Coords</h2>
-            <h3>{selected.id}</h3>
-            <p>
-              {selected.lat} - {selected.lng}
-            </p>
-          </div>
+          <Card flexDirection="column">
+            <Card>
+              <Text fontSize="18px" fontWeight="bold">
+                Coords of {selected.id}
+              </Text>
+            </Card>
+            <Card>
+              <Text fontSize="14px">
+                {selected.lat.toFixed(3)} - {selected.lng.toFixed(3)}
+              </Text>
+            </Card>
+          </Card>
         </InfoWindow>
       ) : null}
     </GoogleMap>
