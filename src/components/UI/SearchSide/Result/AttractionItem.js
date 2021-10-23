@@ -4,8 +4,10 @@ import Text from "../../../common/Text";
 
 export default function AttractionItem(props) {
   return (
-    <Card>
-      <Text>{props.attraction.name}</Text>
+    <Card width="100%" justifyContent="flex-start">
+      <Text fontSize="18px" margin="0 0 0 5%">
+        {props.attraction.name}
+      </Text>
     </Card>
   );
 }

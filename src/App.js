@@ -10,8 +10,10 @@ import {
   faMapMarked,
   faMapMarkedAlt,
   faMapMarkerAlt,
+  faMoneyBillWave,
   faPlane,
   faRoute,
+  faSmile,
   faStar,
   faTicketAlt,
 } from "@fortawesome/free-solid-svg-icons";
@@ -28,7 +30,9 @@ library.add(
   faMapMarkedAlt,
   faMapMarkerAlt,
   faEraser,
-  faStar
+  faStar,
+  faSmile,
+  faMoneyBillWave
 );
 
 function App() {

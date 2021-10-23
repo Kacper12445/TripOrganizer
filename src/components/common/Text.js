@@ -10,5 +10,6 @@ const Text = styled.p`
   letter-spacing: ${(props) => props.letterSpace};
   line-height: ${(props) => props.lineHeight};
   height: ${(props) => props.height};
+  word-spacing: ${(props) => props.wordSpacing};
 `;
 export default Text;
