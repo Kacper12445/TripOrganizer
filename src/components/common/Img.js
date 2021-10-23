@@ -8,5 +8,6 @@ const Img = styled.img`
   position: ${(props) => props.position};
   margin: ${(props) => props.margin};
   overflow: ${(props) => props.overflow};
+  border: ${(props) => props.border};
 `;
 export default Img;

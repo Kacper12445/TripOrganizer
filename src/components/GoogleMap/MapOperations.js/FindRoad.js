@@ -4,9 +4,12 @@ import Button from "../../common/Button";
 import { useSelector } from "react-redux";
 import Card from "../../common/Card";
 import Text from "../../common/Text";
-
-export default function FindRoad(props) {
+import { useDispatch } from "react-redux";
+import { hotelActions } from "../../../store/Slices/hotel";
+export default function FindRoad() {
+  const dispatch = useDispatch();
   const coords = useSelector((state) => state.coord.coords);
+  const hotels = useSelector((state) => state.hotel.hotels);
   const [coordsState, setCoordsState] = useState(false);
 
   useEffect(() => {
@@ -26,10 +29,10 @@ export default function FindRoad(props) {
         "x-rapidapi-key": process.env.REACT_APP_RAPID_API_KEY,
       },
       params: {
-        latitude: coords.destinationCoords.lat,
-        longitude: coords.destinationCoords.lng,
+        latitude: coords.destinationCoords.lat.toFixed(3),
+        longitude: coords.destinationCoords.lng.toFixed(3),
         lang: "en_US",
-        hotel_class: "1,2,3,4,5",
+        hotel_class: "3,4,5",
         limit: "30",
         adults: "1",
         rooms: "1",
@@ -39,7 +42,7 @@ export default function FindRoad(props) {
         checkin: "2021-11-20",
         subcategory: "hotel,bb,specialty",
         nights: "5",
-        distance: "500",
+        distance: "10",
       },
     };
     if (
@@ -51,33 +54,54 @@ export default function FindRoad(props) {
           "https://travel-advisor.p.rapidapi.com/hotels/list-by-latlng",
           options
         )
-        .then(function (response) {
-          console.log(response.data);
+        .then((response) => {
+          console.log(response.data.data);
+          let tempHotelArray = [];
+          for (let i = 0; i < 5; i++) {
+            console.log(`Hotel ${i}: ${response.data.data[i].name}`);
+            tempHotelArray.push(response.data.data[i]);
+          }
+          dispatch(hotelActions.addHotel({ hotelArr: tempHotelArray }));
+          tempHotelArray.forEach((element) => {
+            getHotelAttractions(element);
+          });
+          // getHotelAttractions(tempHotelArray[0]);
         })
-        .catch(function (error) {
+        .catch((error) => {
           console.error(error);
         });
     }
   };
 
-  const buttonClickHandler = () => {
-    if (coordsState) {
-      axios
-        .get(
-          `https://maps.googleapis.com/maps/api/directions/json?origin=${coords.originCoords.lat},${coords.originCoords.lng}&destination=${coords.destinationCoords.lat},${coords.destinationCoords.lng}&mode=transit&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`
-        )
-        .then((res) => {
-          // console.log(res.data.routes[0].legs[0]);
-          console.log(res.data.routes[0].legs[0].steps);
-          // console.log(res.data.routes[0].legs[0].start_address);
-          // console.log(res.data.routes[0].legs[0].end_address);
-          // console.log(res.data.routes[0].legs[0].distance.text);
-          // console.log(res.data.routes[0].legs[0].duration.text);
-          findHotel();
-        })
-        .catch((err) => console.log(err));
-    }
+  const getHotelAttractions = (hotel) => {
+    dispatch(
+      hotelActions.addHotelAttractions({
+        id: hotel.location_id,
+        attractions: "Restauracja",
+      })
+    );
   };
+
+  const buttonClickHandler = () => {
+    // if (coordsState) {
+    //   axios
+    //     .get(
+    //       `https://maps.googleapis.com/maps/api/directions/json?origin=${coords.originCoords.lat},${coords.originCoords.lng}&destination=${coords.destinationCoords.lat},${coords.destinationCoords.lng}&mode=transit&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`
+    //     )
+    //     .then((res) => {
+    //       // console.log(res.data.routes[0].legs[0]);
+    //       console.log(res.data.routes[0].legs[0].steps);
+    //       // console.log(res.data.routes[0].legs[0].start_address);
+    //       // console.log(res.data.routes[0].legs[0].end_address);
+    //       // console.log(res.data.routes[0].legs[0].distance.text);
+    //       // console.log(res.data.routes[0].legs[0].duration.text);
+    //       findHotel();
+    //     })
+    //     .catch((err) => console.log(err));
+    // }
+    findHotel();
+  };
+  console.log(hotels);
 
   return (
     <>

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Card from "../../../common/Card";
 import ResultItem from "./ResultItem";
+import { useSelector } from "react-redux";
 
 const DummyData = [
   {
@@ -21,6 +22,12 @@ const DummyData = [
 ];
 
 export default function SearchResults() {
+  const [hotelData, setHotelData] = useState([]);
+  const hotels = useSelector((state) => state.hotel.hotels);
+
+  useEffect(() => {
+    setHotelData(hotels);
+  }, [hotels]);
   return (
     <Card
       flexBasis="80%"
@@ -33,14 +40,8 @@ export default function SearchResults() {
       alignItems="center"
       // alignContent="space-around"
     >
-      {DummyData.map((element, index) => {
-        return (
-          <ResultItem
-            key={index}
-            name={element.name}
-            description={element.description}
-          ></ResultItem>
-        );
+      {hotelData.map((element, index) => {
+        return <ResultItem key={index} hotel={element}></ResultItem>;
       })}
     </Card>
   );
