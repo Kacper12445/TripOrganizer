@@ -13,8 +13,8 @@ export default function SearchPage() {
         backGroundColor="#002561"
         navItemSize="70%"
         navItemHeight="60%"
-        logoFZ="30px"
-        logoSize="35px"
+        logoFZ="40px"
+        logoSize="40px"
       />
       <Card height="90vh" width="100vw" justifyContent="space-between">
         <Searching />

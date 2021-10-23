@@ -12,6 +12,7 @@ import {
   faMapMarkerAlt,
   faPlane,
   faRoute,
+  faStar,
   faTicketAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import SearchPage from "./pages/SearchPage";
@@ -26,7 +27,8 @@ library.add(
   faHome,
   faMapMarkedAlt,
   faMapMarkerAlt,
-  faEraser
+  faEraser,
+  faStar
 );
 
 function App() {

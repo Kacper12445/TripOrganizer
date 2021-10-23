@@ -65,7 +65,6 @@ export default function FindRoad() {
           tempHotelArray.forEach((element) => {
             getHotelAttractions(element);
           });
-          // getHotelAttractions(tempHotelArray[0]);
         })
         .catch((error) => {
           console.error(error);
@@ -74,12 +73,34 @@ export default function FindRoad() {
   };
 
   const getHotelAttractions = (hotel) => {
-    dispatch(
-      hotelActions.addHotelAttractions({
-        id: hotel.location_id,
-        attractions: "Restauracja",
-      })
-    );
+    let options = {
+      headers: {
+        "x-rapidapi-host": process.env.REACT_APP_TRAVEL_ADVISOR_HOST,
+        "x-rapidapi-key": process.env.REACT_APP_RAPID_API_KEY,
+      },
+      params: {
+        latitude: hotel.latitude,
+        longitude: hotel.longitude,
+        lunit: "km",
+        currency: "EUR",
+        distance: 3,
+        lang: "en_US",
+      },
+    };
+    axios
+      .get(
+        "https://travel-advisor.p.rapidapi.com/attractions/list-by-latlng",
+        options
+      )
+      .then((response) => {
+        console.log(response.data.data);
+        dispatch(
+          hotelActions.addHotelAttractions({
+            id: hotel.location_id,
+            attractions: response.data.data,
+          })
+        );
+      });
   };
 
   const buttonClickHandler = () => {

@@ -17,6 +17,7 @@ const Card = styled.div`
     props.justifyContent ? props.justifyContent : "space-around"};
   flex-basis: ${(props) => props.flexBasis};
   flex-wrap: ${(props) => props.flexWrap};
+  flex-shrink: ${(props) => props.flexShrink}
   // ----------BACKGROUND----------
   background-image: url(${(props) => props.backGroundImg});
   background-size: cover;

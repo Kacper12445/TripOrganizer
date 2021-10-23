@@ -29,8 +29,8 @@ const hotelSlice = createSlice({
           location_id: element.location_id,
           name: element.name,
           position: {
-            latitude: element.lat,
-            longitude: element.lng,
+            latitude: element.latitude,
+            longitude: element.longitude,
           },
           hotel_class: element.hotel_class,
           photo: element.photo.images.large.url,
@@ -45,16 +45,22 @@ const hotelSlice = createSlice({
       state.hotels.length = 0;
     },
     addHotelAttractions(state, action) {
-      const tempHotels = state.hotels;
-      console.log(`Temp hotels ${tempHotels}`);
-      const hotelIndex = tempHotels.findIndex(
+      let tempHotels = state.hotels;
+      let attractionsArr = [];
+      let hotelIndex = tempHotels.findIndex(
         (hotel) => hotel.location_id === action.payload.id
       );
-      console.log(`Hotel index ${hotelIndex}`);
-      console.log(
-        `ID, attr${action.payload.id}, ${action.payload.attractions}`
-      );
-      tempHotels[hotelIndex].hotel_attractions = action.payload.attractions;
+      // console.log(`To w reduxie${action.payload.attractions[0].name}`);
+      action.payload.attractions.forEach((element) => {
+        if (element.location_id === "0") {
+          attractionsArr.push(element);
+        } else if (element.hasOwnProperty("name")) {
+          attractionsArr.unshift(element);
+        }
+      });
+      attractionsArr = attractionsArr.slice(0, 5);
+      console.log(`Attraction arr ${attractionsArr.length}`);
+      tempHotels[hotelIndex].hotel_attractions = attractionsArr;
       state.hotels = tempHotels;
     },
   },
