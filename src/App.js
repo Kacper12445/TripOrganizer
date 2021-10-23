@@ -5,6 +5,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import {
   faEraser,
+  faEye,
   faHome,
   faHotel,
   faLongArrowAltRight,
@@ -17,6 +18,7 @@ import {
   faSmile,
   faStar,
   faTicketAlt,
+  faTimesCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import SearchPage from "./pages/SearchPage";
 
@@ -34,7 +36,9 @@ library.add(
   faStar,
   faSmile,
   faMoneyBillWave,
-  faLongArrowAltRight
+  faLongArrowAltRight,
+  faTimesCircle,
+  faEye
 );
 
 function App() {

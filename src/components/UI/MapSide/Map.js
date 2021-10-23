@@ -9,15 +9,10 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { coordActions } from "../../../store/Slices/coord";
 import { mapActions } from "../../../store/Slices/map";
+import { routeActions } from "../../../store/Slices/route";
 import Card from "../../common/Card";
 import Text from "../../common/Text";
 import MapDirectionRenderer from "./MapDirectionRenderer";
-
-const PLACES = [
-  { latitude: 25.8103146, longitude: -80.1751609 },
-  // { latitude: 27.9947147, longitude: -82.5943645 },
-  { latitude: 28.4813018, longitude: -81.4387899 },
-];
 
 export default function Map() {
   const dispatch = useDispatch();
@@ -53,6 +48,9 @@ export default function Map() {
           longitude: coords.destinationCoords.lng,
         },
       ]);
+    } else if (!coords.originCoords.isSet && !coords.destinationCoords.isSet) {
+      setRouteCoords([]);
+      dispatch(routeActions.resetRoute());
     }
     console.log(
       `Coord z reduxa: ${coords.originCoords.lat}, ${coords.originCoords.lng}`
@@ -60,7 +58,7 @@ export default function Map() {
     console.log(
       `Coord z reduxa: ${coords.destinationCoords.lat}, ${coords.destinationCoords.lng}`
     );
-  }, [coords]);
+  }, [coords, dispatch]);
 
   // const clearCoordsHandler = (key_value) => {
   //   dispatch(coordActions.resetCoords({ key_value: key_value }));
@@ -142,10 +140,12 @@ export default function Map() {
           </Card>
         </InfoWindow>
       ) : null}
-      <MapDirectionRenderer
-        places={routeCoords.length === 0 ? null : routeCoords}
-        travelMode={window.google.maps.TravelMode.TRANSIT}
-      />
+      {routeCoords.length !== 0 && (
+        <MapDirectionRenderer
+          places={routeCoords}
+          travelMode={window.google.maps.TravelMode.TRANSIT}
+        />
+      )}
     </GoogleMap>
   );
 }

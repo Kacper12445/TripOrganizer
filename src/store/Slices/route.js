@@ -26,6 +26,9 @@ const routeSlice = createSlice({
       });
       state.routeHint = tempArray;
     },
+    resetRoute(state) {
+      state.routeHint = initialRouteState;
+    },
   },
 });
 
