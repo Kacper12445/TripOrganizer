@@ -6,10 +6,13 @@ import Card from "../../common/Card";
 import Text from "../../common/Text";
 import { useDispatch } from "react-redux";
 import { hotelActions } from "../../../store/Slices/hotel";
+import { routeActions } from "../../../store/Slices/route";
+
 export default function FindRoad() {
   const dispatch = useDispatch();
   const coords = useSelector((state) => state.coord.coords);
   const hotels = useSelector((state) => state.hotel.hotels);
+  const route = useSelector((state) => state.route.routeHint);
   const [coordsState, setCoordsState] = useState(false);
 
   useEffect(() => {
@@ -104,29 +107,35 @@ export default function FindRoad() {
   };
 
   const buttonClickHandler = () => {
-    // if (coordsState) {
-    //   axios
-    //     .get(
-    //       `https://maps.googleapis.com/maps/api/directions/json?origin=${coords.originCoords.lat},${coords.originCoords.lng}&destination=${coords.destinationCoords.lat},${coords.destinationCoords.lng}&mode=transit&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`
-    //     )
-    //     .then((res) => {
-    //       // console.log(res.data.routes[0].legs[0]);
-    //       console.log(res.data.routes[0].legs[0].steps);
-    //       // console.log(res.data.routes[0].legs[0].start_address);
-    //       // console.log(res.data.routes[0].legs[0].end_address);
-    //       // console.log(res.data.routes[0].legs[0].distance.text);
-    //       // console.log(res.data.routes[0].legs[0].duration.text);
-    //       findHotel();
-    //     })
-    //     .catch((err) => console.log(err));
-    // }
-    findHotel();
+    if (coordsState) {
+      axios
+        .get(
+          `https://maps.googleapis.com/maps/api/directions/json?origin=${coords.originCoords.lat},${coords.originCoords.lng}&destination=${coords.destinationCoords.lat},${coords.destinationCoords.lng}&mode=transit&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`
+        )
+        .then((res) => {
+          console.log(res.data.routes[0].legs[0]);
+          console.log(res.data.routes[0].legs[0].steps);
+          // console.log(res.data.routes[0].legs[0].start_address);
+          // console.log(res.data.routes[0].legs[0].end_address);
+          // console.log(res.data.routes[0].legs[0].distance.text);
+          // console.log(res.data.routes[0].legs[0].duration.text);
+          dispatch(
+            routeActions.setRoute({
+              instruction: res.data.routes[0].legs[0],
+            })
+          );
+          // findHotel();
+        })
+        .catch((err) => console.log(err));
+    }
   };
-  console.log(hotels);
+
+  useEffect(() => {
+    console.log(route);
+  }, [route]);
 
   return (
     <>
-      {/* <Button onClick={findHotel}>FindHotel</Button> */}
       <Card
         flexBasis="25%"
         width="100%"

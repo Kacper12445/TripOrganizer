@@ -23,6 +23,7 @@ export default function TripForm() {
       flexBasis="20%"
       alignItems="center"
       width="90%"
+      flexWrap="wrap"
     >
       <Card
         flexBasis="35%"

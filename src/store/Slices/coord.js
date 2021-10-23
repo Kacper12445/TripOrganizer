@@ -10,6 +10,7 @@ const initialCoordState = {
       lng: 0,
       visible: false,
       icon: home,
+      isSet: false,
     },
     destinationCoords: {
       id: "destination",
@@ -17,6 +18,7 @@ const initialCoordState = {
       lng: 0,
       visible: false,
       icon: destination,
+      isSet: false,
     },
   },
 };
@@ -38,6 +40,7 @@ const coordSlice = createSlice({
       coordToUpdate.lat = action.payload.lat;
       coordToUpdate.lng = action.payload.lng;
       coordToUpdate.visible = true;
+      coordToUpdate.isSet = true;
 
       state.coords = updatedCoords;
     },
@@ -55,6 +58,7 @@ const coordSlice = createSlice({
       coordToUpdate.lat = 0;
       coordToUpdate.lng = 0;
       coordToUpdate.visible = false;
+      coordToUpdate.isSet = false;
       state.coords = updatedCoords;
     },
     getCoords(state, action) {

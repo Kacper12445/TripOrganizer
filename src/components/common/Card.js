@@ -17,7 +17,7 @@ const Card = styled.div`
     props.justifyContent ? props.justifyContent : "space-around"};
   flex-basis: ${(props) => props.flexBasis};
   flex-wrap: ${(props) => props.flexWrap};
-  flex-shrink: ${(props) => props.flexShrink}
+  flex-shrink: ${(props) => props.flexShrink};
   // ----------BACKGROUND----------
   background-image: url(${(props) => props.backGroundImg});
   background-size: cover;
@@ -29,7 +29,7 @@ const Card = styled.div`
   border-radius: ${(props) => props.borderRad};
   border-bottom: ${(props) => props.border_bot};
   border-left: ${(props) => props.borderLeft};
-  overflow: ${(props) => (props.overflow ? props.overflow : "hidden")};
+  overflow: ${(props) => props.overflow};
   cursor: ${(props) => props.cursor};
   &.navItem:hover .navItemText {
     color: lightgreen;

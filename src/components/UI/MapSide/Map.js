@@ -11,18 +11,18 @@ import { coordActions } from "../../../store/Slices/coord";
 import { mapActions } from "../../../store/Slices/map";
 import Card from "../../common/Card";
 import Text from "../../common/Text";
-// import MapDirectionRenderer from "./MapDirectionRenderer";
+import MapDirectionRenderer from "./MapDirectionRenderer";
 
-// const PLACES = [
-//   { latitude: 25.8103146, longitude: -80.1751609 },
-//   { latitude: 27.9947147, longitude: -82.5943645 },
-//   { latitude: 28.4813018, longitude: -81.4387899 },
-// ];
+const PLACES = [
+  { latitude: 25.8103146, longitude: -80.1751609 },
+  // { latitude: 27.9947147, longitude: -82.5943645 },
+  { latitude: 28.4813018, longitude: -81.4387899 },
+];
 
 export default function Map() {
   const dispatch = useDispatch();
   const coords = useSelector((state) => state.coord.coords);
-
+  const [routeCoords, setRouteCoords] = useState([]);
   const [libraries] = useState(["places"]);
   const mapContainerStyle = {
     height: "100%",
@@ -42,6 +42,18 @@ export default function Map() {
   const [focusCoord, setFocusCoord] = useState({ lat: 51, lng: 17 });
 
   useEffect(() => {
+    if (coords.originCoords.isSet && coords.destinationCoords.isSet) {
+      setRouteCoords([
+        {
+          latitude: coords.originCoords.lat,
+          longitude: coords.originCoords.lng,
+        },
+        {
+          latitude: coords.destinationCoords.lat,
+          longitude: coords.destinationCoords.lng,
+        },
+      ]);
+    }
     console.log(
       `Coord z reduxa: ${coords.originCoords.lat}, ${coords.originCoords.lng}`
     );
@@ -130,10 +142,10 @@ export default function Map() {
           </Card>
         </InfoWindow>
       ) : null}
-      {/* <MapDirectionRenderer
-          places={PLACES}
-          travelMode={window.google.maps.TravelMode.DRIVING}
-        /> */}
+      <MapDirectionRenderer
+        places={routeCoords.length === 0 ? null : routeCoords}
+        travelMode={window.google.maps.TravelMode.TRANSIT}
+      />
     </GoogleMap>
   );
 }

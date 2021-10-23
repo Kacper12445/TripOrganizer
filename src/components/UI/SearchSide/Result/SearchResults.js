@@ -14,13 +14,11 @@ export default function SearchResults() {
     <Card
       flexBasis="80%"
       width="95%"
-      // flexDirection="column"
       backGroundColor="rgba(100, 100, 100, .3)"
       overflow="scroll"
       borderRad="20px"
       justifyContent="center"
       flexWrap="wrap"
-      // alignContent="space-around"
     >
       {hotelData.map((element, index) => {
         return <ResultItem key={index} hotel={element}></ResultItem>;

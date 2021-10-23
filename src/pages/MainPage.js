@@ -1,5 +1,4 @@
 import React from "react";
-// import AirportSearching from "../components/Trip/FlightSearch/AirportSearching";
 import Header from "../components/UI/Header/Header";
 import Text from "../components/common/Text";
 import Card from "../components/common/Card";

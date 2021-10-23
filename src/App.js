@@ -7,6 +7,7 @@ import {
   faEraser,
   faHome,
   faHotel,
+  faLongArrowAltRight,
   faMapMarked,
   faMapMarkedAlt,
   faMapMarkerAlt,
@@ -32,7 +33,8 @@ library.add(
   faEraser,
   faStar,
   faSmile,
-  faMoneyBillWave
+  faMoneyBillWave,
+  faLongArrowAltRight
 );
 
 function App() {
