@@ -113,8 +113,9 @@ export default function FindRoad() {
           `https://maps.googleapis.com/maps/api/directions/json?origin=${coords.originCoords.lat},${coords.originCoords.lng}&destination=${coords.destinationCoords.lat},${coords.destinationCoords.lng}&mode=transit&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`
         )
         .then((res) => {
-          console.log(res.data.routes[0].legs[0]);
-          console.log(res.data.routes[0].legs[0].steps);
+          console.log(res);
+          // console.log(res.data.routes[0].legs[0]);
+          // console.log(res.data.routes[0].legs[0].steps);
           // console.log(res.data.routes[0].legs[0].start_address);
           // console.log(res.data.routes[0].legs[0].end_address);
           // console.log(res.data.routes[0].legs[0].distance.text);
@@ -124,15 +125,15 @@ export default function FindRoad() {
               instruction: res.data.routes[0].legs[0],
             })
           );
-          findHotel();
+          // findHotel();
         })
         .catch((err) => console.log(err));
     }
   };
 
-  useEffect(() => {
-    console.log(route);
-  }, [route]);
+  // useEffect(() => {
+  //   console.log(route);
+  // }, [route]);
 
   return (
     <>
