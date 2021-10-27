@@ -24,14 +24,14 @@ export default function ResultItem(props) {
         </Card>
         <Card flexDirection="column">
           <Text fontSize="18px" margin="0 0 0 5%">
-            <strong>Price:</strong> {props.hotel.price}
+            <strong>Price: </strong> {props.hotel.price}
             <FontAwesomeIcon
               icon="money-bill-wave"
               style={{ color: "green", fontSize: "22px", margin: "0 0 0 2%" }}
             />
           </Text>
           <Text fontSize="18px" margin="0 0 0 5%" wordSpacing="2px">
-            <strong>Rating:</strong>
+            <strong>Rating: </strong>
             {props.hotel.rating}
             <FontAwesomeIcon
               icon="smile"
@@ -39,7 +39,7 @@ export default function ResultItem(props) {
             />
           </Text>
           <Text fontSize="18px" margin="0 0 0 5%">
-            <strong>Hotel class:</strong> {props.hotel.hotel_class}
+            <strong>Hotel class: </strong> {props.hotel.hotel_class}
             <FontAwesomeIcon
               icon="star"
               style={{ color: "yellow", fontSize: "22px", margin: "0 0 0 2%" }}

@@ -60,7 +60,7 @@ export default function FindRoad() {
         .then((response) => {
           console.log(response.data.data);
           let tempHotelArray = [];
-          for (let i = 0; i < 5; i++) {
+          for (let i = 0; i < 3; i++) {
             console.log(`Hotel ${i}: ${response.data.data[i].name}`);
             tempHotelArray.push(response.data.data[i]);
           }
@@ -124,7 +124,7 @@ export default function FindRoad() {
               instruction: res.data.routes[0].legs[0],
             })
           );
-          // findHotel();
+          findHotel();
         })
         .catch((err) => console.log(err));
     }

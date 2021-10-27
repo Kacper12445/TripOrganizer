@@ -41,6 +41,7 @@ export default function RouteInstruction() {
           alignItems="center"
           justifyContent="space-around"
           position="relative"
+          // overflow="scroll"
         >
           <FontAwesomeIcon
             onClick={iconClickHandler}
