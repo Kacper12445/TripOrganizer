@@ -1,5 +1,4 @@
 import styled from "styled-components";
-// import Text from "./Text";
 
 const Card = styled.div`
   box-sizing: border-box;

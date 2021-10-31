@@ -4,35 +4,55 @@ import Button from "../components/common/Button";
 import Text from "../components/common/Text";
 import Input from "../components/common/Input";
 import Header from "../components/UI/Header/Header";
+import Form from "../components/common/Form";
 import ResultItem from "../components/UI/SearchSide/Result/ResultItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
+
 export default function CartPage() {
   const [formData, setFormData] = useState([
     {
-      labelName: "name",
+      name: "name",
       data: "",
+      type: "text",
     },
     {
-      labelName: "surname",
+      name: "surname",
       data: "",
+      type: "text",
     },
     {
-      labelName: "phone number",
+      name: "phone number",
       data: "",
+      type: "tel",
     },
     {
-      labelName: "email",
+      name: "email",
       data: "",
-    },
-    {
-      labelName: "gender",
-      data: "",
-    },
-    {
-      labelName: "birth date",
-      data: "",
+      type: "email",
     },
   ]);
+
+  const buyTrip = (e) => {
+    const userData = {
+      name: e.target[0].value,
+      surname: e.target[1].value,
+      phoneNumber: e.target[2].value,
+      email: e.target[3].value,
+    };
+    e.preventDefault();
+    axios
+      .post("http://localhost:5000/ticket/buy", {
+        name: userData.name,
+        surname: userData.surname,
+        phoneNumber: userData.phoneNumber,
+        email: userData.email,
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <>
@@ -75,7 +95,7 @@ export default function CartPage() {
           <Card backGroundColor="blue" flexBasis="30%" width="100%">
             {/* <ResultItem/> */}
           </Card>
-          <Card
+          <Form
             flexBasis="60%"
             width="100%"
             backGroundColor="rgba(160, 160, 160, .7)"
@@ -83,6 +103,7 @@ export default function CartPage() {
             justifyContent="space-between"
             alignItems="center"
             borderBot="25px"
+            onSubmit={buyTrip}
           >
             <Card
               width="80%"
@@ -96,17 +117,29 @@ export default function CartPage() {
             >
               {formData.map((item, index) => {
                 return (
-                  <Card height="20%" width="33.4%" flexDirection="column">
-                    <Text>
-                      {item.labelName ? item.labelName.toUpperCase() : null}
+                  <Card
+                    key={index}
+                    height="23%"
+                    width="33.4%"
+                    flexDirection="column"
+                    justifyContent="space-between"
+                  >
+                    <Text
+                      margin="0 0 0 3%"
+                      width="100%"
+                      height="20%"
+                      fontSize="12px"
+                    >
+                      {item.name ? item.name.toUpperCase() : null}
                     </Text>
                     <Input
-                      key={index}
-                      height="60%"
+                      height="70%"
                       borderRad="25px"
-                      placeholder={`Enter your ${item.labelName}`}
+                      placeholder={`Enter your ${item.name}`}
+                      name={item.name}
                       fontSize="1.5em"
                       textAlign="center"
+                      type={item.type}
                     />
                   </Card>
                 );
@@ -121,6 +154,8 @@ export default function CartPage() {
               hoverColor="rgba(144, 238, 144, .7)"
               borderRad="25px"
               margin="2% 0"
+              type="submit"
+              // onClick={buyTrip}
             >
               <FontAwesomeIcon
                 icon="shopping-cart"
@@ -130,7 +165,7 @@ export default function CartPage() {
                 Buy now
               </Text>
             </Button>
-          </Card>
+          </Form>
         </Card>
       </Card>
     </>

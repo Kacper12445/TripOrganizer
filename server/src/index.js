@@ -22,6 +22,8 @@ app.use(function (req, res, next) {
   console.log(`Request: ${req.method.brightGreen} ${req.url.cyan}`);
   next();
 });
+app.use(express.urlencoded());
+app.use(express.json());
 
 app.use(tripRouter);
 

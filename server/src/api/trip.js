@@ -6,20 +6,21 @@ tripRouter.get("/ticket/price/:distance", async (req, res) => {
   res.send("Return ticket price");
 });
 
-tripRouter.get("/ticket/buy", async (req, res) => {
-  res.send("Buy ticket");
+tripRouter.post("/ticket/buy", async (req, res) => {
+  const { name, surname, email, phoneNumber } = req.body;
+  console.log(req.body);
   const mailOptions = {
     from: process.env.MAIL,
-    to: "kacper12445@o2.pl",
-    subject: "Sending Email using Node.js",
-    text: "That was easy!",
+    to: email,
+    subject: `Ticket Information`,
+    text: `Dear ${name} ${surname}, We write to inform you that your ticket has been succesfully bought via Trip Planner`,
   };
-  console.log(req.body);
   try {
     email_service.sendMail(mailOptions);
   } catch (error) {
     console.log(`Error: ${error}`);
   }
+  res.send("Email has been sent");
 });
 
 tripRouter.get("/trip/find-route", async (req, res) => {
