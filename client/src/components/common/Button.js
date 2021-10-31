@@ -13,6 +13,10 @@ const Button = styled.button`
   background-color: ${(props) => props.backGroundColor};
   border: 0;
   border-radius: ${(props) => props.borderRad};
+  text-align: ${(props) => props.textAlign};
+  &:hover {
+    background-color: ${(props) => props.hoverColor};
+  }
 `;
 
 export default Button;

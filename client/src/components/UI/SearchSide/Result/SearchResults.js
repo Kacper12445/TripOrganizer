@@ -21,7 +21,9 @@ export default function SearchResults() {
       flexWrap="wrap"
     >
       {hotelData.map((element, index) => {
-        return <ResultItem key={index} hotel={element}></ResultItem>;
+        return (
+          <ResultItem key={index} hotel={element} visible={true}></ResultItem>
+        );
       })}
     </Card>
   );

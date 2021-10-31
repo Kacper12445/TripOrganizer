@@ -17,12 +17,14 @@ import {
   faPlane,
   faRoute,
   faSearch,
+  faShoppingCart,
   faSmile,
   faStar,
   faTicketAlt,
   faTimesCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import SearchPage from "./pages/SearchPage";
+import CartPage from "./pages/CartPage";
 
 library.add(
   fab,
@@ -42,7 +44,8 @@ library.add(
   faTimesCircle,
   faEye,
   faSearch,
-  faPaperPlane
+  faPaperPlane,
+  faShoppingCart
 );
 
 function App() {
@@ -52,6 +55,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={MainPage} />
           <Route exact path="/searchingPage" component={SearchPage} />
+          <Route exact path="/card" component={CartPage} />
         </Switch>
       </Router>
     </>

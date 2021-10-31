@@ -29,6 +29,10 @@ const Card = styled.div`
   border-radius: ${(props) => props.borderRad};
   border-bottom: ${(props) => props.border_bot};
   border-left: ${(props) => props.borderLeft};
+  border-bottom-left-radius: ${(props) => props.borderBot};
+  border-bottom-right-radius: ${(props) => props.borderBot};
+  border-top-left-radius: ${(props) => props.borderTop};
+  border-top-right-radius: ${(props) => props.borderTop};
   overflow: ${(props) => props.overflow};
   cursor: ${(props) => props.cursor};
   &.navItem:hover .navItemText {
