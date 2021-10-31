@@ -6,11 +6,17 @@ const SuggestionsLi = styled.li`
   width: 100%;
   justify-content: space-between;
   overflow: hidden;
+  padding: 4px;
+  border-bottom: 1px solid lightgreen;
+  border-radius: 25px;
   &:hover {
-    background-color: #f78e8a;
+    background-color: #83ffff;
     color: #000000;
     cursor: pointer;
     font-weight: 700;
+    p {
+      color: white;
+    }
   }
 `;
 

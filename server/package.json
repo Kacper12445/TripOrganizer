@@ -15,6 +15,8 @@
     "express": "^4.17.1"
   },
   "devDependencies": {
+    "googleapis": "^89.0.0",
+    "nodemailer": "^6.7.0",
     "nodemon": "^2.0.14"
   }
 }

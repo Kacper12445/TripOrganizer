@@ -7,12 +7,13 @@ import Text from "../../common/Text";
 import { useDispatch } from "react-redux";
 import { hotelActions } from "../../../store/Slices/hotel";
 import { routeActions } from "../../../store/Slices/route";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function FindRoad() {
   const dispatch = useDispatch();
   const coords = useSelector((state) => state.coord.coords);
-  const hotels = useSelector((state) => state.hotel.hotels);
-  const route = useSelector((state) => state.route.routeHint);
+  // const hotels = useSelector((state) => state.hotel.hotels);
+  // const route = useSelector((state) => state.route.routeHint);
   const [coordsState, setCoordsState] = useState(false);
 
   useEffect(() => {
@@ -125,15 +126,11 @@ export default function FindRoad() {
               instruction: res.data.routes[0].legs[0],
             })
           );
-          // findHotel();
+          findHotel();
         })
         .catch((err) => console.log(err));
     }
   };
-
-  // useEffect(() => {
-  //   console.log(route);
-  // }, [route]);
 
   return (
     <>
@@ -152,6 +149,10 @@ export default function FindRoad() {
           justifyContent="center"
           onClick={buttonClickHandler}
         >
+          <FontAwesomeIcon
+            icon="search"
+            style={{ fontSize: "20px", color: "white", marginRight: "3%" }}
+          />
           <Text textAlign="center" fontSize="20px" color="white">
             Search
           </Text>

@@ -13,8 +13,10 @@ import {
   faMapMarkedAlt,
   faMapMarkerAlt,
   faMoneyBillWave,
+  faPaperPlane,
   faPlane,
   faRoute,
+  faSearch,
   faSmile,
   faStar,
   faTicketAlt,
@@ -38,7 +40,9 @@ library.add(
   faMoneyBillWave,
   faLongArrowAltRight,
   faTimesCircle,
-  faEye
+  faEye,
+  faSearch,
+  faPaperPlane
 );
 
 function App() {

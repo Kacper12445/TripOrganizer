@@ -14,7 +14,6 @@ import { useDispatch } from "react-redux";
 
 export default function AutocompleteInput(props) {
   const dispatch = useDispatch();
-
   const {
     ready,
     value,
@@ -91,12 +90,7 @@ export default function AutocompleteInput(props) {
             padding: "0 0 0 5px",
           }}
         />
-        <Card
-          width="60%"
-          flexDirection="column"
-          overflow="scroll"
-          position="relative"
-        >
+        <Card width="60%" flexDirection="column" height="75%">
           <Input
             value={value}
             onChange={handleInput}
@@ -107,9 +101,11 @@ export default function AutocompleteInput(props) {
             padding="22px 18px"
             fontSize="15px"
           />
-          {status === "OK" && (
-            <SuggestionDiv>{renderSuggestion()}</SuggestionDiv>
-          )}
+          <Card position="relative" height="100%">
+            {status === "OK" && (
+              <SuggestionDiv>{renderSuggestion()}</SuggestionDiv>
+            )}
+          </Card>
         </Card>
         {props.travelPoint === "origin" ? (
           <CurrentLocalisation

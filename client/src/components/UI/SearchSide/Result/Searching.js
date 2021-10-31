@@ -14,6 +14,7 @@ export default function Searching() {
       height="100%"
       flexBasis="65%"
       alignItems="center"
+      justifyContent="space-around"
     >
       <RouteInstruction />
       <TripForm />
