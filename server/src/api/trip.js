@@ -2,8 +2,10 @@ const express = require("express");
 const tripRouter = express.Router();
 const email_service = require("../services/email-service");
 
-tripRouter.get("/ticket/price/:distance", async (req, res) => {
-  res.send("Return ticket price");
+tripRouter.post("/ticket/price/", async (req, res) => {
+  const { distance } = req.body;
+  const ticketPrice = (distance / 9).toFixed(2);
+  res.send({ ticketPrice });
 });
 
 tripRouter.post("/ticket/buy", async (req, res) => {

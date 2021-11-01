@@ -52,12 +52,12 @@ export default function Map() {
       setRouteCoords([]);
       dispatch(routeActions.resetRoute());
     }
-    console.log(
-      `Coord z reduxa: ${coords.originCoords.lat}, ${coords.originCoords.lng}`
-    );
-    console.log(
-      `Coord z reduxa: ${coords.destinationCoords.lat}, ${coords.destinationCoords.lng}`
-    );
+    // console.log(
+    //   `Coord z reduxa: ${coords.originCoords.lat}, ${coords.originCoords.lng}`
+    // );
+    // console.log(
+    //   `Coord z reduxa: ${coords.destinationCoords.lat}, ${coords.destinationCoords.lng}`
+    // );
   }, [coords, dispatch]);
 
   // const clearCoordsHandler = (key_value) => {

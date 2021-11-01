@@ -5,6 +5,7 @@ const initialRouteState = {
     {
       text: "",
       distance: "",
+      distanceValue: 0,
       duration: "",
     },
   ],
@@ -16,12 +17,13 @@ const routeSlice = createSlice({
   reducers: {
     setRoute(state, action) {
       let tempArray = [];
-      console.log(action.payload.instruction);
       action.payload.instruction.steps.forEach((element) => {
         tempArray.push({
           text: element.html_instructions,
           distance: element.distance.text,
+          distanceValue: element.distance.value,
           duration: element.duration.text,
+          durationValue: element.duration.value,
         });
       });
       state.routeHint = tempArray;

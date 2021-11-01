@@ -26,7 +26,7 @@ export default function InstructionItem(props) {
         </Card>
       </Card>
       <Card
-        height="100%"
+        height="80%"
         backGroundColor="lightgreen"
         borderRad="20px"
         alignItems="center"

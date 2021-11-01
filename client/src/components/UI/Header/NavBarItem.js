@@ -14,7 +14,7 @@ export default function NavBarItem(props) {
       className="navItem"
     >
       <Link to={props.navItem.path} style={{ textDecoration: "none" }}>
-        <Text fontSize="25px" className="navItemText" color="white">
+        <Text fontSize="30px" className="navItemText" color="white">
           {props.navItem.name}{" "}
         </Text>
       </Link>

@@ -10,11 +10,12 @@ import { Link } from "react-router-dom";
 export default function ResultItem(props) {
   return (
     <Card
-      width="90%"
+      width={props.width}
       justifyContent="spacer-between"
       border="1px solid black"
-      margin="2% 0"
+      margin={props.margin}
       backGroundColor="lightgrey"
+      // height={props.height}
     >
       <Card width="35%" flexDirection="column" alignItems="center">
         <Img
@@ -24,7 +25,7 @@ export default function ResultItem(props) {
         />
         {props.visible && (
           <Link
-            to={"/card"}
+            to={`/cart/${props.hotel.location_id}`}
             style={{ textDecoration: "none", height: "20%", width: "100%" }}
           >
             <Button
@@ -53,7 +54,7 @@ export default function ResultItem(props) {
       </Card>
       <Card flexDirection="column" height="100%" width="65%">
         <Card border_bot="1px solid black" padding="1% 0">
-          <Text fontSize="30px" fontWeight="bold">
+          <Text fontSize="26px" fontWeight="bold">
             {props.hotel.name}
           </Text>
         </Card>

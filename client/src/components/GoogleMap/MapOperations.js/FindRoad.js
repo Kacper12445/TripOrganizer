@@ -12,8 +12,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function FindRoad() {
   const dispatch = useDispatch();
   const coords = useSelector((state) => state.coord.coords);
-  // const hotels = useSelector((state) => state.hotel.hotels);
-  // const route = useSelector((state) => state.route.routeHint);
   const [coordsState, setCoordsState] = useState(false);
 
   useEffect(() => {
@@ -59,10 +57,8 @@ export default function FindRoad() {
           options
         )
         .then((response) => {
-          console.log(response.data.data);
           let tempHotelArray = [];
           for (let i = 0; i < 3; i++) {
-            console.log(`Hotel ${i}: ${response.data.data[i].name}`);
             tempHotelArray.push(response.data.data[i]);
           }
           dispatch(hotelActions.addHotel({ hotelArr: tempHotelArray }));
@@ -97,7 +93,6 @@ export default function FindRoad() {
         options
       )
       .then((response) => {
-        console.log(response.data.data);
         dispatch(
           hotelActions.addHotelAttractions({
             id: hotel.location_id,
@@ -111,7 +106,7 @@ export default function FindRoad() {
     if (coordsState) {
       axios
         .get(
-          `https://maps.googleapis.com/maps/api/directions/json?origin=${coords.originCoords.lat},${coords.originCoords.lng}&destination=${coords.destinationCoords.lat},${coords.destinationCoords.lng}&mode=transit&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`
+          `https://maps.googleapis.com/maps/api/directions/json?origin=${coords.originCoords.lat},${coords.originCoords.lng}&destination=${coords.destinationCoords.lat},${coords.destinationCoords.lng}&mode=transit&language=en&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`
         )
         .then((res) => {
           console.log(res);

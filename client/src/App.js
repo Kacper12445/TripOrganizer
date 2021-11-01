@@ -55,7 +55,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={MainPage} />
           <Route exact path="/searchingPage" component={SearchPage} />
-          <Route exact path="/card" component={CartPage} />
+          <Route exact path="/cart/:hotelId" component={CartPage} />
         </Switch>
       </Router>
     </>

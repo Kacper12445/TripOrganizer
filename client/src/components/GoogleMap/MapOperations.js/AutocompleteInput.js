@@ -47,7 +47,7 @@ export default function AutocompleteInput(props) {
         .then((results) => getLatLng(results[0]))
         .then(({ lat, lng }) => {
           // props.panTo({ lat: lat, lng: lng }, props.travelPoint);
-          console.log("Coordinates:", { lat, lng });
+          // console.log("Coordinates:", { lat, lng });
           dispatch(
             coordActions.changeCoords({
               lat: lat,

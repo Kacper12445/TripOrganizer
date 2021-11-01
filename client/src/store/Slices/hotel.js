@@ -123,8 +123,7 @@ const hotelSlice = createSlice({
           attractionsArr.unshift(element);
         }
       });
-      attractionsArr = attractionsArr.slice(0, 5);
-      console.log(`Attraction arr ${attractionsArr.length}`);
+      attractionsArr = attractionsArr.slice(0, 4);
       tempHotels[hotelIndex].hotel_attractions = attractionsArr;
       state.hotels = tempHotels;
     },
