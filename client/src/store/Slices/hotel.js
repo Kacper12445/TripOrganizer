@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { ATTRACTIONS_NUMBER } from "../../constants/Consts";
 
 const initialHotelState = {
   hotels: [
@@ -15,71 +16,6 @@ const initialHotelState = {
       price: 0,
       hotel_attractions: [],
     },
-    // {
-    //   location_id: 0,
-    //   name: "",
-    //   position: {
-    //     latitude: 0,
-    //     longitude: 0,
-    //   },
-    //   hotel_class: 0,
-    //   photo: "",
-    //   rating: 0,
-    //   price: 0,
-    //   hotel_attractions: [],
-    // },
-    // {
-    //   location_id: 0,
-    //   name: "",
-    //   position: {
-    //     latitude: 0,
-    //     longitude: 0,
-    //   },
-    //   hotel_class: 0,
-    //   photo: "",
-    //   rating: 0,
-    //   price: 0,
-    //   hotel_attractions: [],
-    // },
-    // {
-    //   location_id: 0,
-    //   name: "",
-    //   position: {
-    //     latitude: 0,
-    //     longitude: 0,
-    //   },
-    //   hotel_class: 0,
-    //   photo: "",
-    //   rating: 0,
-    //   price: 0,
-    //   hotel_attractions: [],
-    // },
-    // {
-    //   location_id: 0,
-    //   name: "",
-    //   position: {
-    //     latitude: 0,
-    //     longitude: 0,
-    //   },
-    //   hotel_class: 0,
-    //   photo: "",
-    //   rating: 0,
-    //   price: 0,
-    //   hotel_attractions: [],
-    // },
-    // {
-    //   location_id: 0,
-    //   name: "",
-    //   position: {
-    //     latitude: 0,
-    //     longitude: 0,
-    //   },
-    //   hotel_class: 0,
-    //   photo: "",
-    //   rating: 0,
-    //   price: 0,
-    //   hotel_attractions: [],
-    // },
   ],
 };
 
@@ -123,7 +59,7 @@ const hotelSlice = createSlice({
           attractionsArr.unshift(element);
         }
       });
-      attractionsArr = attractionsArr.slice(0, 4);
+      attractionsArr = attractionsArr.slice(0, ATTRACTIONS_NUMBER);
       tempHotels[hotelIndex].hotel_attractions = attractionsArr;
       state.hotels = tempHotels;
     },

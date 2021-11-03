@@ -8,6 +8,13 @@ import { useDispatch } from "react-redux";
 import { hotelActions } from "../../../store/Slices/hotel";
 import { routeActions } from "../../../store/Slices/route";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  HOTEL_NUMBER,
+  GET_ATTRACTION_URL,
+  GET_HOTEL_URL,
+  BACKEND_URL,
+  TRAVEL_ADVISOR_URL,
+} from "../../../constants/Consts";
 
 export default function FindRoad() {
   const dispatch = useDispatch();
@@ -24,10 +31,29 @@ export default function FindRoad() {
     coords.destinationCoords.lng,
   ]);
 
+  const buttonClickHandler = () => {
+    if (coordsState) {
+      axios
+        .post(`${BACKEND_URL}trip/find-route`, {
+          origin: coords.originCoords,
+          destination: coords.destinationCoords,
+        })
+        .then((res) => {
+          dispatch(
+            routeActions.setRoute({
+              instruction: res.data,
+            })
+          );
+          findHotel();
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
   const findHotel = () => {
     let options = {
       headers: {
-        "x-rapidapi-host": process.env.REACT_APP_TRAVEL_ADVISOR_HOST,
+        "x-rapidapi-host": TRAVEL_ADVISOR_URL,
         "x-rapidapi-key": process.env.REACT_APP_RAPID_API_KEY,
       },
       params: {
@@ -52,13 +78,10 @@ export default function FindRoad() {
       coords.destinationCoords.lng !== 0
     ) {
       axios
-        .get(
-          "https://travel-advisor.p.rapidapi.com/hotels/list-by-latlng",
-          options
-        )
+        .get(GET_HOTEL_URL, options)
         .then((response) => {
           let tempHotelArray = [];
-          for (let i = 0; i < 3; i++) {
+          for (let i = 0; i < HOTEL_NUMBER; i++) {
             tempHotelArray.push(response.data.data[i]);
           }
           dispatch(hotelActions.addHotel({ hotelArr: tempHotelArray }));
@@ -75,7 +98,7 @@ export default function FindRoad() {
   const getHotelAttractions = (hotel) => {
     let options = {
       headers: {
-        "x-rapidapi-host": process.env.REACT_APP_TRAVEL_ADVISOR_HOST,
+        "x-rapidapi-host": TRAVEL_ADVISOR_URL,
         "x-rapidapi-key": process.env.REACT_APP_RAPID_API_KEY,
       },
       params: {
@@ -87,44 +110,14 @@ export default function FindRoad() {
         lang: "en_US",
       },
     };
-    axios
-      .get(
-        "https://travel-advisor.p.rapidapi.com/attractions/list-by-latlng",
-        options
-      )
-      .then((response) => {
-        dispatch(
-          hotelActions.addHotelAttractions({
-            id: hotel.location_id,
-            attractions: response.data.data,
-          })
-        );
-      });
-  };
-
-  const buttonClickHandler = () => {
-    if (coordsState) {
-      axios
-        .post("http://localhost:5000/trip/find-route", {
-          origin: coords.originCoords,
-          destination: coords.destinationCoords,
+    axios.get(GET_ATTRACTION_URL, options).then((response) => {
+      dispatch(
+        hotelActions.addHotelAttractions({
+          id: hotel.location_id,
+          attractions: response.data.data,
         })
-        .then((res) => {
-          // console.log(res.data);
-          // console.log(res.data.routes[0].legs[0].steps);
-          // console.log(res.data.routes[0].legs[0].start_address);
-          // console.log(res.data.routes[0].legs[0].end_address);
-          // console.log(res.data.routes[0].legs[0].distance.text);
-          // console.log(res.data.routes[0].legs[0].duration.text);
-          dispatch(
-            routeActions.setRoute({
-              instruction: res.data,
-            })
-          );
-          findHotel();
-        })
-        .catch((err) => console.log(err));
-    }
+      );
+    });
   };
 
   return (
