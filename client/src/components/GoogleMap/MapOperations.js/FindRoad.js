@@ -105,12 +105,12 @@ export default function FindRoad() {
   const buttonClickHandler = () => {
     if (coordsState) {
       axios
-        .get(
-          `https://maps.googleapis.com/maps/api/directions/json?origin=${coords.originCoords.lat},${coords.originCoords.lng}&destination=${coords.destinationCoords.lat},${coords.destinationCoords.lng}&mode=transit&language=en&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`
-        )
+        .post("http://localhost:5000/trip/find-route", {
+          origin: coords.originCoords,
+          destination: coords.destinationCoords,
+        })
         .then((res) => {
-          console.log(res);
-          // console.log(res.data.routes[0].legs[0]);
+          // console.log(res.data);
           // console.log(res.data.routes[0].legs[0].steps);
           // console.log(res.data.routes[0].legs[0].start_address);
           // console.log(res.data.routes[0].legs[0].end_address);
@@ -118,7 +118,7 @@ export default function FindRoad() {
           // console.log(res.data.routes[0].legs[0].duration.text);
           dispatch(
             routeActions.setRoute({
-              instruction: res.data.routes[0].legs[0],
+              instruction: res.data,
             })
           );
           findHotel();

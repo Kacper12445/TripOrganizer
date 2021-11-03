@@ -1,19 +1,16 @@
 const tripRouter = require("./api/trip");
 const http = require("http");
+const cors = require("cors");
 const express = require("express");
 const routers = tripRouter;
 require("dotenv").config();
-const Colors = require("./style/colors");
+require("./style/colors");
 const port = process.env.PORT;
 const host = process.env.HOST;
 
 const app = express();
 const server = http.createServer(app);
 
-// app.use((req, res, next) => {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   next();
-// });
 app.get("/", (req, res) => {
   res.send("Trip Planner API");
 });
@@ -24,6 +21,11 @@ app.use(function (req, res, next) {
 });
 app.use(express.urlencoded());
 app.use(express.json());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 app.use(tripRouter);
 
