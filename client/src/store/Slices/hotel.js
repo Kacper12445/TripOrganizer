@@ -51,7 +51,6 @@ const hotelSlice = createSlice({
       let hotelIndex = tempHotels.findIndex(
         (hotel) => hotel.location_id === action.payload.id
       );
-      // console.log(`To w reduxie${action.payload.attractions[0].name}`);
       action.payload.attractions.forEach((element) => {
         if (element.location_id === "0") {
           attractionsArr.push(element);
