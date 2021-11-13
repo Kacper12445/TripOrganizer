@@ -8,13 +8,13 @@ export default function NavBarItem(props) {
     <Card
       alignItems="center"
       width="15%"
-      border_bot="solid white 1px"
+      border_bot="solid white 2px"
       height={props.navItemHeight}
       cursor="pointer"
       className="navItem"
     >
       <Link to={props.navItem.path} style={{ textDecoration: "none" }}>
-        <Text fontSize="30px" className="navItemText" color="white">
+        <Text fontSize="2.7rem" className="navItemText" color="white">
           {props.navItem.name}{" "}
         </Text>
       </Link>

@@ -38,7 +38,7 @@ const Card = styled.div`
     color: lightgreen;
   }
   &.navItem:hover {
-    border-bottom: solid lightgreen 1px;
+    border-bottom: solid lightgreen 2px;
   }
 `;
 export default Card;

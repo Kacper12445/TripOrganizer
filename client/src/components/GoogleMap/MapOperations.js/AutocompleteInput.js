@@ -84,7 +84,7 @@ export default function AutocompleteInput(props) {
         <FontAwesomeIcon
           icon={props.icon}
           style={{
-            fontSize: "35px",
+            fontSize: "3rem",
             margin: "0 0 0 5%",
             borderLeft: "3px solid lightgreen",
             padding: "0 0 0 5px",
@@ -99,7 +99,7 @@ export default function AutocompleteInput(props) {
             height="100%"
             width="100%"
             padding="22px 18px"
-            fontSize="15px"
+            fontSize="1.5rem"
           />
           <Card position="relative" height="100%">
             {status === "OK" && (
@@ -117,7 +117,7 @@ export default function AutocompleteInput(props) {
         <FontAwesomeIcon
           icon="eraser"
           style={{
-            fontSize: "25px",
+            fontSize: "2.4rem",
             cursor: "pointer",
             marginRight: "5%",
           }}
