@@ -45,7 +45,7 @@ export default function ResultItem(props) {
                   color: "white",
                 }}
               />
-              <Text fontSize="20px" color="white">
+              <Text fontSize="2rem" color="white">
                 Choose this offer
               </Text>
             </Button>

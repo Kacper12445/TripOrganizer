@@ -127,7 +127,7 @@ export default function Map() {
               </Text>
             </Card>
             <Card>
-              <Text fontSize="14px">
+              <Text fontSize="1.1rem">
                 {selected.lat.toFixed(3)} - {selected.lng.toFixed(3)}
               </Text>
             </Card>
