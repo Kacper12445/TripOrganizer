@@ -17,6 +17,7 @@ const Button = styled.button`
   text-align: ${(props) => props.textAlign};
   &:hover {
     background-color: ${(props) => props.hoverColor};
+    opacity: ${(props) => props.hoverOpacity};
   }
 `;
 

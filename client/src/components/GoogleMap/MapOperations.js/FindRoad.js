@@ -150,6 +150,7 @@ export default function FindRoad() {
           justifyContent="center"
           onClick={buttonClickHandler}
           minWidth="130px"
+          hoverOpacity=".5"
         >
           <FontAwesomeIcon
             icon="search"
