@@ -36,7 +36,7 @@ export default function RouteInstruction() {
           width="95%"
           height="45%"
           margin="2% 0 2% 0"
-          borderRad="25px"
+          borderRad="15px"
           flexWrap="wrap"
           alignItems="center"
           justifyContent="space-around"
