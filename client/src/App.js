@@ -1,6 +1,7 @@
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import MainPage from "./pages/MainPage";
+import * as Routes from "./constants/Routes";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import {
@@ -53,9 +54,9 @@ function App() {
     <>
       <Router>
         <Switch>
-          <Route exact path="/" component={MainPage} />
-          <Route exact path="/searchingPage" component={SearchPage} />
-          <Route exact path="/cart/:hotelId" component={CartPage} />
+          <Route exact path={Routes.HOME} component={MainPage} />
+          <Route exact path={Routes.SEARCH_PAGE} component={SearchPage} />
+          <Route exact path={Routes.BUY_OFFER_PAGE} component={CartPage} />
         </Switch>
       </Router>
     </>
