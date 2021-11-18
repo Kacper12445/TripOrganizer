@@ -6,6 +6,7 @@ const Button = styled.button`
   padding: ${(props) => (props.padding ? props.padding : "0")};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
+  min-width: ${(props) => props.minWidth};
   cursor: pointer;
   display: flex;
   align-items: ${(props) => props.alignItems};

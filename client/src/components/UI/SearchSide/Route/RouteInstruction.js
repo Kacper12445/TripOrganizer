@@ -33,9 +33,9 @@ export default function RouteInstruction() {
       {toggleInstruction && (
         <Card
           backGroundColor="white"
-          width="90%"
+          width="95%"
           height="45%"
-          margin="5% 0 2% 0"
+          margin="2% 0 2% 0"
           borderRad="25px"
           flexWrap="wrap"
           alignItems="center"

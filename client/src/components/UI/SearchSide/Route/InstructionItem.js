@@ -10,7 +10,7 @@ export default function InstructionItem(props) {
       alignItems="center"
       justifyContent="space-around"
     >
-      <Card flexDirection="column" width="60%">
+      <Card flexDirection="column" width="50%">
         <Card>
           <Text>
             ({props.hint.distance} | {props.hint.duration})
@@ -24,9 +24,9 @@ export default function InstructionItem(props) {
         </Card>
       </Card>
       <Card
-        height="80%"
+        height="100%"
         backGroundColor="lightgreen"
-        borderRad="20px"
+        borderRad="10px"
         alignItems="center"
       >
         <Text
@@ -34,7 +34,7 @@ export default function InstructionItem(props) {
           fontWeight="bold"
           textAlign="center"
           color="white"
-          padding="0 5px"
+          padding="5px"
         >
           {props.hint.text}
         </Text>

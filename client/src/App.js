@@ -4,6 +4,7 @@ import MainPage from "./pages/MainPage";
 import * as Routes from "./constants/Routes";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
+import NotificationContainer from "react-notifications/lib/NotificationContainer";
 import {
   faEraser,
   faEye,
@@ -59,6 +60,7 @@ function App() {
           <Route exact path={Routes.BUY_OFFER_PAGE} component={CartPage} />
         </Switch>
       </Router>
+      <NotificationContainer />
     </>
   );
 }

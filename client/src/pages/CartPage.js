@@ -309,7 +309,7 @@ export default function CartPage(props) {
           </Form>
         </Card>
       </Card>
-      <NotificationContainer />
+      {/* <NotificationContainer /> */}
     </>
   );
 }

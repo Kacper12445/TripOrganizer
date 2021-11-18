@@ -139,21 +139,23 @@ export default function FindRoad() {
         width="100%"
         justifyContent="center"
         alignItems="center"
+        margin="15px 0 0 0"
       >
         <Button
           backGroundColor="rgb(0,255,110)"
-          height="100%"
-          width="30%"
+          height="4rem"
+          width="20%"
           borderRad="25px"
           alignItems="center"
           justifyContent="center"
           onClick={buttonClickHandler}
+          minWidth="130px"
         >
           <FontAwesomeIcon
             icon="search"
-            style={{ fontSize: "20px", color: "white", marginRight: "3%" }}
+            style={{ fontSize: "2rem", color: "white", marginRight: "3%" }}
           />
-          <Text textAlign="center" fontSize="20px" color="white">
+          <Text textAlign="center" fontSize="2rem" color="white">
             Search
           </Text>
         </Button>
