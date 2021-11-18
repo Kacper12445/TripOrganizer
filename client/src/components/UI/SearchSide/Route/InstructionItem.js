@@ -5,8 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function InstructionItem(props) {
   return (
     <Card
-      //   flexDirection="column"
-
       height="30%"
       flexBasis="32%"
       alignItems="center"
@@ -21,7 +19,7 @@ export default function InstructionItem(props) {
         <Card>
           <FontAwesomeIcon
             icon={"long-arrow-alt-right"}
-            style={{ color: "green", fontSize: "45px" }}
+            style={{ color: "green", fontSize: "3.8rem" }}
           ></FontAwesomeIcon>
         </Card>
       </Card>
@@ -32,10 +30,11 @@ export default function InstructionItem(props) {
         alignItems="center"
       >
         <Text
-          fontSize="14px"
+          fontSize="1.2rem"
           fontWeight="bold"
           textAlign="center"
           color="white"
+          padding="0 5px"
         >
           {props.hint.text}
         </Text>

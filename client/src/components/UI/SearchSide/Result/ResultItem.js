@@ -39,7 +39,7 @@ export default function ResultItem(props) {
               <FontAwesomeIcon
                 icon="paper-plane"
                 style={{
-                  fontSize: "20px",
+                  fontSize: "1.8rem",
                   margin: "0 5% 0 0",
                   height: "100%",
                   color: "white",
@@ -54,36 +54,40 @@ export default function ResultItem(props) {
       </Card>
       <Card flexDirection="column" height="100%" width="65%">
         <Card border_bot="1px solid black" padding="1% 0">
-          <Text fontSize="26px" fontWeight="bold">
+          <Text fontSize="2.1rem" fontWeight="bold">
             {props.hotel.name}
           </Text>
         </Card>
         <Card flexDirection="column" margin="2% 0 0 0">
-          <Text fontSize="18px" margin="0 0 0 5%">
+          <Text fontSize="1.5rem" margin="0 0 0 5%">
             <strong>Price: </strong> {props.hotel.price}
             <FontAwesomeIcon
               icon="money-bill-wave"
-              style={{ color: "green", fontSize: "22px", margin: "0 0 0 2%" }}
+              style={{ color: "green", fontSize: "1.8rem", margin: "0 0 0 2%" }}
             />
           </Text>
-          <Text fontSize="18px" margin="0 0 0 5%" wordSpacing="2px">
+          <Text fontSize="1.5rem" margin="0 0 0 5%" wordSpacing="2px">
             <strong>Rating: </strong>
             {props.hotel.rating}
             <FontAwesomeIcon
               icon="smile"
-              style={{ color: "aqua", fontSize: "22px", margin: "0 0 0 2%" }}
+              style={{ color: "aqua", fontSize: "1.8rem", margin: "0 0 0 2%" }}
             />
           </Text>
-          <Text fontSize="18px" margin="0 0 0 5%">
+          <Text fontSize="1.5rem" margin="0 0 0 5%">
             <strong>Hotel class: </strong> {props.hotel.hotel_class}
             <FontAwesomeIcon
               icon="star"
-              style={{ color: "yellow", fontSize: "22px", margin: "0 0 0 2%" }}
+              style={{
+                color: "yellow",
+                fontSize: "1.8rem",
+                margin: "0 0 0 2%",
+              }}
             />
           </Text>
         </Card>
         <Card flexDirection="column" justifyContent="center" margin="2% 0">
-          <Text textAlign="center" fontSize="22px" fontWeight="bold">
+          <Text textAlign="center" fontSize="1.8rem" fontWeight="bold">
             Attractions nearby hotel
           </Text>
           {props.hotel.hotel_attractions &&

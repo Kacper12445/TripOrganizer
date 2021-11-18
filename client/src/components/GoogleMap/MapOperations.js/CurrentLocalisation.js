@@ -44,7 +44,7 @@ export default function CurrentLocalisation(props) {
   return (
     <FontAwesomeIcon
       icon="map-marker-alt"
-      style={{ fontSize: "25px", cursor: "pointer" }}
+      style={{ fontSize: "2.3rem", cursor: "pointer" }}
       onClick={getCurrentLocalisation}
       height="100%"
       width="25%"

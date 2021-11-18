@@ -41,9 +41,9 @@ export default function MainPage() {
           navItemSize="30%"
           navItemHeight="80%"
           margin="6% 0 0 0"
-          logoLetterSpacing="10px"
-          logoFZ="50px"
-          logoSize="55px"
+          logoLetterSpacing=".9rem"
+          logoFZ="5rem"
+          logoSize="5.5rem"
         />
         {/* <AirportSearching></AirportSearching> */}
         <Card
@@ -54,7 +54,7 @@ export default function MainPage() {
         >
           <Card width="100%">
             <Text
-              fontSize="80px"
+              fontSize="6.6rem"
               fontWeight="bold"
               color="white"
               textAlign="right"

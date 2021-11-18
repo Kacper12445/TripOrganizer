@@ -32,10 +32,7 @@ export default function Logo(props) {
           letterSpace={props.logoLetterSpacing}
           cursor="pointer"
           color="white"
-          lineHeight="30px"
-          height="30px"
         >
-          {/* <FontAwesomeIcon icon="plane" /> */}
           Trip Planner
         </Text>
       </Link>

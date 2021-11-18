@@ -50,7 +50,19 @@ export default function FindRoad() {
     }
   };
 
+  const getCheckInDate = () => {
+    let newDate = new Date();
+    let day = newDate.getDate();
+    let month = newDate.getMonth() + 1;
+    let year = newDate.getFullYear();
+
+    let checkInMonth = month + 1 > 12 ? 1 : month + 1;
+    return `${year}-${
+      checkInMonth < 10 ? `0${checkInMonth}` : `${checkInMonth}`
+    }-${day}`;
+  };
   const findHotel = () => {
+    let checkInDate = getCheckInDate();
     let options = {
       headers: {
         "x-rapidapi-host": TRAVEL_ADVISOR_URL,
@@ -67,7 +79,7 @@ export default function FindRoad() {
         pricesmin: "10",
         pricesmax: "1000",
         currency: "EUR",
-        checkin: "2021-11-20",
+        checkin: checkInDate,
         subcategory: "hotel,bb,specialty",
         nights: "5",
         distance: "10",
