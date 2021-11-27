@@ -10,7 +10,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import createNotification from "../services/Notification";
 import beach from "../assets/beach.jpg";
 import axios from "axios";
-import { NotificationContainer } from "react-notifications";
 import { useSelector } from "react-redux";
 
 export default function CartPage(props) {
@@ -309,7 +308,6 @@ export default function CartPage(props) {
           </Form>
         </Card>
       </Card>
-      {/* <NotificationContainer /> */}
     </>
   );
 }
