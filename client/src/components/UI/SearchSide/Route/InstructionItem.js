@@ -6,9 +6,10 @@ export default function InstructionItem(props) {
   return (
     <Card
       height="30%"
-      flexBasis="32%"
+      flexBasis="27%"
       alignItems="center"
       justifyContent="space-around"
+      margin="10px 8px"
     >
       <Card flexDirection="column" width="50%">
         <Card>
