@@ -42,7 +42,7 @@ export default function FindRoad() {
         .then((res) => {
           dispatch(
             routeActions.setRoute({
-              instruction: res.data,
+              instruction: res.data.data,
             })
           );
           findHotel();

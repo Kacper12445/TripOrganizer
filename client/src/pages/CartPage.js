@@ -86,9 +86,8 @@ export default function CartPage(props) {
         email: userData.email,
       })
       .then((response) => {
-        console.log(response);
         if (response.status === 200) {
-          createNotification("success", "Email has been sent");
+          createNotification("success", response.data.message);
         }
         history.push("/");
       })
