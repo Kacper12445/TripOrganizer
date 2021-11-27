@@ -3,7 +3,7 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch } from "react-redux";
 import { coordActions } from "../../../store/Slices/coord";
-
+import createNotification from "../../../services/Notification";
 export default function CurrentLocalisation(props) {
   const dispatch = useDispatch();
 
@@ -15,7 +15,7 @@ export default function CurrentLocalisation(props) {
       .then((resp) => {
         props.passValue(resp.data.results[0].formatted_address);
       })
-      .catch((error) => console.log(error));
+      .catch(createNotification("error", "Localizing failed, try again"));
   };
   const getCurrentLocalisation = () => {
     navigator.geolocation.getCurrentPosition(

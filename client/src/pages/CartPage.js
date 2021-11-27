@@ -12,6 +12,29 @@ import beach from "../assets/beach.jpg";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
+const FORM_DATA = [
+  {
+    name: "name",
+    data: "",
+    type: "text",
+  },
+  {
+    name: "surname",
+    data: "",
+    type: "text",
+  },
+  {
+    name: "phone number",
+    data: "",
+    type: "tel",
+  },
+  {
+    name: "email",
+    data: "",
+    type: "email",
+  },
+];
+
 export default function CartPage(props) {
   const hotels = useSelector((state) => state.hotel.hotels);
   const route = useSelector((state) => state.route.routeHint);
@@ -23,28 +46,28 @@ export default function CartPage(props) {
     duration: 0,
   });
 
-  const [formData, setFormData] = useState([
-    {
-      name: "name",
-      data: "",
-      type: "text",
-    },
-    {
-      name: "surname",
-      data: "",
-      type: "text",
-    },
-    {
-      name: "phone number",
-      data: "",
-      type: "tel",
-    },
-    {
-      name: "email",
-      data: "",
-      type: "email",
-    },
-  ]);
+  // const [formData, setFormData] = useState([
+  //   {
+  //     name: "name",
+  //     data: "",
+  //     type: "text",
+  //   },
+  //   {
+  //     name: "surname",
+  //     data: "",
+  //     type: "text",
+  //   },
+  //   {
+  //     name: "phone number",
+  //     data: "",
+  //     type: "tel",
+  //   },
+  //   {
+  //     name: "email",
+  //     data: "",
+  //     type: "email",
+  //   },
+  // ]);
 
   const buyTrip = (e) => {
     const userData = {
@@ -68,7 +91,7 @@ export default function CartPage(props) {
         }
         console.log(response);
       })
-      .catch((err) => console.log(err));
+      .catch(() => createNotification("error", "Buying ticket failed"));
   };
 
   const calcPrice = (distanceValue, duration) => {
@@ -256,7 +279,7 @@ export default function CartPage(props) {
               alignItems="center"
               flexWrap="wrap"
             >
-              {formData.map((item, index) => {
+              {FORM_DATA.map((item, index) => {
                 return (
                   <Card
                     key={index}

@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { hotelActions } from "../../../store/Slices/hotel";
 import { routeActions } from "../../../store/Slices/route";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import createNotification from "../../../services/Notification";
 import {
   HOTEL_NUMBER,
   GET_ATTRACTION_URL,
@@ -101,8 +102,8 @@ export default function FindRoad() {
             getHotelAttractions(element);
           });
         })
-        .catch((error) => {
-          console.error(error);
+        .catch(() => {
+          createNotification("error", "Finding hotels failed");
         });
     }
   };
@@ -122,14 +123,17 @@ export default function FindRoad() {
         lang: "en_US",
       },
     };
-    axios.get(GET_ATTRACTION_URL, options).then((response) => {
-      dispatch(
-        hotelActions.addHotelAttractions({
-          id: hotel.location_id,
-          attractions: response.data.data,
-        })
-      );
-    });
+    axios
+      .get(GET_ATTRACTION_URL, options)
+      .then((response) => {
+        dispatch(
+          hotelActions.addHotelAttractions({
+            id: hotel.location_id,
+            attractions: response.data.data,
+          })
+        );
+      })
+      .catch(() => createNotification("error", "Finding attractions failed"));
   };
 
   return (
