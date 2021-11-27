@@ -9,13 +9,7 @@ import { hotelActions } from "../store/Slices/hotel";
 import { routeActions } from "../store/Slices/route";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import createNotification from "./Notification";
-import {
-  HOTEL_NUMBER,
-  GET_ATTRACTION_URL,
-  GET_HOTEL_URL,
-  BACKEND_URL,
-  TRAVEL_ADVISOR_URL,
-} from "../constants/Consts";
+import * as VAR from "../constants/Consts";
 
 export default function FindRoad() {
   const dispatch = useDispatch();
@@ -35,7 +29,7 @@ export default function FindRoad() {
   const buttonClickHandler = () => {
     if (coordsState) {
       axios
-        .post(`${BACKEND_URL}trip/find-route`, {
+        .post(`${VAR.BACKEND_URL}trip/find-route`, {
           origin: coords.originCoords,
           destination: coords.destinationCoords,
         })
@@ -66,24 +60,24 @@ export default function FindRoad() {
     let checkInDate = getCheckInDate();
     let options = {
       headers: {
-        "x-rapidapi-host": TRAVEL_ADVISOR_URL,
+        "x-rapidapi-host": VAR.TRAVEL_ADVISOR_URL,
         "x-rapidapi-key": process.env.REACT_APP_RAPID_API_KEY,
       },
       params: {
         latitude: coords.destinationCoords.lat.toFixed(3),
         longitude: coords.destinationCoords.lng.toFixed(3),
         lang: "en_US",
-        hotel_class: "3,4,5",
+        hotel_class: VAR.HOTEL_CLASS,
         limit: "30",
-        adults: "1",
-        rooms: "1",
-        pricesmin: "10",
-        pricesmax: "1000",
-        currency: "EUR",
+        adults: VAR.ADULTS_NUMBER,
+        rooms: VAR.ROOM_NUMBER,
+        pricesmin: VAR.PRICE_MIN,
+        pricesmax: VAR.PRICE_MAX,
+        currency: VAR.CURRENCY,
         checkin: checkInDate,
-        subcategory: "hotel,bb,specialty",
-        nights: "5",
-        distance: "10",
+        subcategory: VAR.SUBCATEGORY,
+        nights: VAR.NIGHT_NUMBER,
+        distance: VAR.SEARCH_DISTANCE,
       },
     };
     if (
@@ -91,10 +85,10 @@ export default function FindRoad() {
       coords.destinationCoords.lng !== 0
     ) {
       axios
-        .get(GET_HOTEL_URL, options)
+        .get(VAR.GET_HOTEL_URL, options)
         .then((response) => {
           let tempHotelArray = [];
-          for (let i = 0; i < HOTEL_NUMBER; i++) {
+          for (let i = 0; i < VAR.HOTEL_NUMBER; i++) {
             tempHotelArray.push(response.data.data[i]);
           }
           dispatch(hotelActions.addHotel({ hotelArr: tempHotelArray }));
@@ -111,7 +105,7 @@ export default function FindRoad() {
   const getHotelAttractions = (hotel) => {
     let options = {
       headers: {
-        "x-rapidapi-host": TRAVEL_ADVISOR_URL,
+        "x-rapidapi-host": VAR.TRAVEL_ADVISOR_URL,
         "x-rapidapi-key": process.env.REACT_APP_RAPID_API_KEY,
       },
       params: {
@@ -119,12 +113,12 @@ export default function FindRoad() {
         longitude: hotel.longitude,
         lunit: "km",
         currency: "EUR",
-        distance: 3,
+        distance: VAR.DISTANCE_FROM_HOTEL,
         lang: "en_US",
       },
     };
     axios
-      .get(GET_ATTRACTION_URL, options)
+      .get(VAR.GET_ATTRACTION_URL, options)
       .then((response) => {
         dispatch(
           hotelActions.addHotelAttractions({
