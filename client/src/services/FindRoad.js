@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Button from "../../common/Button";
+import Button from "../components/common/Button";
 import { useSelector } from "react-redux";
-import Card from "../../common/Card";
-import Text from "../../common/Text";
+import Card from "../components/common/Card";
+import Text from "../components/common/Text";
 import { useDispatch } from "react-redux";
-import { hotelActions } from "../../../store/Slices/hotel";
-import { routeActions } from "../../../store/Slices/route";
+import { hotelActions } from "../store/Slices/hotel";
+import { routeActions } from "../store/Slices/route";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import createNotification from "../../../services/Notification";
+import createNotification from "./Notification";
 import {
   HOTEL_NUMBER,
   GET_ATTRACTION_URL,
   GET_HOTEL_URL,
   BACKEND_URL,
   TRAVEL_ADVISOR_URL,
-} from "../../../constants/Consts";
+} from "../constants/Consts";
 
 export default function FindRoad() {
   const dispatch = useDispatch();

@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch } from "react-redux";
-import { coordActions } from "../../../store/Slices/coord";
+import { coordActions } from "../store/Slices/coord";
 export default function CurrentLocalisation(props) {
   const dispatch = useDispatch();
 

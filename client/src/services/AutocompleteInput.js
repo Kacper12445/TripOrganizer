@@ -1,15 +1,15 @@
 import React from "react";
-import Input from "../../common/Input";
-import Card from "../../common/Card";
-import SuggestionDiv from "../../common/SuggestionDiv";
-import SuggestionItem from "../../UI/SearchSide/Form/SuggestionItem";
+import Input from "../components/common/Input";
+import Card from "../components/common/Card";
+import SuggestionDiv from "../components/common/SuggestionDiv";
+import SuggestionItem from "../components/UI/SearchSide/Form/SuggestionItem";
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
 import CurrentLocalisation from "./CurrentLocalisation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { coordActions } from "../../../store/Slices/coord";
+import { coordActions } from "../store/Slices/coord";
 import { useDispatch } from "react-redux";
 
 export default function AutocompleteInput(props) {
