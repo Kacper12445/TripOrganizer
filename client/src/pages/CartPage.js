@@ -11,6 +11,7 @@ import createNotification from "../services/Notification";
 import beach from "../assets/beach.jpg";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 const FORM_DATA = [
   {
@@ -38,7 +39,7 @@ const FORM_DATA = [
 export default function CartPage(props) {
   const hotels = useSelector((state) => state.hotel.hotels);
   const route = useSelector((state) => state.route.routeHint);
-
+  const history = useHistory();
   const [selectedHotel, setSelectedHotel] = useState();
   const [tripData, setTripData] = useState({
     distance: 0,
@@ -89,7 +90,7 @@ export default function CartPage(props) {
         if (response.status === 200) {
           createNotification("success", "Email has been sent");
         }
-        console.log(response);
+        history.push("/");
       })
       .catch(() => createNotification("error", "Buying ticket failed"));
   };
@@ -200,7 +201,7 @@ export default function CartPage(props) {
               borderTop="25px"
               alignItems="center"
             >
-              <Text fontSize="5em" color="white" fontWeight="bold">
+              <Text fontSize="4.5rem" color="white" fontWeight="bold">
                 Purchasing Trip
               </Text>
             </Card>
@@ -220,6 +221,7 @@ export default function CartPage(props) {
               width="40%"
               flexDirection="column"
               justifyContent="flex-start"
+              overflow="scroll"
             >
               <Text
                 fontSize="26px"
