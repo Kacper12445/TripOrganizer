@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import TripForm from "../Form/TripForm";
 import SearchResults from "./SearchResults";
 import Card from "../../../common/Card";
@@ -10,9 +10,6 @@ export default function Searching() {
   const hotels = useSelector((state) => state.hotel.hotels);
   const loadingHotel = useSelector((state) => state.hotel.loading);
 
-  useEffect(() => {
-    console.log(loadingHotel);
-  }, [loadingHotel]);
   return (
     <Card
       flexDirection="column"
