@@ -57,12 +57,14 @@ export default function FindRoad() {
     let year = newDate.getFullYear();
 
     let checkInMonth = month + 1 > 12 ? 1 : month + 1;
-    return `${year}-${
+    let checkInYear = checkInMonth === 1 ? year + 1 : year;
+    return `${checkInYear}-${
       checkInMonth < 10 ? `0${checkInMonth}` : `${checkInMonth}`
-    }-${day}`;
+    }-${day < 10 ? `0${day}` : `${day}`}`;
   };
   const findHotel = () => {
     let checkInDate = getCheckInDate();
+    console.log(checkInDate);
     let options = {
       headers: {
         "x-rapidapi-host": TRAVEL_ADVISOR_URL,
@@ -92,6 +94,7 @@ export default function FindRoad() {
       axios
         .get(GET_HOTEL_URL, options)
         .then((response) => {
+          console.log(response);
           let tempHotelArray = [];
           for (let i = 0; i < HOTEL_NUMBER; i++) {
             tempHotelArray.push(response.data.data[i]);
