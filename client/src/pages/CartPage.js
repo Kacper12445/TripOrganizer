@@ -19,29 +19,6 @@ export default function CartPage(props) {
     duration: 0,
   });
 
-  // const [formData, setFormData] = useState([
-  //   {
-  //     name: "name",
-  //     data: "",
-  //     type: "text",
-  //   },
-  //   {
-  //     name: "surname",
-  //     data: "",
-  //     type: "text",
-  //   },
-  //   {
-  //     name: "phone number",
-  //     data: "",
-  //     type: "tel",
-  //   },
-  //   {
-  //     name: "email",
-  //     data: "",
-  //     type: "email",
-  //   },
-  // ]);
-
   const calcPrice = (distanceValue, duration) => {
     axios
       .post("http://localhost:5000/ticket/price", {
