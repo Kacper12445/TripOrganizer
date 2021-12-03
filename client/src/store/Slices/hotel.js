@@ -66,6 +66,9 @@ const hotelSlice = createSlice({
       tempHotels[hotelIndex].hotel_attractions = attractionsArr;
       state.hotels = tempHotels;
     },
+    changeToInitial(state) {
+      state.hotels = initialHotelState.hotels;
+    },
   },
 });
 

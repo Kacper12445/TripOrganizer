@@ -12,6 +12,10 @@ import beach from "../assets/beach.jpg";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { hotelActions } from "../store/Slices/hotel";
+import { routeActions } from "../store/Slices/route";
+import { coordActions } from "../store/Slices/coord";
 
 const FORM_DATA = [
   {
@@ -40,6 +44,7 @@ export default function CartPage(props) {
   const hotels = useSelector((state) => state.hotel.hotels);
   const route = useSelector((state) => state.route.routeHint);
   const history = useHistory();
+  const dispatch = useDispatch();
   const [selectedHotel, setSelectedHotel] = useState();
   const [tripData, setTripData] = useState({
     distance: 0,
@@ -89,7 +94,10 @@ export default function CartPage(props) {
         if (response.status === 200) {
           createNotification("success", response.data.message);
         }
-        history.push("/");
+        dispatch(routeActions.resetRoute());
+        dispatch(coordActions.changeToInitial());
+        dispatch(hotelActions.changeToInitial());
+        history.push("/searchingPage");
       })
       .catch(() => createNotification("error", "Buying ticket failed"));
   };
