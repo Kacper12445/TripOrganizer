@@ -85,6 +85,7 @@ export default function FindRoad() {
       coords.destinationCoords.lat !== 0 &&
       coords.destinationCoords.lng !== 0
     ) {
+      dispatch(hotelActions.setLoading(true));
       axios
         .get(VAR.GET_HOTEL_URL, options)
         .then((response) => {
@@ -129,6 +130,7 @@ export default function FindRoad() {
         );
       })
       .catch(() => createNotification("error", "Finding attractions failed"));
+    dispatch(hotelActions.setLoading(false));
   };
 
   return (

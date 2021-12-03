@@ -21,6 +21,7 @@ import {
   faSearch,
   faShoppingCart,
   faSmile,
+  faSpinner,
   faStar,
   faTicketAlt,
   faTimesCircle,
@@ -47,7 +48,8 @@ library.add(
   faEye,
   faSearch,
   faPaperPlane,
-  faShoppingCart
+  faShoppingCart,
+  faSpinner
 );
 
 function App() {

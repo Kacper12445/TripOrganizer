@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { ATTRACTIONS_NUMBER } from "../../constants/Consts";
 
 const initialHotelState = {
+  loading: false,
   hotels: [
     {
       location_id: 0,
@@ -44,6 +45,9 @@ const hotelSlice = createSlice({
     },
     resetHotels(state) {
       state.hotels.length = 0;
+    },
+    setLoading(state, action) {
+      state.loading = action.payload;
     },
     addHotelAttractions(state, action) {
       let tempHotels = state.hotels;

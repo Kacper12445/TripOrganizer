@@ -7,7 +7,6 @@ export default function SearchResults() {
   const hotels = useSelector((state) => state.hotel.hotels);
   const coords = useSelector((state) => state.coord.coords);
   const [ifSet, setIfSet] = useState(false);
-
   useEffect(() => {
     if (coords.originCoords.isSet && coords.destinationCoords.isSet) {
       setIfSet(true);
