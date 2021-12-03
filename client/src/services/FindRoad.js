@@ -52,9 +52,10 @@ export default function FindRoad() {
     let year = newDate.getFullYear();
 
     let checkInMonth = month + 1 > 12 ? 1 : month + 1;
-    return `${year}-${
+    let checkInYear = checkInMonth === 1 ? year + 1 : year;
+    return `${checkInYear}-${
       checkInMonth < 10 ? `0${checkInMonth}` : `${checkInMonth}`
-    }-${day}`;
+    }-${day < 10 ? `0${day}` : `${day}`}`;
   };
   const findHotel = () => {
     let checkInDate = getCheckInDate();
