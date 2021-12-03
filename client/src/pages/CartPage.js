@@ -1,50 +1,17 @@
 import React, { useState, useEffect } from "react";
 import Card from "../components/common/Card";
-import Button from "../components/common/Button";
 import Text from "../components/common/Text";
-import Input from "../components/common/Input";
 import Header from "../components/UI/Header/Header";
-import Form from "../components/common/Form";
 import ResultItem from "../components/UI/SearchSide/Result/ResultItem";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import createNotification from "../services/Notification";
 import beach from "../assets/beach.jpg";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { hotelActions } from "../store/Slices/hotel";
-import { routeActions } from "../store/Slices/route";
-import { coordActions } from "../store/Slices/coord";
-
-const FORM_DATA = [
-  {
-    name: "name",
-    data: "",
-    type: "text",
-  },
-  {
-    name: "surname",
-    data: "",
-    type: "text",
-  },
-  {
-    name: "phone number",
-    data: "",
-    type: "tel",
-  },
-  {
-    name: "email",
-    data: "",
-    type: "email",
-  },
-];
+import PurchasingForm from "../components/UI/CartPage/PurchasingForm";
 
 export default function CartPage(props) {
   const hotels = useSelector((state) => state.hotel.hotels);
   const route = useSelector((state) => state.route.routeHint);
-  const history = useHistory();
-  const dispatch = useDispatch();
+
   const [selectedHotel, setSelectedHotel] = useState();
   const [tripData, setTripData] = useState({
     distance: 0,
@@ -74,33 +41,6 @@ export default function CartPage(props) {
   //     type: "email",
   //   },
   // ]);
-
-  const buyTrip = (e) => {
-    const userData = {
-      name: e.target[0].value,
-      surname: e.target[1].value,
-      phoneNumber: e.target[2].value,
-      email: e.target[3].value,
-    };
-    e.preventDefault();
-    axios
-      .post("http://localhost:5000/ticket/buy", {
-        name: userData.name,
-        surname: userData.surname,
-        phoneNumber: userData.phoneNumber,
-        email: userData.email,
-      })
-      .then((response) => {
-        if (response.status === 200) {
-          createNotification("success", response.data.message);
-        }
-        dispatch(routeActions.resetRoute());
-        dispatch(coordActions.changeToInitial());
-        dispatch(hotelActions.changeToInitial());
-        history.push("/searchingPage");
-      })
-      .catch(() => createNotification("error", "Buying ticket failed"));
-  };
 
   const calcPrice = (distanceValue, duration) => {
     axios
@@ -267,76 +207,7 @@ export default function CartPage(props) {
               </Text>
             </Card>
           </Card>
-          <Form
-            height="55%"
-            width="100%"
-            backGroundColor="rgba(160, 160, 160, .7)"
-            flexDirection="column"
-            justifyContent="space-between"
-            alignItems="center"
-            borderBot="25px"
-            onSubmit={buyTrip}
-          >
-            <Card
-              width="70%"
-              height="60%"
-              backGroundColor="rgba(220, 220, 220, .8)"
-              margin="2% 0 0 0"
-              borderRad="25px"
-              justifyContent="space-around"
-              alignItems="center"
-              flexWrap="wrap"
-            >
-              {FORM_DATA.map((item, index) => {
-                return (
-                  <Card
-                    key={index}
-                    height="30%"
-                    width="33.4%"
-                    flexDirection="column"
-                    justifyContent="space-between"
-                  >
-                    <Text
-                      margin="0 0 0 3%"
-                      width="100%"
-                      height="20%"
-                      fontSize="12px"
-                    >
-                      {item.name ? item.name.toUpperCase() : null}
-                    </Text>
-                    <Input
-                      height="70%"
-                      borderRad="25px"
-                      placeholder={`Enter your ${item.name}`}
-                      name={item.name}
-                      fontSize="1.5em"
-                      textAlign="center"
-                      type={item.type}
-                    />
-                  </Card>
-                );
-              })}
-            </Card>
-            <Button
-              height="15%"
-              width="30%"
-              justifyContent="center"
-              alignItems="center"
-              backGroundColor="lightgreen"
-              hoverColor="rgba(144, 238, 144, .7)"
-              borderRad="25px"
-              margin="2% 0"
-              type="submit"
-            >
-              <FontAwesomeIcon
-                icon="shopping-cart"
-                style={{ fontSize: "3em", color: "white", marginRight: "5%" }}
-              />
-              <Text fontSize="3em" color="white">
-                Buy now
-              </Text>
-            </Button>
-          </Form>
+          <PurchasingForm />
         </Card>
       </Card>
     </>
