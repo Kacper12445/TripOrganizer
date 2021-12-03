@@ -100,7 +100,6 @@ export default function CartPage(props) {
         distance: distanceValue,
       })
       .then((res) => {
-        // console.log(res);
         setTripData({
           price: res.data.ticketPrice,
           distance: tripData.distance,
