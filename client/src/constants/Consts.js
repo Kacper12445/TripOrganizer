@@ -13,7 +13,7 @@ export const AERO_DATA_BOX_API_URL = "aerodatabox.p.rapidapi.com";
 //HOTEL
 export const HOTEL_NUMBER = 3;
 export const HOTEL_CLASS = "3,4,5";
-export const ADULTS_NUMBER = "30";
+export const ADULTS_NUMBER = "1";
 export const ROOM_NUMBER = "1";
 export const PRICE_MIN = "10";
 export const PRICE_MAX = "1000";
