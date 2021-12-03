@@ -96,10 +96,10 @@ export default function AutocompleteInput(props) {
             onChange={handleInput}
             disabled={!ready}
             placeholder={`Enter ${props.travelPoint}`}
-            height="100%"
+            height="50px"
             width="100%"
-            padding="22px 18px"
-            fontSize="1.5rem"
+            padding="10px 4px"
+            fontSize="1.7rem"
           />
           <Card position="relative" height="100%">
             {status === "OK" && (

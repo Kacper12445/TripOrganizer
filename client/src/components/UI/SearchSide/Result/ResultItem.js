@@ -33,8 +33,9 @@ export default function ResultItem(props) {
               width="100%"
               alignItems="center"
               justifyContent="center"
-              backGroundColor="#34495E"
-              hoverColor="#35596C"
+              backGroundColor="#002561"
+              // hoverColor="#35596C"
+              hoverOpacity=".5"
             >
               <FontAwesomeIcon
                 icon="paper-plane"

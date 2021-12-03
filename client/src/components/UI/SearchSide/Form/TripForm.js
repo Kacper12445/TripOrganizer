@@ -31,7 +31,7 @@ export default function TripForm() {
         width="90%"
         backGroundColor="white"
         alignItems="center"
-        borderRad="25px"
+        borderRad="10px"
         justifyContent="space-between"
       >
         {isLoaded

@@ -129,8 +129,10 @@ export default function FindRoad() {
           })
         );
       })
-      .catch(() => createNotification("error", "Finding attractions failed"));
-    dispatch(hotelActions.setLoading(false));
+      .catch(() => createNotification("error", "Finding attractions failed"))
+      .finally(() => {
+        dispatch(hotelActions.setLoading(false));
+      });
   };
 
   return (
@@ -140,22 +142,22 @@ export default function FindRoad() {
         width="100%"
         justifyContent="center"
         alignItems="center"
-        margin="15px 0 0 0"
+        margin="5px 0 0 0"
       >
         <Button
-          backGroundColor="rgb(0,255,110)"
-          height="4rem"
-          width="20%"
-          borderRad="25px"
+          backGroundColor="#002561"
+          height="3.5rem"
+          width="16%"
+          borderRad="10px"
           alignItems="center"
           justifyContent="center"
           onClick={buttonClickHandler}
-          minWidth="130px"
+          minWidth="100px"
           hoverOpacity=".5"
         >
           <FontAwesomeIcon
             icon="search"
-            style={{ fontSize: "2rem", color: "white", marginRight: "3%" }}
+            style={{ fontSize: "1.9rem", color: "white", marginRight: "12px" }}
           />
           <Text textAlign="center" fontSize="2rem" color="white">
             Search

@@ -117,21 +117,21 @@ export default function PurchasingForm() {
         })}
       </Card>
       <Button
-        height="15%"
-        width="30%"
+        height="17%"
+        width="20%"
         justifyContent="center"
         alignItems="center"
-        backGroundColor="lightgreen"
-        hoverColor="rgba(144, 238, 144, .7)"
-        borderRad="25px"
+        backGroundColor="#002561"
+        hoverColor="#7486A6"
+        borderRad="10px"
         margin="2% 0"
         type="submit"
       >
         <FontAwesomeIcon
           icon="shopping-cart"
-          style={{ fontSize: "3em", color: "white", marginRight: "5%" }}
+          style={{ fontSize: "2.8em", color: "white", marginRight: "5%" }}
         />
-        <Text fontSize="3em" color="white">
+        <Text fontSize="2.8em" color="white">
           Buy now
         </Text>
       </Button>

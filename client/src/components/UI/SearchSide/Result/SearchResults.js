@@ -21,9 +21,10 @@ export default function SearchResults() {
         width="95%"
         backGroundColor="rgba(100, 100, 100, .3)"
         overflow="scroll"
-        borderRad="20px"
+        borderRad="5px"
         justifyContent="center"
         flexWrap="wrap"
+        margin="0 0 25px 0"
       >
         {hotels.map((element, index) => {
           return (
@@ -33,7 +34,7 @@ export default function SearchResults() {
               visible={true}
               width="90%"
               margin="2% 0"
-            ></ResultItem>
+            />
           );
         })}
       </Card>
