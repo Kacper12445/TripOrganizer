@@ -2,8 +2,7 @@ import React from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch } from "react-redux";
-import { coordActions } from "../../../store/Slices/coord";
-
+import { coordActions } from "../store/Slices/coord";
 export default function CurrentLocalisation(props) {
   const dispatch = useDispatch();
 
@@ -14,8 +13,7 @@ export default function CurrentLocalisation(props) {
       )
       .then((resp) => {
         props.passValue(resp.data.results[0].formatted_address);
-      })
-      .catch((error) => console.log(error));
+      });
   };
   const getCurrentLocalisation = () => {
     navigator.geolocation.getCurrentPosition(

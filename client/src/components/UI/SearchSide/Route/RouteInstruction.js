@@ -36,22 +36,23 @@ export default function RouteInstruction() {
           width="95%"
           height="45%"
           margin="2% 0 2% 0"
-          borderRad="15px"
+          borderRad="5px"
           flexWrap="wrap"
           alignItems="center"
           justifyContent="space-around"
           position="relative"
-          // overflow="scroll"
+          overflow="scroll"
         >
           <FontAwesomeIcon
             onClick={iconClickHandler}
             icon="times-circle"
             style={{
               position: "absolute",
-              top: "-5%",
-              right: "-1.5%",
+              top: "0",
+              right: "0",
               fontSize: "30px",
               cursor: "pointer",
+              zIndex: "10",
             }}
           />
           {route.length > 1 &&

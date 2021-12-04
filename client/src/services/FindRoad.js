@@ -1,20 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Button from "../../common/Button";
+import Button from "../components/common/Button";
 import { useSelector } from "react-redux";
-import Card from "../../common/Card";
-import Text from "../../common/Text";
+import Card from "../components/common/Card";
+import Text from "../components/common/Text";
 import { useDispatch } from "react-redux";
-import { hotelActions } from "../../../store/Slices/hotel";
-import { routeActions } from "../../../store/Slices/route";
+import { hotelActions } from "../store/Slices/hotel";
+import { routeActions } from "../store/Slices/route";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  HOTEL_NUMBER,
-  GET_ATTRACTION_URL,
-  GET_HOTEL_URL,
-  BACKEND_URL,
-  TRAVEL_ADVISOR_URL,
-} from "../../../constants/Consts";
+import createNotification from "./Notification";
+import * as VAR from "../constants/Consts";
 
 export default function FindRoad() {
   const dispatch = useDispatch();
@@ -34,14 +29,14 @@ export default function FindRoad() {
   const buttonClickHandler = () => {
     if (coordsState) {
       axios
-        .post(`${BACKEND_URL}trip/find-route`, {
+        .post(`${VAR.BACKEND_URL}trip/find-route`, {
           origin: coords.originCoords,
           destination: coords.destinationCoords,
         })
         .then((res) => {
           dispatch(
             routeActions.setRoute({
-              instruction: res.data,
+              instruction: res.data.data,
             })
           );
           findHotel();
@@ -67,36 +62,37 @@ export default function FindRoad() {
     console.log(checkInDate);
     let options = {
       headers: {
-        "x-rapidapi-host": TRAVEL_ADVISOR_URL,
+        "x-rapidapi-host": VAR.TRAVEL_ADVISOR_URL,
         "x-rapidapi-key": process.env.REACT_APP_RAPID_API_KEY,
       },
       params: {
         latitude: coords.destinationCoords.lat.toFixed(3),
         longitude: coords.destinationCoords.lng.toFixed(3),
         lang: "en_US",
-        hotel_class: "3,4,5",
+        hotel_class: VAR.HOTEL_CLASS,
         limit: "30",
-        adults: "1",
-        rooms: "1",
-        pricesmin: "10",
-        pricesmax: "1000",
-        currency: "EUR",
+        adults: VAR.ADULTS_NUMBER,
+        rooms: VAR.ROOM_NUMBER,
+        pricesmin: VAR.PRICE_MIN,
+        pricesmax: VAR.PRICE_MAX,
+        currency: VAR.CURRENCY,
         checkin: checkInDate,
-        subcategory: "hotel,bb,specialty",
-        nights: "5",
-        distance: "10",
+        subcategory: VAR.SUBCATEGORY,
+        nights: VAR.NIGHT_NUMBER,
+        distance: VAR.SEARCH_DISTANCE,
       },
     };
     if (
       coords.destinationCoords.lat !== 0 &&
       coords.destinationCoords.lng !== 0
     ) {
+      dispatch(hotelActions.setLoading(true));
       axios
-        .get(GET_HOTEL_URL, options)
+        .get(VAR.GET_HOTEL_URL, options)
         .then((response) => {
           console.log(response);
           let tempHotelArray = [];
-          for (let i = 0; i < HOTEL_NUMBER; i++) {
+          for (let i = 0; i < VAR.HOTEL_NUMBER; i++) {
             tempHotelArray.push(response.data.data[i]);
           }
           dispatch(hotelActions.addHotel({ hotelArr: tempHotelArray }));
@@ -104,8 +100,8 @@ export default function FindRoad() {
             getHotelAttractions(element);
           });
         })
-        .catch((error) => {
-          console.error(error);
+        .catch(() => {
+          createNotification("error", "Finding hotels failed");
         });
     }
   };
@@ -113,7 +109,7 @@ export default function FindRoad() {
   const getHotelAttractions = (hotel) => {
     let options = {
       headers: {
-        "x-rapidapi-host": TRAVEL_ADVISOR_URL,
+        "x-rapidapi-host": VAR.TRAVEL_ADVISOR_URL,
         "x-rapidapi-key": process.env.REACT_APP_RAPID_API_KEY,
       },
       params: {
@@ -121,18 +117,24 @@ export default function FindRoad() {
         longitude: hotel.longitude,
         lunit: "km",
         currency: "EUR",
-        distance: 3,
+        distance: VAR.DISTANCE_FROM_HOTEL,
         lang: "en_US",
       },
     };
-    axios.get(GET_ATTRACTION_URL, options).then((response) => {
-      dispatch(
-        hotelActions.addHotelAttractions({
-          id: hotel.location_id,
-          attractions: response.data.data,
-        })
-      );
-    });
+    axios
+      .get(VAR.GET_ATTRACTION_URL, options)
+      .then((response) => {
+        dispatch(
+          hotelActions.addHotelAttractions({
+            id: hotel.location_id,
+            attractions: response.data.data,
+          })
+        );
+      })
+      .catch(() => createNotification("error", "Finding attractions failed"))
+      .finally(() => {
+        dispatch(hotelActions.setLoading(false));
+      });
   };
 
   return (
@@ -142,13 +144,13 @@ export default function FindRoad() {
         width="100%"
         justifyContent="center"
         alignItems="center"
-        margin="15px 0 0 0"
+        margin="10px 0 0 0"
       >
         <Button
-          backGroundColor="rgb(0,255,110)"
-          height="4rem"
-          width="20%"
-          borderRad="25px"
+          backGroundColor="#002561"
+          height="3.5rem"
+          width="16%"
+          borderRad="10px"
           alignItems="center"
           justifyContent="center"
           onClick={buttonClickHandler}
@@ -157,7 +159,7 @@ export default function FindRoad() {
         >
           <FontAwesomeIcon
             icon="search"
-            style={{ fontSize: "2rem", color: "white", marginRight: "3%" }}
+            style={{ fontSize: "1.9rem", color: "white", marginRight: "12px" }}
           />
           <Text textAlign="center" fontSize="2rem" color="white">
             Search

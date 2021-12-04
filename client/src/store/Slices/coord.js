@@ -68,6 +68,9 @@ const coordSlice = createSlice({
         return state.coords.destinationCoords;
       }
     },
+    changeToInitial(state) {
+      state.coords = initialCoordState.coords;
+    },
   },
 });
 

@@ -4,9 +4,11 @@ import SearchResults from "./SearchResults";
 import Card from "../../../common/Card";
 import { useSelector } from "react-redux";
 import RouteInstruction from "../Route/RouteInstruction";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function Searching() {
   const hotels = useSelector((state) => state.hotel.hotels);
+  const loadingHotel = useSelector((state) => state.hotel.loading);
 
   return (
     <Card
@@ -18,7 +20,15 @@ export default function Searching() {
     >
       <RouteInstruction />
       <TripForm />
-      {hotels.length >= 2 && <SearchResults />}
+      {loadingHotel ? (
+        <FontAwesomeIcon
+          icon="spinner"
+          pulse
+          style={{ color: "black", fontSize: "4.7rem" }}
+        />
+      ) : (
+        hotels.length >= 2 && <SearchResults />
+      )}
     </Card>
   );
 }

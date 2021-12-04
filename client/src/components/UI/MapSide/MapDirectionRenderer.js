@@ -25,7 +25,6 @@ export default function MapDirectionRenderer(props) {
           waypoints: waypoints,
         },
         (result, status) => {
-          console.log(result);
           if (status === window.google.maps.DirectionsStatus.OK) {
             setDirections(result);
           } else {
