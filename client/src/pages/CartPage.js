@@ -28,7 +28,7 @@ export default function CartPage(props) {
         <Card
           width="90%"
           height="90%"
-          borderRad="25px"
+          borderRad="5px"
           backGroundColor="rgba(0, 37, 97, .5)"
           flexDirection="column"
           justifyContent="space-between"

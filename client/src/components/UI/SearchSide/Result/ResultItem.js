@@ -55,7 +55,7 @@ export default function ResultItem(props) {
       </Card>
       <Card flexDirection="column" height="100%" width="65%">
         <Card border_bot="1px solid black" padding="1% 0">
-          <Text fontSize="2.1rem" fontWeight="bold">
+          <Text fontSize="1.8rem" fontWeight="bold">
             {props.hotel.name}
           </Text>
         </Card>
@@ -64,7 +64,7 @@ export default function ResultItem(props) {
             <strong>Price: </strong> {props.hotel.price}
             <FontAwesomeIcon
               icon="money-bill-wave"
-              style={{ color: "green", fontSize: "1.8rem", margin: "0 0 0 2%" }}
+              style={{ color: "green", fontSize: "1.5rem", margin: "0 0 0 2%" }}
             />
           </Text>
           <Text fontSize="1.5rem" margin="0 0 0 5%" wordSpacing="2px">
@@ -72,7 +72,7 @@ export default function ResultItem(props) {
             {props.hotel.rating}
             <FontAwesomeIcon
               icon="smile"
-              style={{ color: "aqua", fontSize: "1.8rem", margin: "0 0 0 2%" }}
+              style={{ color: "blue", fontSize: "1.5rem", margin: "0 0 0 2%" }}
             />
           </Text>
           <Text fontSize="1.5rem" margin="0 0 0 5%">
@@ -81,14 +81,14 @@ export default function ResultItem(props) {
               icon="star"
               style={{
                 color: "yellow",
-                fontSize: "1.8rem",
+                fontSize: "1.5rem",
                 margin: "0 0 0 2%",
               }}
             />
           </Text>
         </Card>
-        <Card flexDirection="column" justifyContent="center" margin="2% 0">
-          <Text textAlign="center" fontSize="1.8rem" fontWeight="bold">
+        <Card flexDirection="column" justifyContent="center" margin="5px 0">
+          <Text textAlign="center" fontSize="1.7rem" fontWeight="bold">
             Attractions nearby hotel
           </Text>
           {props.hotel.hotel_attractions &&

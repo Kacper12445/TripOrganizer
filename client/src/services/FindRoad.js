@@ -142,7 +142,7 @@ export default function FindRoad() {
         width="100%"
         justifyContent="center"
         alignItems="center"
-        margin="5px 0 0 0"
+        margin="10px 0 0 0"
       >
         <Button
           backGroundColor="#002561"

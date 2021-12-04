@@ -9,9 +9,9 @@ export default function InstructionItem(props) {
       flexBasis="27%"
       alignItems="center"
       justifyContent="space-around"
-      margin="10px 8px"
+      margin="16px 8px 10px 0"
     >
-      <Card flexDirection="column" width="50%">
+      <Card flexDirection="column" width="50%" margin="5px 0 0 0">
         <Card>
           <Text>
             ({props.hint.distance} | {props.hint.duration})
@@ -21,18 +21,19 @@ export default function InstructionItem(props) {
           <FontAwesomeIcon
             icon={"long-arrow-alt-right"}
             style={{ color: "green", fontSize: "3.8rem" }}
-          ></FontAwesomeIcon>
+          />
         </Card>
       </Card>
       <Card
         height="100%"
         backGroundColor="lightgreen"
-        borderRad="10px"
+        borderRad="5px"
         alignItems="center"
+        margin="26px 0 0 0"
       >
         <Text
           fontSize="1.2rem"
-          fontWeight="bold"
+          // fontWeight="bold"
           textAlign="center"
           color="white"
           padding="5px"
