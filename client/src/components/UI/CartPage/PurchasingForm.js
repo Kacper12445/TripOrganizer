@@ -48,27 +48,34 @@ export default function PurchasingForm() {
       email: e.target[3].value,
     };
     e.preventDefault();
-    axios
-      .post("http://localhost:5000/ticket/buy", {
-        name: userData.name,
-        surname: userData.surname,
-        phoneNumber: userData.phoneNumber,
-        email: userData.email,
-      })
-      .then((response) => {
-        if (response.status === 200) {
-          createNotification("success", response.data.message);
-        }
-      })
-      .catch(() => createNotification("error", "Buying ticket failed"))
-      .finally(() => {
-        setTimeout(() => {
-          dispatch(routeActions.resetRoute());
-          dispatch(coordActions.changeToInitial());
-          dispatch(hotelActions.changeToInitial());
-          history.push("/searchingPage");
-        }, 3000);
-      });
+    const isEmpty = Object.values(userData).every(
+      (x) => x !== null && x !== ""
+    );
+    if (isEmpty) {
+      axios
+        .post("http://localhost:5000/ticket/buy", {
+          name: userData.name,
+          surname: userData.surname,
+          phoneNumber: userData.phoneNumber,
+          email: userData.email,
+        })
+        .then((response) => {
+          if (response.status === 200) {
+            createNotification("success", response.data.message);
+          }
+        })
+        .catch(() => createNotification("error", "Buying ticket failed"))
+        .finally(() => {
+          setTimeout(() => {
+            dispatch(routeActions.resetRoute());
+            dispatch(coordActions.changeToInitial());
+            dispatch(hotelActions.changeToInitial());
+            history.push("/searchingPage");
+          }, 3000);
+        });
+    } else {
+      createNotification("warning", "You need to fill all the fields");
+    }
   };
   return (
     <Form
