@@ -78,7 +78,7 @@ export default function PurchasingForm() {
       flexDirection="column"
       justifyContent="space-between"
       alignItems="center"
-      borderBot="25px"
+      borderBot="5px"
       onSubmit={buyTrip}
     >
       <Card
@@ -86,7 +86,7 @@ export default function PurchasingForm() {
         height="60%"
         backGroundColor="rgba(220, 220, 220, .8)"
         margin="2% 0 0 0"
-        borderRad="25px"
+        borderRad="5px"
         justifyContent="space-around"
         alignItems="center"
         flexWrap="wrap"
@@ -100,12 +100,17 @@ export default function PurchasingForm() {
               flexDirection="column"
               justifyContent="space-between"
             >
-              <Text margin="0 0 0 3%" width="100%" height="20%" fontSize="12px">
+              <Text
+                margin="0 0 10px 5px"
+                width="100%"
+                height="20%"
+                fontSize="12px"
+              >
                 {item.name ? item.name.toUpperCase() : null}
               </Text>
               <Input
                 height="70%"
-                borderRad="25px"
+                borderRad="5px"
                 placeholder={`Enter your ${item.name}`}
                 name={item.name}
                 fontSize="1.5em"

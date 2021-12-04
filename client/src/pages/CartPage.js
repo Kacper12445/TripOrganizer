@@ -38,17 +38,17 @@ export default function CartPage(props) {
             width="100%"
             backGroundColor="rgba(0, 0, 0, .5)"
             height="15%"
-            borderTop="25px"
+            borderTop="5px"
             backGroundImg={beach}
           >
             <Card
               width="100%"
               height="100%"
               backGroundColor="rgba(0, 63, 114, 0.5)"
-              borderTop="25px"
+              borderTop="5px"
               alignItems="center"
             >
-              <Text fontSize="4.5rem" color="white" fontWeight="bold">
+              <Text fontSize="3.8rem" color="white" fontWeight="bold">
                 Purchasing Trip
               </Text>
             </Card>
