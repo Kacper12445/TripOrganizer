@@ -59,7 +59,6 @@ export default function FindRoad() {
   };
   const findHotel = () => {
     let checkInDate = getCheckInDate();
-    console.log(checkInDate);
     let options = {
       headers: {
         "x-rapidapi-host": VAR.TRAVEL_ADVISOR_URL,
@@ -90,7 +89,6 @@ export default function FindRoad() {
       axios
         .get(VAR.GET_HOTEL_URL, options)
         .then((response) => {
-          console.log(response);
           let tempHotelArray = [];
           for (let i = 0; i < VAR.HOTEL_NUMBER; i++) {
             tempHotelArray.push(response.data.data[i]);
